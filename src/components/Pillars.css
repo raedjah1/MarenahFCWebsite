@@ -1,0 +1,347 @@
+.pillars-section {
+  position: relative;
+  height: 60vh;
+  background: 
+    /* African pattern overlay */
+    radial-gradient(circle at 20% 30%, rgba(230, 166, 76, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(118, 87, 43, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(230, 166, 76, 0.08) 0%, transparent 50%),
+    /* Graffiti texture */
+    linear-gradient(45deg, transparent 30%, rgba(230, 166, 76, 0.05) 31%, rgba(230, 166, 76, 0.05) 33%, transparent 34%),
+    linear-gradient(-45deg, transparent 30%, rgba(118, 87, 43, 0.05) 31%, rgba(118, 87, 43, 0.05) 33%, transparent 34%),
+    /* Main black background */
+    #000000;
+  background-size: 200px 200px, 150px 150px, 180px 180px, 40px 40px, 40px 40px, cover;
+  background-position: 0 0, 100px 100px, 200px 50px, 0 0, 20px 20px, center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Graffiti soccer ball animations */
+.pillars-section::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: 
+    /* Soccer ball pattern */
+    radial-gradient(circle at 30% 30%, #ffffff 15%, transparent 16%),
+    radial-gradient(circle at 70% 70%, #ffffff 12%, transparent 13%),
+    radial-gradient(circle at 50% 20%, rgba(230, 166, 76, 0.8) 10%, transparent 11%),
+    radial-gradient(circle at 20% 80%, rgba(118, 87, 43, 0.6) 8%, transparent 9%),
+    conic-gradient(from 0deg, #ffffff 0deg, #000000 30deg, #ffffff 60deg, #000000 90deg, #ffffff 120deg, #000000 150deg, #ffffff 180deg, #000000 210deg, #ffffff 240deg, #000000 270deg, #ffffff 300deg, #000000 330deg, #ffffff 360deg);
+  border-radius: 50%;
+  top: 10%;
+  left: 5%;
+  opacity: 0.15;
+  animation: graffitiBall1 20s linear infinite;
+  filter: blur(1px) brightness(1.2);
+}
+
+.pillars-section::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: 
+    radial-gradient(circle at 40% 40%, #ffffff 20%, transparent 21%),
+    radial-gradient(circle at 60% 60%, rgba(230, 166, 76, 0.9) 15%, transparent 16%),
+    conic-gradient(from 45deg, #ffffff 0deg, #000000 36deg, #ffffff 72deg, #000000 108deg, #ffffff 144deg, #000000 180deg, #ffffff 216deg, #000000 252deg, #ffffff 288deg, #000000 324deg, #ffffff 360deg);
+  border-radius: 50%;
+  top: 70%;
+  right: 8%;
+  opacity: 0.12;
+  animation: graffitiBall2 25s linear infinite reverse;
+  filter: blur(0.5px) brightness(1.1);
+}
+
+@keyframes graffitiBall1 {
+  0% { transform: rotate(0deg) translateX(0px) rotate(0deg); }
+  25% { transform: rotate(90deg) translateX(50px) rotate(-90deg); }
+  50% { transform: rotate(180deg) translateX(0px) rotate(-180deg); }
+  75% { transform: rotate(270deg) translateX(-50px) rotate(-270deg); }
+  100% { transform: rotate(360deg) translateX(0px) rotate(-360deg); }
+}
+
+@keyframes graffitiBall2 {
+  0% { transform: rotate(0deg) translateY(0px) rotate(0deg); }
+  33% { transform: rotate(120deg) translateY(-40px) rotate(-120deg); }
+  66% { transform: rotate(240deg) translateY(40px) rotate(-240deg); }
+  100% { transform: rotate(360deg) translateY(0px) rotate(-360deg); }
+}
+
+.pillars-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* African tribal pattern */
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(230, 166, 76, 0.03) 10px,
+      rgba(230, 166, 76, 0.03) 12px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 15px,
+      rgba(118, 87, 43, 0.03) 15px,
+      rgba(118, 87, 43, 0.03) 17px
+    ),
+    /* Graffiti spray effect */
+    radial-gradient(ellipse at top left, rgba(230, 166, 76, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(118, 87, 43, 0.08) 0%, transparent 50%),
+    /* Dark overlay for contrast */
+    rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+}
+
+/* Graffiti-style title */
+.pillars-title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: 3px;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(230, 166, 76, 0.5),
+    0 0 20px rgba(230, 166, 76, 0.3),
+    0 0 30px rgba(230, 166, 76, 0.2),
+    2px 2px 0px rgba(118, 87, 43, 0.8),
+    4px 4px 0px rgba(0, 0, 0, 0.9);
+  position: relative;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  transform: skew(-2deg);
+  animation: graffitiGlow 3s ease-in-out infinite alternate;
+}
+
+.pillars-title::before {
+  content: 'OUR PILLARS';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(230, 166, 76, 0.8);
+  z-index: -1;
+  transform: translate(2px, 2px);
+  filter: blur(1px);
+}
+
+.pillars-title::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  right: -20px;
+  bottom: -10px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(230, 166, 76, 0.1) 2px,
+      rgba(230, 166, 76, 0.1) 3px
+    );
+  z-index: -2;
+  border-radius: 5px;
+}
+
+@keyframes graffitiGlow {
+  0% { 
+    text-shadow: 
+      0 0 10px rgba(230, 166, 76, 0.5),
+      0 0 20px rgba(230, 166, 76, 0.3),
+      0 0 30px rgba(230, 166, 76, 0.2),
+      2px 2px 0px rgba(118, 87, 43, 0.8),
+      4px 4px 0px rgba(0, 0, 0, 0.9);
+  }
+  100% { 
+    text-shadow: 
+      0 0 15px rgba(230, 166, 76, 0.7),
+      0 0 25px rgba(230, 166, 76, 0.4),
+      0 0 35px rgba(230, 166, 76, 0.3),
+      2px 2px 0px rgba(118, 87, 43, 1),
+      4px 4px 0px rgba(0, 0, 0, 0.9);
+  }
+}
+
+.pillars-grid {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.pillar {
+  text-align: center;
+  position: relative;
+}
+
+/* Amazing graffiti-style pillar boxes */
+.pillar h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 1.5rem 2.5rem;
+  background: 
+    /* Main gradient with brand colors */
+    linear-gradient(135deg, 
+      rgba(230, 166, 76, 0.9) 0%, 
+      rgba(118, 87, 43, 0.8) 50%, 
+      rgba(230, 166, 76, 0.9) 100%
+    ),
+    /* African pattern overlay */
+    repeating-conic-gradient(from 0deg at 50% 50%, 
+      rgba(255, 255, 255, 0.1) 0deg, 
+      transparent 10deg, 
+      rgba(255, 255, 255, 0.1) 20deg, 
+      transparent 30deg
+    );
+  background-size: 100% 100%, 20px 20px;
+  border: 3px solid #ffffff;
+  border-radius: 15px;
+  box-shadow: 
+    0 0 20px rgba(230, 166, 76, 0.4),
+    inset 0 2px 10px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-shadow: 
+    2px 2px 0px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  transform: skew(-1deg);
+}
+
+/* Graffiti spray effect on pillars */
+.pillar h3::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: 
+    radial-gradient(ellipse at top left, rgba(230, 166, 76, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse at bottom right, rgba(118, 87, 43, 0.2) 0%, transparent 70%);
+  z-index: -1;
+  border-radius: 20px;
+  filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pillar h3::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  background: 
+    radial-gradient(circle, #ffffff 30%, transparent 31%),
+    radial-gradient(circle at 30% 30%, rgba(230, 166, 76, 0.8) 20%, transparent 21%);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: soccerBallSpin 4s linear infinite;
+}
+
+@keyframes soccerBallSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pillar h3:hover {
+  background: 
+    linear-gradient(135deg, 
+      rgba(230, 166, 76, 1) 0%, 
+      rgba(118, 87, 43, 0.9) 50%, 
+      rgba(230, 166, 76, 1) 100%
+    ),
+    repeating-conic-gradient(from 0deg at 50% 50%, 
+      rgba(255, 255, 255, 0.2) 0deg, 
+      transparent 10deg, 
+      rgba(255, 255, 255, 0.2) 20deg, 
+      transparent 30deg
+    );
+  background-size: 100% 100%, 20px 20px;
+  transform: translateY(-5px) skew(-1deg) scale(1.05);
+  box-shadow: 
+    0 10px 30px rgba(230, 166, 76, 0.6),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.4);
+  border-color: rgba(230, 166, 76, 0.8);
+}
+
+.pillar h3:hover::before {
+  opacity: 1;
+}
+
+/* African-inspired decorative elements */
+.pillar:nth-child(1) h3::after {
+  background: 
+    radial-gradient(circle, #ffffff 30%, transparent 31%),
+    radial-gradient(circle at 40% 40%, rgba(230, 166, 76, 0.8) 25%, transparent 26%),
+    linear-gradient(45deg, rgba(118, 87, 43, 0.6) 50%, transparent 51%);
+}
+
+.pillar:nth-child(2) h3::after {
+  background: 
+    radial-gradient(circle, #ffffff 35%, transparent 36%),
+    radial-gradient(circle at 30% 60%, rgba(118, 87, 43, 0.8) 20%, transparent 21%),
+    linear-gradient(-45deg, rgba(230, 166, 76, 0.6) 50%, transparent 51%);
+}
+
+.pillar:nth-child(3) h3::after {
+  background: 
+    radial-gradient(circle, #ffffff 32%, transparent 33%),
+    radial-gradient(circle at 60% 30%, rgba(230, 166, 76, 0.8) 22%, transparent 23%),
+    linear-gradient(0deg, rgba(118, 87, 43, 0.6) 50%, transparent 51%);
+}
+
+@media (max-width: 768px) {
+  .pillars-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+  
+  .pillars-grid {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .pillar h3 {
+    font-size: 1.3rem;
+    padding: 1.2rem 2rem;
+    letter-spacing: 1px;
+  }
+  
+  .pillars-section::before {
+    width: 80px;
+    height: 80px;
+    top: 5%;
+    left: 2%;
+  }
+  
+  .pillars-section::after {
+    width: 60px;
+    height: 60px;
+    top: 75%;
+    right: 5%;
+  }
+} 

@@ -1,0 +1,173 @@
+/* View Transitions API CSS */
+/* These styles work with the native browser View Transitions API */
+
+/* Default transition for all view transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Main content transitions */
+::view-transition-old(main-content) {
+  animation: fadeSlideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-new(main-content) {
+  animation: fadeSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hero section transitions */
+::view-transition-old(hero-section) {
+  animation: heroFadeOut 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+::view-transition-new(hero-section) {
+  animation: heroFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Navigation stays in place */
+::view-transition-old(navigation),
+::view-transition-new(navigation) {
+  animation: none;
+}
+
+/* Footer transitions */
+::view-transition-old(footer) {
+  animation: footerSlideOut 0.3s ease-out;
+}
+
+::view-transition-new(footer) {
+  animation: footerSlideIn 0.3s ease-in;
+  animation-delay: 0.2s;
+}
+
+/* Keyframes for different transition types */
+@keyframes fadeSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.05) translateY(-30px);
+  }
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes footerSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes footerSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Special transitions for specific route combinations */
+/* Home to other pages - slide up effect */
+::view-transition-old(root):only-child {
+  animation: slideUpOut 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Back to home - slide down effect */
+::view-transition-new(root):only-child {
+  animation: slideDownIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUpOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes slideDownIn {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Smooth cross-fade for similar pages */
+.page-transition-crossfade::view-transition-old(root),
+.page-transition-crossfade::view-transition-new(root) {
+  animation: crossFade 0.3s ease-in-out;
+}
+
+@keyframes crossFade {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Fallback for browsers without View Transitions API */
+@supports not (view-transition-name: none) {
+  /* Add fallback transitions here if needed */
+  .main-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+} 

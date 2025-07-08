@@ -3,9 +3,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LoadingProvider } from './contexts/LoadingContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { LoadingScreen } from './components/LoadingScreen';
-import { Navigation } from './components/Navigation';
 import { CookieNotification } from './components/CookieNotification';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { ViewTransition } from './components/ViewTransition';
 import { RootLayout } from './layouts/RootLayout';
 import { AuthLayout } from './layouts/AuthLayout';
 import { LandingPage } from './pages/LandingPage';
@@ -30,6 +30,7 @@ import './styles/components/animations.css';
 import './styles/typography.css';
 import './styles/global.css';
 import './styles/style.css';
+import './styles/view-transitions.css';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -54,7 +55,9 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Router>
             <LoadingScreen />
-            <MainContent isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
+            <ViewTransition>
+              <MainContent isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
+            </ViewTransition>
           </Router>
         </QueryClientProvider>
       </LoadingProvider>
@@ -79,12 +82,7 @@ const MainContent = ({ isDarkMode, onToggleTheme }: { isDarkMode: boolean; onTog
         </Route>
         
         {/* Regular routes with navigation */}
-        <Route element={
-          <>
-            <Navigation isDarkMode={isDarkMode} onToggleTheme={onToggleTheme} />
-            <RootLayout />
-          </>
-        }>
+        <Route element={<RootLayout />}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/store" element={<StorePage />} />

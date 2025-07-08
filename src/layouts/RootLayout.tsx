@@ -1,9 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { ReactNode } from 'react';
 import { Footer } from '../components/Footer';
+import { Navigation } from '../components/Navigation';
+import '../styles/global.css';
 
 interface RootLayoutProps {
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
@@ -14,10 +15,15 @@ export const RootLayout = ({ children }: RootLayoutProps) => {
   const shouldShowFooter = !hideFooterPaths.includes(location.pathname);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <main className="flex-1">
+    <div className="app-container">
+      <header className="header">
+        <Navigation />
+      </header>
+      
+      <main className="main-content">
         {children || <Outlet />}
       </main>
+      
       {shouldShowFooter && <Footer />}
     </div>
   );
