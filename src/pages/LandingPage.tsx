@@ -1,42 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
 import { Pillars } from '../components/Pillars';
-import { Gallery } from '../components/Gallery';
 import { Dreamers } from '../components/Dreamers';
+import { Gallery } from '../components/Gallery';
 import { Academies } from '../components/Academies';
 import { News } from '../components/News';
 import './LandingPage.css';
 
-// Small transitional mission section with scroll overlay effect
-const Mission = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+// Hero wrapper with pinning effect
+const PinnedHero = () => {
+  const heroRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
-      
-      // Show mission when user scrolls past 60% of viewport height
-      const triggerPoint = window.innerHeight * 0.6;
-      setIsVisible(currentScrollY > triggerPoint);
-    };
+    gsap.registerPlugin(ScrollTrigger);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (heroRef.current) {
+      ScrollTrigger.create({
+        trigger: heroRef.current,
+        start: 'top top',
+        end: 'bottom top', // pin until mission section covers it
+        pin: true,
+        pinSpacing: false, // mission section overlays it
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trig => trig.kill());
+    };
   }, []);
 
-  // Calculate transform based on scroll position
-  const heroHeight = window.innerHeight * 0.8; // 80vh from hero section
-  const transformY = Math.max(0, heroHeight - scrollY);
-
   return (
-    <section 
-      className={`mission-section ${isVisible ? 'visible' : ''}`}
-      style={{
-        transform: `translateY(${transformY}px)`
-      }}
-    >
+    <div ref={heroRef}>
+      <Hero />
+    </div>
+  );
+};
+
+// Simple mission section that slides over hero
+const Mission = () => {
+  return (
+    <section className="mission-section">
       <div className="mission-container">
         <div className="mission-content">
           <h2>OUR MISSION</h2>
@@ -50,16 +55,16 @@ const Mission = () => {
 export const LandingPage = () => {
   return (
     <div className="landing-page">
-      <Hero />
+      <PinnedHero />
       <Mission />
       <div className="content-section">
         <Pillars />
       </div>
       <div className="content-section">
-        <Gallery />
+        <Dreamers />
       </div>
       <div className="content-section">
-        <Dreamers />
+        <Gallery />
       </div>
       <div className="content-section">
         <Academies />

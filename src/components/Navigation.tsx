@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useViewTransition } from './ViewTransition';
 import logoImage from '../assets/images/Logo.png';
@@ -7,8 +7,35 @@ import './Navigation.css';
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const { transitionNavigate, supportsViewTransitions } = useViewTransition();
+  
+  // Modern scroll behavior - hide on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Always show header at the very top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      }
+      // Hide when scrolling down past 100px
+      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      }
+      // Show when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
   
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -31,7 +58,7 @@ export const Navigation = () => {
   ];
 
   return (
-    <header className="header">
+    <header className={`header ${isVisible ? 'visible' : 'hidden'}`}>
       {/* Overlay */}
       <div className="header-overlay"></div>
       

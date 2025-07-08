@@ -1,6 +1,7 @@
 .pillars-section {
   position: relative;
-  height: 60vh;
+  height: 40vh; /* reduced from 60vh for more compact design */
+  min-height: 350px; /* ensure minimum space for content */
   background: 
     /* Subtle geometric patterns */
     radial-gradient(circle at 15% 25%, rgba(230, 166, 76, 0.08) 0%, transparent 50%),
@@ -113,7 +114,7 @@
   font-size: 3.2rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem; /* reduced from 4rem for tighter spacing */
   letter-spacing: 4px;
   color: #ffffff;
   text-shadow: 
@@ -138,7 +139,7 @@
 .pillars-grid {
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  gap: 2.5rem; /* reduced from 3rem for tighter spacing */
   position: relative;
   z-index: 10;
 }
@@ -362,6 +363,11 @@
 
 /* Enhanced responsive design */
 @media (max-width: 1200px) {
+  .pillars-section {
+    height: 35vh; /* slightly smaller on tablets */
+    min-height: 320px;
+  }
+
   .pillar h3 {
     padding: 2rem 1.5rem;
     font-size: 1rem;
@@ -371,6 +377,21 @@
 }
 
 @media (max-width: 768px) {
+  .pillars-section {
+    height: 50vh; /* taller on mobile to accommodate stacked layout */
+    min-height: 400px;
+  }
+
+  .pillars-title {
+    font-size: 2.5rem; /* smaller title on mobile */
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .pillars-grid {
+    gap: 1.5rem; /* tighter spacing on mobile */
+  }
+
   .pillar h3 {
     font-size: 0.9rem;
     padding: 1.8rem 1.5rem;

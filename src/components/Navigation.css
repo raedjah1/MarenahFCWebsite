@@ -1,11 +1,21 @@
 /* Header */
 .header {
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed for consistent positioning */
   height: 100px;
   left: 0px;
   right: 0px;
   top: 0px;
-  z-index: 1000;
+  z-index: 9999; /* Increased to ensure it's above scroll overlays */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern scroll behavior */
+.header.visible {
+  transform: translateY(0);
+}
+
+.header.hidden {
+  transform: translateY(-100%);
 }
 
 /* Glassmorphism Overlay - Natural fade */
