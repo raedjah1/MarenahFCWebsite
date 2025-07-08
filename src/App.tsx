@@ -10,9 +10,11 @@ import { RootLayout } from './layouts/RootLayout';
 import { AuthLayout } from './layouts/AuthLayout';
 import { LandingPage } from './pages/LandingPage';
 import { TeamPage } from './pages/TeamPage';
+import { MatchesPage } from './pages/MatchesPage';
+import { FacilityPage } from './pages/FacilityPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SupportPage } from './pages/SupportPage';
-import StorePage from './pages/Store';
+import { StorePage } from './pages/StorePage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import { TermsOfService } from './pages/TermsOfService';
@@ -85,6 +87,8 @@ const MainContent = ({ isDarkMode, onToggleTheme }: { isDarkMode: boolean; onTog
         <Route element={<RootLayout />}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/matches" element={<MatchesPage />} />
+          <Route path="/facility" element={<FacilityPage />} />
           <Route path="/store" element={<StorePage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />

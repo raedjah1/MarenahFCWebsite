@@ -2,13 +2,34 @@
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 800px;
+  height: 80vh;
+  min-height: 600px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   view-transition-name: hero-main;
+}
+
+/* Smooth transition border to next section */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(230, 166, 76, 0.08) 20%, 
+    rgba(118, 87, 43, 0.12) 35%, 
+    rgba(0, 0, 0, 0.8) 50%, 
+    rgba(118, 87, 43, 0.12) 65%, 
+    rgba(230, 166, 76, 0.08) 80%, 
+    transparent 100%
+  );
+  z-index: 10;
+  opacity: 0.6;
 }
 
 /* Background Layers */
