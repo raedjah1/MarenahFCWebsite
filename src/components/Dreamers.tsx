@@ -138,14 +138,6 @@ export const Dreamers = () => {
             <i className="fas fa-chevron-right"></i>
           </button>
         </div>
-        
-        {/* Team page navigation button */}
-        <div className="team-navigation">
-          <Link to="/team" className="team-button">
-            <span>VIEW FULL TEAM</span>
-            <i className="fas fa-arrow-right"></i>
-          </Link>
-        </div>
       </div>
     </section>
   );
