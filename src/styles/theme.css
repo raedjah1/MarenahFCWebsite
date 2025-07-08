@@ -1,0 +1,116 @@
+/* Modern theme implementation using CSS custom properties and color-scheme */
+@property --theme-transition {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+:root {
+  color-scheme: light dark;
+  
+  /* Light theme default colors */
+  --primary-light: #5be2e8;
+  --secondary-light: #E0E0E0;
+  --background-light: #EFEFEF;
+  --surface-light: #FFFFFF;
+  --text-primary-light: #101010;
+  --text-secondary-light: #424242;
+  
+  /* Dark theme default colors */
+  --primary-dark: #3caea3;
+  --secondary-dark: #000000;
+  --background-dark: #101010;
+  --surface-dark: #1E1E1E;
+  --text-primary-dark: #FFFFFF;
+  --text-secondary-dark: #B0B0B0;
+  
+  /* Theme transition duration */
+  --theme-duration: 0.3s;
+}
+
+/* Light theme by default */
+:root {
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --background: var(--background-light);
+  --surface: var(--surface-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  
+  /* Smooth transitions for theme changes */
+  transition: 
+    background-color var(--theme-duration) ease,
+    color var(--theme-duration) ease;
+}
+
+/* Dark theme when system prefers dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: var(--primary-dark);
+    --secondary: var(--secondary-dark);
+    --background: var(--background-dark);
+    --surface: var(--surface-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+  }
+}
+
+/* Class-based override for manual theme switching */
+:root[data-theme="dark"] {
+  --primary: var(--primary-dark);
+  --secondary: var(--secondary-dark);
+  --background: var(--background-dark);
+  --surface: var(--surface-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+}
+
+:root[data-theme="light"] {
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --background: var(--background-light);
+  --surface: var(--surface-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+}
+
+/* Apply theme to body */
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: 
+    background-color var(--theme-duration) ease,
+    color var(--theme-duration) ease;
+}
+
+/* Modern theme transition effects */
+.theme-transition-fade {
+  transition: 
+    opacity var(--theme-duration) ease,
+    transform var(--theme-duration) ease,
+    background-color var(--theme-duration) ease,
+    color var(--theme-duration) ease,
+    border-color var(--theme-duration) ease,
+    box-shadow var(--theme-duration) ease;
+}
+
+/* Theme aware components */
+.glass-panel {
+  background: color-mix(in srgb, var(--background) 80%, transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+  box-shadow: 0 4px 6px color-mix(in srgb, var(--background) 50%, transparent);
+}
+
+.theme-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    color-mix(in srgb, var(--primary) 80%, var(--secondary))
+  );
+}
+
+/* High contrast text utilities */
+.text-contrast {
+  color: color-contrast(var(--background) vs var(--text-primary), var(--text-secondary));
+} 

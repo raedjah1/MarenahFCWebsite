@@ -1,0 +1,557 @@
+/* CTA Component Styles */
+
+/* Section background and animations */
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(40, 40, 120, 0.8) 0%, rgba(20, 20, 60, 0.9) 100%);
+  z-index: -1;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: float 15s ease-in-out infinite;
+}
+
+.particle-1 {
+  width: 80px;
+  height: 80px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 100, 255, 0.6), rgba(60, 60, 150, 0.1));
+  filter: blur(4px);
+}
+
+.particle-2 {
+  width: 120px;
+  height: 120px;
+  top: 40%;
+  left: 25%;
+  animation-delay: 2s;
+  background: radial-gradient(circle at 30% 30%, rgba(180, 100, 255, 0.6), rgba(100, 60, 150, 0.1));
+  filter: blur(5px);
+}
+
+.particle-3 {
+  width: 150px;
+  height: 150px;
+  top: 70%;
+  left: 15%;
+  animation-delay: 4s;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 180, 255, 0.6), rgba(60, 100, 150, 0.1));
+  filter: blur(6px);
+}
+
+.particle-4 {
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 70%;
+  animation-delay: 1s;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 100, 180, 0.6), rgba(150, 60, 100, 0.1));
+  filter: blur(5px);
+}
+
+.particle-5 {
+  width: 130px;
+  height: 130px;
+  top: 50%;
+  left: 80%;
+  animation-delay: 3s;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 255, 180, 0.6), rgba(60, 150, 100, 0.1));
+  filter: blur(6px);
+}
+
+.particle-6 {
+  width: 90px;
+  height: 90px;
+  top: 80%;
+  left: 65%;
+  animation-delay: 5s;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 180, 100, 0.6), rgba(150, 100, 60, 0.1));
+  filter: blur(4px);
+}
+
+.particle-7 {
+  width: 70px;
+  height: 70px;
+  top: 35%;
+  left: 50%;
+  animation-delay: 2.5s;
+  background: radial-gradient(circle at 30% 30%, rgba(200, 120, 255, 0.6), rgba(120, 80, 150, 0.1));
+  filter: blur(3px);
+}
+
+.particle-8 {
+  width: 110px;
+  height: 110px;
+  top: 60%;
+  left: 40%;
+  animation-delay: 4.5s;
+  background: radial-gradient(circle at 30% 30%, rgba(120, 255, 200, 0.6), rgba(80, 150, 120, 0.1));
+  filter: blur(5px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-15px) translateX(15px) scale(1.05);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(0) translateX(30px) scale(1.1);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(15px) translateX(15px) scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* CTA Card styling */
+.cta-card {
+  background: rgba(10, 10, 40, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(100, 100, 255, 0.2);
+}
+
+/* Content Container */
+.cta-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.cta-left-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* iPhone styling from codepen */
+.phone-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.phone {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 37/76;
+  background: black;
+  height: 560px;
+  border-radius: 40px;
+  box-shadow: 0 0 0.1em 0.25em rgba(40, 40, 60, 0.25), 0 0 0 0.4em rgba(100, 100, 150, 0.85);
+  box-sizing: border-box;
+  transform: translateZ(0);
+}
+
+.phone:before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  right: -0.4em;
+  bottom: 40px;
+  left: -0.4em;
+  border: 0.5em solid rgba(40, 40, 60, 0.3);
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.buttons {
+  position: absolute;
+  inset: -0.4em;
+  pointer-events: none;
+}
+
+.buttons .left,
+.buttons .right {
+  position: absolute;
+  width: 0.333em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5em;
+}
+
+.buttons .left {
+  right: 100%;
+  top: 80px;
+}
+
+.buttons .left .button:nth-child(1) {
+  height: 3em;
+  margin-bottom: 0.5em;
+}
+
+.buttons .right {
+  left: 100%;
+  transform: scale3d(-1, 1, 1);
+  top: 120px;
+}
+
+.buttons .right .button {
+  height: 9.5em;
+}
+
+.buttons .button {
+  background: rgba(100, 100, 150, 0.95);
+  height: 6em;
+  box-shadow:
+    inset -0.15em 0 0.1em black, 
+    inset 0 0 0.1em rgba(100, 100, 150, 0.9),
+    inset 0 0.2em 0.1em rgba(100, 100, 150, 0.9),
+    inset 0 -0.2em 0.1em rgba(100, 100, 150, 0.9),
+    inset -0.1em 0.333em 0.1em rgba(0, 0, 0, 0.5), 
+    inset -0.1em -0.333em 0.1em rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 0.2em;
+  border-bottom-left-radius: 0.2em;
+}
+
+.screen-container {
+  position: absolute;
+  inset: 0;
+  border-radius: 40px;
+  border: 12px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.screen-container:before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  background: white;
+  width: 36.6%;
+  bottom: 8px;
+  height: 5px;
+  border-radius: 3px;
+  filter: drop-shadow(0 0.1em 0.25em rgba(0, 0, 0, 0.1));
+}
+
+.camera {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  pointer-events: none;
+  position: absolute;
+  z-index: 4;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(60, 60, 100, 0.3);
+}
+
+.camera:before {
+  content: "";
+  height: 33.3%;
+  aspect-ratio: 1;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0.25em #4c4da3;
+  background: radial-gradient(#6667ac, transparent 50%) no-repeat 33.3% 10% / 75% 50%, 
+           radial-gradient(#36374c, transparent 50%) no-repeat 60% 85% / 50% 50%;
+  background-color: #080928;
+}
+
+.notch-container {
+  display: none;
+}
+
+.notch {
+  display: none;
+}
+
+.notch-blur {
+  display: none;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 1.75em;
+  gap: 1em;
+  font-size: 125%;
+  position: relative;
+}
+
+.content .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  flex-grow: 2;
+}
+
+.content .tile {
+  background: rgba(85, 85, 150, 0.75);
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 33.3%;
+  position: relative;
+}
+
+.content .tile:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 55% 40%, rgba(60, 60, 100, 0.75), #cd1385 75%, transparent) center / 133.3% 133.3%;
+  background-color: yellow;
+  filter: blur(0.05em);
+}
+
+.screen {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+.screenshot-slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.screenshot-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.screenshot-image.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Button styling based on Hero.tsx */
+.hero-cta-buttons {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.primary-button, .secondary-button {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  min-width: 140px;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #6366F1 0%, #4338CA 100%);
+  color: white;
+  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+}
+
+.primary-button:hover {
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.6);
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secondary-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Store buttons */
+.store-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.store-button {
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.store-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.store-button-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.store-icon {
+  font-size: 24px;
+}
+
+.store-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-label {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.store-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Features list */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature-item i {
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(100, 100, 255, 0.15);
+  border-radius: 50%;
+  color: rgba(100, 100, 255, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .cta-container {
+    flex-direction: column;
+  }
+  
+  .cta-left-content {
+    width: 100%;
+  }
+  
+  /* On mobile, the iPhone container will stack underneath */
+  .phone-container {
+    margin: 0 auto 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-card {
+    padding: 25px;
+  }
+  
+  .phone {
+    height: 500px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-cta-buttons {
+    flex-direction: column;
+  }
+  
+  .store-buttons {
+    flex-direction: column;
+  }
+  
+  .phone {
+    height: 450px;
+    width: 90%;
+    margin: 0 auto;
+  }
+} 

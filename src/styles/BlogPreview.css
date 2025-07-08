@@ -1,0 +1,212 @@
+/* Blog Preview Section - Dark Mode by Default */
+.blog-preview-section {
+  padding: 5rem 0;
+  background-color: #121821;
+  color: #f5f5f5;
+  overflow: hidden;
+}
+
+:root:not([data-theme="dark"]) .blog-preview-section {
+  background-color: #f5f7fa;
+  color: #333333;
+}
+
+.blog-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.blog-preview-header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #5BE2E8, #FF66C4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.view-all-link {
+  color: #5BE2E8;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+:root:not([data-theme="dark"]) .view-all-link {
+  color: #5e35b1;
+}
+
+.view-all-link:hover {
+  transform: translateX(5px);
+}
+
+.view-all-link i {
+  font-size: 0.85rem;
+}
+
+/* Horizontal Scrolling Section */
+.blog-preview-scroll-container {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding: 1rem 0;
+}
+
+.blog-preview-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.blog-preview-cards {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem 1rem;
+  width: max-content;
+  min-width: 100%;
+}
+
+/* Blog Preview Cards */
+.blog-preview-card {
+  width: 350px;
+  flex-shrink: 0;
+  background-color: #2d3748;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+:root:not([data-theme="dark"]) .blog-preview-card {
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.blog-preview-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+}
+
+.blog-preview-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.blog-preview-category {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, #5BE2E8, #FF66C4);
+  color: white;
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.blog-preview-content {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-preview-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #f7fafc;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+:root:not([data-theme="dark"]) .blog-preview-content h3 {
+  color: #2d3748;
+}
+
+.blog-preview-meta {
+  color: #a0aec0;
+  font-size: 0.875rem;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+
+:root:not([data-theme="dark"]) .blog-preview-meta {
+  color: #718096;
+}
+
+.blog-preview-meta .separator {
+  margin: 0 0.5rem;
+}
+
+/* Scrollbar Styling for browsers that support it */
+@media (hover: hover) {
+  .blog-preview-scroll-container {
+    scrollbar-width: thin;
+    -ms-overflow-style: auto;
+  }
+  
+  .blog-preview-scroll-container::-webkit-scrollbar {
+    display: block;
+    height: 8px;
+  }
+  
+  .blog-preview-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+  
+  .blog-preview-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(94, 53, 177, 0.3);
+    border-radius: 10px;
+  }
+  
+  .blog-preview-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(94, 53, 177, 0.5);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .blog-preview-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .blog-preview-card {
+    width: 280px;
+  }
+  
+  .blog-preview-image {
+    height: 160px;
+  }
+  
+  .blog-preview-content h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .blog-preview-card {
+    width: 260px;
+  }
+} 
