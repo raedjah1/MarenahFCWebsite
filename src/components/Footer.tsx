@@ -55,6 +55,15 @@ export const Footer = () => {
               <li><Link to="/store/accessories">ACCESSORIES</Link></li>
             </ul>
           </div>
+
+          <div className="footer-section">
+            <h4>PARTNERS</h4>
+            <ul>
+              <li><Link to="/sponsorship">BECOME A SPONSOR</Link></li>
+              <li><Link to="/sponsorship#current-partners">CURRENT PARTNERS</Link></li>
+              <li><Link to="/sponsorship#opportunities">OPPORTUNITIES</Link></li>
+            </ul>
+          </div>
         </div>
         
         {/* Contact & Social */}
@@ -93,6 +102,7 @@ export const Footer = () => {
           <div className="footer-legal">
             <Link to="/privacy">Privacy Policy</Link>
             <Link to="/terms">Terms of Service</Link>
+            <Link to="/admin" className="admin-link">Admin</Link>
           </div>
         </div>
       </div>

@@ -31,18 +31,17 @@ body {
 /* Main Content */
 .main-content {
   position: relative;
-  min-height: calc(100vh - 282px); /* 100vh - (header + footer) */
+  min-height: calc(100vh - 100px); /* 100vh - header height */
   margin-top: 100px;
-  padding-bottom: 182px; /* Footer height */
+  padding-bottom: 0; /* Remove the extra padding */
 }
 
 /* Footer */
 .footer {
-  position: absolute;
+  position: relative; /* Changed from absolute to relative */
   height: 182px;
   left: 0;
   right: 0;
-  bottom: 0;
   background: #000000;
 }
 

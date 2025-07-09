@@ -116,15 +116,6 @@ export const Navigation = () => {
               STORE
             </Link>
           </li>
-          <li className="nav-item">
-            <Link 
-              to="/blog" 
-              className={`nav-link ${location.pathname === '/blog' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/blog', e)}
-            >
-              NEWS
-            </Link>
-          </li>
         </ul>
       </nav>
 

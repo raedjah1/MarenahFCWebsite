@@ -1,6 +1,8 @@
 /* Landing Page Styles */
 .landing-page {
   position: relative;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Mission Section - Slides over Hero */
@@ -8,6 +10,7 @@
   position: relative;
   height: 30vh; /* smaller again since hero is pinned */
   min-height: 200px;
+  width: 100%;
   background: linear-gradient(135deg, 
     rgba(0, 0, 0, 0.95) 0%, 
     rgba(10, 10, 10, 0.98) 50%, 
@@ -38,23 +41,30 @@
   z-index: 1;
 }
 
-/* Add shadow effect for depth */
+/* Smooth bottom transition */
 .mission-section::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 20px;
-  background: linear-gradient(to bottom, 
+  height: 2px;
+  background: linear-gradient(90deg, 
     transparent 0%, 
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(230, 166, 76, 0.04) 20%, 
+    rgba(118, 87, 43, 0.06) 35%, 
+    rgba(0, 0, 0, 0.8) 50%, 
+    rgba(118, 87, 43, 0.06) 65%, 
+    rgba(230, 166, 76, 0.04) 80%, 
+    transparent 100%
   );
   z-index: 1;
+  opacity: 0.4;
 }
 
 .mission-container {
-  max-width: 800px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
@@ -106,12 +116,21 @@
   z-index: 10;
 }
 
-/* Pillars section - on top of mission */
+/* Content sections - full width */
 .content-section {
   position: relative;
   z-index: 60;
   margin: 0;
   padding: 0;
+  width: 100%;
+}
+
+/* Container class for all sections */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 /* Responsive Design */
@@ -132,5 +151,16 @@
   
   .mission-container {
     padding: 0 1.5rem;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mission-container,
+  .container {
+    padding: 0 1rem;
   }
 } 

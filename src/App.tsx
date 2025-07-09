@@ -23,6 +23,8 @@ import { useState, useEffect } from 'react';
 import { useLoading } from './contexts/LoadingContext';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPostPage } from './pages/BlogPostPage';
+import SponsorshipPage from './pages/SponsorshipPage';
+import AdminDashboard from './pages/AdminDashboard';
 
 // Styles
 import './styles/vendor/bootstrap.min.css';
@@ -90,9 +92,15 @@ const MainContent = ({ isDarkMode, onToggleTheme }: { isDarkMode: boolean; onTog
           <Route path="/matches" element={<MatchesPage />} />
           <Route path="/facility" element={<FacilityPage />} />
           <Route path="/store" element={<StorePage />} />
+          <Route path="/sponsorship" element={<SponsorshipPage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
           
           <Route path="/profile" element={
             <ProtectedRoute>

@@ -1,0 +1,247 @@
+.sponsorship-page {
+  width: 100%;
+  padding: 4rem 0;
+  background: #000000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  opacity: 0.9;
+}
+
+/* Partnership Tiers */
+.partnership-tiers {
+  margin-bottom: 6rem;
+}
+
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.tier-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(230, 166, 76, 0.2);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.tier-card.featured {
+  transform: scale(1.05);
+  background: linear-gradient(135deg,
+    rgba(230, 166, 76, 0.15) 0%,
+    rgba(118, 87, 43, 0.15) 100%
+  );
+  border-color: var(--primary-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.tier-header {
+  margin-bottom: 2rem;
+}
+
+.tier-header h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.tier-price {
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.tier-features li {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tier-features li:last-child {
+  border-bottom: none;
+}
+
+.tier-cta {
+  background: linear-gradient(135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: #000000;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tier-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(230, 166, 76, 0.3);
+}
+
+/* Current Partners Section */
+.current-partners {
+  margin-bottom: 6rem;
+  text-align: center;
+}
+
+.current-partners h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 3rem;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.partner-placeholder {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+/* Contact Section */
+.contact-section {
+  text-align: center;
+  padding: 4rem 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
+}
+
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.contact-method {
+  text-align: center;
+}
+
+.contact-method i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.contact-method h4 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.contact-method p {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .tiers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tier-card.featured {
+    grid-column: span 2;
+    margin-bottom: 2rem;
+  }
+  
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tier-card.featured {
+    grid-column: span 1;
+  }
+  
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .contact-info {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tier-card {
+    padding: 1.5rem;
+  }
+} 
