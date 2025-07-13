@@ -8,7 +8,7 @@ export const Footer = () => {
       {/* Glassmorphism Overlay */}
       <div className="footer-overlay"></div>
       
-      <div className="footer-content">
+        <div className="footer-content">
         {/* Logo Section */}
         <div className="footer-logo-section">
           <div className="footer-logo">
@@ -16,7 +16,7 @@ export const Footer = () => {
           </div>
           <h3 className="footer-club-name">MARENAH FUTBOL CLUB</h3>
           <p className="footer-tagline">Redefining Football Excellence</p>
-        </div>
+            </div>
         
         {/* Navigation Links */}
         <div className="footer-navigation">
@@ -28,7 +28,7 @@ export const Footer = () => {
               <li><Link to="/team/management">MANAGEMENT</Link></li>
             </ul>
           </div>
-          
+
           <div className="footer-section">
             <h4>MATCHES</h4>
             <ul>
@@ -37,7 +37,7 @@ export const Footer = () => {
               <li><Link to="/matches/statistics">STATISTICS</Link></li>
             </ul>
           </div>
-          
+
           <div className="footer-section">
             <h4>FACILITY</h4>
             <ul>
@@ -46,7 +46,7 @@ export const Footer = () => {
               <li><Link to="/facility/tours">VIRTUAL TOURS</Link></li>
             </ul>
           </div>
-          
+
           <div className="footer-section">
             <h4>STORE</h4>
             <ul>
@@ -65,12 +65,12 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
-        
+
         {/* Contact & Social */}
         <div className="footer-contact-section">
           <h4>CONNECT WITH US</h4>
           <div className="contact-info">
-            <p><i className="fas fa-map-marker-alt"></i> Marenah, Senegal</p>
+            <p><i className="fas fa-map-marker-alt"></i> Marenah, Gambia</p>
             <p><i className="fas fa-envelope"></i> info@marenahfc.com</p>
             <p><i className="fas fa-phone"></i> +221 XX XXX XXXX</p>
           </div>
@@ -96,7 +96,7 @@ export const Footer = () => {
       </div>
       
       {/* Bottom Section */}
-      <div className="footer-bottom">
+        <div className="footer-bottom">
         <div className="footer-bottom-content">
           <p className="footer-copyright">© 2024 Marenah Futbol Club. All Rights Reserved.</p>
           <div className="footer-legal">

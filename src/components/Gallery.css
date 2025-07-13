@@ -3,6 +3,23 @@
   background: #000000;
 }
 
+.gallery-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.gallery-subtitle {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 3rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -58,6 +75,15 @@
 @media (max-width: 768px) {
   .gallery-section {
     padding: 2rem 0;
+  }
+  
+  .gallery-title {
+    font-size: 2rem;
+  }
+  
+  .gallery-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
   }
   
   .gallery-grid {

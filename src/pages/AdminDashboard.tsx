@@ -102,7 +102,7 @@ const AdminDashboard = () => {
                   <p className="staff-role">Head Coach</p>
                   <div className="staff-info">
                     <span>Experience: 15 years</span>
-                    <span>Nationality: Senegalese</span>
+                    <span>Nationality: Gambiaese</span>
                   </div>
                 </div>
               </div>

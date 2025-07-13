@@ -26,6 +26,18 @@ body {
   top: 0;
   z-index: 1000;
   background: #000000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header visibility states */
+.header.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 /* Main Content */
@@ -34,6 +46,12 @@ body {
   min-height: calc(100vh - 100px); /* 100vh - header height */
   margin-top: 100px;
   padding-bottom: 0; /* Remove the extra padding */
+  transition: margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Adjust main content margin when header is hidden */
+.header.hidden + .main-content {
+  margin-top: 0;
 }
 
 /* Footer */

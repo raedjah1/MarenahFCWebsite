@@ -11,7 +11,7 @@ export const Navigation = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const { transitionNavigate, supportsViewTransitions } = useViewTransition();
-  
+
   // Modern scroll behavior - hide on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +36,16 @@ export const Navigation = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
-  
+
+  // Apply visibility classes to the parent header element
+  useEffect(() => {
+    const headerElement = document.querySelector('.header');
+    if (headerElement) {
+      headerElement.classList.toggle('visible', isVisible);
+      headerElement.classList.toggle('hidden', !isVisible);
+    }
+  }, [isVisible]);
+
   const closeMenu = () => setIsMenuOpen(false);
 
   const handleNavClick = (to: string, event: React.MouseEvent) => {
@@ -58,7 +67,7 @@ export const Navigation = () => {
   ];
 
   return (
-    <header className={`header ${isVisible ? 'visible' : 'hidden'}`}>
+    <>
       {/* Overlay */}
       <div className="header-overlay"></div>
       
@@ -69,55 +78,64 @@ export const Navigation = () => {
           className="logo-link" 
           onClick={(e) => handleNavClick('/', e)}
         >
-          <img 
-            src={logoImage} 
+            <img 
+              src={logoImage}
             alt="Right To Dream Logo" 
             className="logo-img"
-          />
-        </Link>
-      </div>
+            />
+          </Link>
+        </div>
 
       {/* Navigation Menu */}
       <nav className="header-nav">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link 
-              to="/team" 
+              <Link 
+              to="/who-we-are" 
+              className={`nav-link ${location.pathname === '/who-we-are' ? 'active' : ''}`}
+              onClick={(e) => handleNavClick('/who-we-are', e)}
+              >
+              WHO WE ARE
+              </Link>
+            </li>
+          <li className="nav-item">
+              <Link 
+                to="/team" 
               className={`nav-link ${location.pathname === '/team' ? 'active' : ''}`}
               onClick={(e) => handleNavClick('/team', e)}
-            >
+              >
               TEAM
-            </Link>
-          </li>
+              </Link>
+            </li>
           <li className="nav-item">
-            <Link 
+              <Link 
               to="/matches" 
               className={`nav-link ${location.pathname === '/matches' ? 'active' : ''}`}
               onClick={(e) => handleNavClick('/matches', e)}
-            >
+              >
               MATCHES
-            </Link>
-          </li>
+              </Link>
+            </li>
           <li className="nav-item">
-            <Link 
+              <Link 
               to="/facility" 
               className={`nav-link ${location.pathname === '/facility' ? 'active' : ''}`}
               onClick={(e) => handleNavClick('/facility', e)}
-            >
+              >
               FACILITY
-            </Link>
-          </li>
+              </Link>
+            </li>
           <li className="nav-item">
-            <Link 
+              <Link 
               to="/store" 
               className={`nav-link ${location.pathname === '/store' ? 'active' : ''}`}
               onClick={(e) => handleNavClick('/store', e)}
             >
               STORE
-            </Link>
-          </li>
-        </ul>
-      </nav>
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
       {/* Language Selector */}
       <div className="language-selector">
@@ -161,6 +179,6 @@ export const Navigation = () => {
         <span></span>
         <span></span>
       </button>
-    </header>
+    </>
   );
 };

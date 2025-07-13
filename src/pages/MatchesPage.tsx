@@ -25,7 +25,6 @@ interface MatchStats {
 
 export const MatchesPage = () => {
   const [activeTab, setActiveTab] = useState<'fixtures' | 'results' | 'statistics'>('fixtures');
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'home' | 'away'>('all');
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
 
   const matches: Match[] = [
@@ -36,7 +35,7 @@ export const MatchesPage = () => {
       awayTeam: "AS Douanes",
       date: "2024-02-15",
       time: "16:00",
-      competition: "Ligue 1 Senegal",
+      competition: "Ligue 1 Gambia",
       status: "upcoming",
       venue: "Stade Marenah",
       isHome: true
@@ -47,24 +46,10 @@ export const MatchesPage = () => {
       awayTeam: "Marenah FC",
       date: "2024-02-22",
       time: "18:30",
-      competition: "Ligue 1 Senegal",
+      competition: "Ligue 1 Gambia",
       status: "upcoming",
       venue: "Stade Aline Sitoe Diatta",
       isHome: false
-    },
-    // Live Match
-    {
-      id: 3,
-      homeTeam: "Marenah FC",
-      awayTeam: "Teungueth FC",
-      homeScore: 2,
-      awayScore: 1,
-      date: "2024-02-08",
-      time: "20:00",
-      competition: "Coupe du Senegal",
-      status: "live",
-      venue: "Stade Marenah",
-      isHome: true
     },
     // Finished Matches
     {
@@ -75,7 +60,7 @@ export const MatchesPage = () => {
       awayScore: 1,
       date: "2024-02-01",
       time: "16:00",
-      competition: "Ligue 1 Senegal",
+      competition: "Ligue 1 Gambia",
       status: "finished",
       venue: "Stade Marenah",
       isHome: true
@@ -88,31 +73,15 @@ export const MatchesPage = () => {
       awayScore: 2,
       date: "2024-01-25",
       time: "18:30",
-      competition: "Ligue 1 Senegal",
+      competition: "Ligue 1 Gambia",
       status: "finished",
       venue: "Stade Demba Diop",
       isHome: false
     }
   ];
 
-  const liveMatchStats: MatchStats = {
-    possession: { home: 65, away: 35 },
-    shots: { home: 12, away: 8 },
-    shotsOnTarget: { home: 6, away: 3 },
-    corners: { home: 7, away: 4 },
-    fouls: { home: 8, away: 12 }
-  };
-
-  const filteredMatches = matches.filter(match => {
-    if (selectedFilter === 'all') return true;
-    if (selectedFilter === 'home') return match.isHome;
-    if (selectedFilter === 'away') return !match.isHome;
-    return true;
-  });
-
-  const upcomingMatches = filteredMatches.filter(m => m.status === 'upcoming');
-  const liveMatches = filteredMatches.filter(m => m.status === 'live');
-  const finishedMatches = filteredMatches.filter(m => m.status === 'finished');
+  const upcomingMatches = matches.filter(m => m.status === 'upcoming');
+  const finishedMatches = matches.filter(m => m.status === 'finished');
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -131,7 +100,6 @@ export const MatchesPage = () => {
     >
       <div className="match-header">
         <span className="competition">{match.competition}</span>
-        {match.status === 'live' && <span className="live-badge">LIVE</span>}
       </div>
       
       <div className="match-teams">
@@ -183,57 +151,6 @@ export const MatchesPage = () => {
     </div>
   );
 
-  const renderLiveStats = () => (
-    <div className="live-stats">
-      <h3>Match Statistics</h3>
-      <div className="stats-grid">
-        <div className="stat-row">
-          <span className="stat-label">Possession</span>
-          <div className="stat-bar">
-            <div className="stat-home" style={{ width: `${liveMatchStats.possession.home}%` }}>
-              {liveMatchStats.possession.home}%
-            </div>
-            <div className="stat-away" style={{ width: `${liveMatchStats.possession.away}%` }}>
-              {liveMatchStats.possession.away}%
-            </div>
-          </div>
-        </div>
-        
-        <div className="stat-row">
-          <span className="stat-label">Shots</span>
-          <div className="stat-numbers">
-            <span className="home-stat">{liveMatchStats.shots.home}</span>
-            <span className="away-stat">{liveMatchStats.shots.away}</span>
-          </div>
-        </div>
-        
-        <div className="stat-row">
-          <span className="stat-label">Shots on Target</span>
-          <div className="stat-numbers">
-            <span className="home-stat">{liveMatchStats.shotsOnTarget.home}</span>
-            <span className="away-stat">{liveMatchStats.shotsOnTarget.away}</span>
-          </div>
-        </div>
-        
-        <div className="stat-row">
-          <span className="stat-label">Corners</span>
-          <div className="stat-numbers">
-            <span className="home-stat">{liveMatchStats.corners.home}</span>
-            <span className="away-stat">{liveMatchStats.corners.away}</span>
-          </div>
-        </div>
-        
-        <div className="stat-row">
-          <span className="stat-label">Fouls</span>
-          <div className="stat-numbers">
-            <span className="home-stat">{liveMatchStats.fouls.home}</span>
-            <span className="away-stat">{liveMatchStats.fouls.away}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div className="matches-page">
       {/* Navigation Tabs */}
@@ -263,45 +180,10 @@ export const MatchesPage = () => {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="matches-filters">
-        <div className="filter-container">
-          <button 
-            className={`filter-btn ${selectedFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setSelectedFilter('all')}
-          >
-            ALL MATCHES
-          </button>
-          <button 
-            className={`filter-btn ${selectedFilter === 'home' ? 'active' : ''}`}
-            onClick={() => setSelectedFilter('home')}
-          >
-            HOME
-          </button>
-          <button 
-            className={`filter-btn ${selectedFilter === 'away' ? 'active' : ''}`}
-            onClick={() => setSelectedFilter('away')}
-          >
-            AWAY
-          </button>
-        </div>
-      </div>
-
       {/* Content */}
       <div className="matches-content">
         {activeTab === 'fixtures' && (
           <div className="fixtures-section">
-            {/* Live Matches */}
-            {liveMatches.length > 0 && (
-              <div className="matches-group">
-                <h2><i className="fas fa-circle live-dot"></i> LIVE NOW</h2>
-                <div className="matches-grid">
-                  {liveMatches.map(renderMatchCard)}
-                </div>
-                {renderLiveStats()}
-              </div>
-            )}
-
             {/* Upcoming Matches */}
             <div className="matches-group">
               <h2><i className="fas fa-clock"></i> UPCOMING FIXTURES</h2>

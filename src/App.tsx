@@ -9,6 +9,7 @@ import { ViewTransition } from './components/ViewTransition';
 import { RootLayout } from './layouts/RootLayout';
 import { AuthLayout } from './layouts/AuthLayout';
 import { LandingPage } from './pages/LandingPage';
+import { WhoWeArePage } from './pages/WhoWeArePage';
 import { TeamPage } from './pages/TeamPage';
 import { MatchesPage } from './pages/MatchesPage';
 import { FacilityPage } from './pages/FacilityPage';
@@ -60,7 +61,7 @@ function App() {
           <Router>
             <LoadingScreen />
             <ViewTransition>
-              <MainContent isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
+            <MainContent isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
             </ViewTransition>
           </Router>
         </QueryClientProvider>
@@ -88,6 +89,7 @@ const MainContent = ({ isDarkMode, onToggleTheme }: { isDarkMode: boolean; onTog
         {/* Regular routes with navigation */}
         <Route element={<RootLayout />}>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/who-we-are" element={<WhoWeArePage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/matches" element={<MatchesPage />} />
           <Route path="/facility" element={<FacilityPage />} />

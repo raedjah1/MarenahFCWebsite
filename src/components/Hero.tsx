@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './Hero.css';
 import mfcLogo from '../assets/images/MFC__Main_Logo.jpg';
+import teamImage from '../assets/images/team.JPG';
+import coachImage from '../assets/images/coach_image.JPG';
 
 const Hero: React.FC = () => {
   const [currentHero, setCurrentHero] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const heroes = [
     {
@@ -12,40 +13,36 @@ const Hero: React.FC = () => {
       title: "DREAM",
       subtitle: "RIGHT TO",
       description: "Every child deserves the opportunity to pursue their dreams through football, education, and character development.",
-      cta: "DISCOVER OUR MISSION",
       background: "linear-gradient(135deg, var(--background-color) 0%, #1a1a1a 50%, var(--secondary-color) 100%)",
       accent: "var(--primary-color)",
-      showLogo: true
+      showLogo: true,
+      showTeam: false
     },
     {
       id: 2,
       title: "EXCELLENCE",
-      subtitle: "PURSUING",
-      description: "Through our holistic approach, we nurture talent and build character that transforms lives and communities.",
-      cta: "OUR APPROACH",
+      subtitle: "STRIVING FOR",
+      description: "We nurture talent and build character that transforms lives and communities.",
       background: "linear-gradient(125deg, var(--background-color) 0%, var(--secondary-color) 50%, #2a2a2a 100%)",
       accent: "var(--secondary-color)",
-      showLogo: false
+      showLogo: false,
+      showTeam: true
     },
     {
       id: 3,
       title: "FUTURE",
       subtitle: "BUILDING THE",
       description: "Join us in creating pathways to success for the next generation of dreamers, leaders, and champions.",
-      cta: "JOIN OUR FAMILY",
       background: "linear-gradient(45deg, var(--background-color) 0%, #2a1f0a 50%, var(--primary-color) 100%)",
       accent: "var(--primary-color)",
-      showLogo: false
+      showLogo: false,
+      showTeam: false
     }
   ];
 
   const handleHeroChange = (index: number) => {
-    if (index !== currentHero && !isTransitioning) {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentHero(index);
-        setIsTransitioning(false);
-      }, 500);
+    if (index !== currentHero) {
+      setCurrentHero(index);
     }
   };
 
@@ -53,18 +50,10 @@ const Hero: React.FC = () => {
 
   return (
     <section className="hero-section" data-hero-id={currentHero}>
-      {/* Background Layers */}
-      <div className="hero-backgrounds">
-        {heroes.map((hero, index) => (
-          <div
-            key={hero.id}
-            className={`hero-background ${index === currentHero ? 'active' : ''}`}
-            style={{
-              background: hero.background
-            }}
-          />
-        ))}
-      </div>
+      {/* Background Layer */}
+      <div className="hero-background" style={{
+        background: currentHeroData.background
+      }} />
 
       {/* Overlay Pattern */}
       <div className="hero-overlay-pattern"></div>
@@ -88,11 +77,53 @@ const Hero: React.FC = () => {
               </div>
             </div>
           </div>
+        ) : currentHeroData.showTeam ? (
+          /* Team and coach layout for second slide */
+          <div className="hero-team-layout">
+            <div className="hero-team-content">
+              <div className="hero-team-header">
+                <div className="hero-subtitle" style={{ color: currentHeroData.accent }}>
+                  {currentHeroData.subtitle}
+                </div>
+                <h1 className="hero-title">
+                  {currentHeroData.title}
+                </h1>
+              </div>
+              
+              <div className="hero-team-images">
+                <div className="team-image-card">
+                  <img 
+                    src={teamImage} 
+                    alt="Marenah FC Team" 
+                    className="team-image"
+                  />
+                  <div className="image-label">
+                    <span>Our Squad</span>
+                  </div>
+                </div>
+                
+                <div className="team-image-card">
+                  <img 
+                    src={coachImage} 
+                    alt="Team Coaches" 
+                    className="team-image"
+                  />
+                  <div className="image-label">
+                    <span>Our Coaches</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="hero-team-description">
+                <p>{currentHeroData.description}</p>
+              </div>
+            </div>
+          </div>
         ) : (
           /* Regular layout for other slides */
           <div className="hero-content">
             {/* Text Content */}
-            <div className={`hero-text ${isTransitioning ? 'transitioning' : ''}`}>
+            <div className="hero-text">
               <div className="hero-subtitle" style={{ color: currentHeroData.accent }}>
                 {currentHeroData.subtitle}
               </div>
@@ -102,23 +133,6 @@ const Hero: React.FC = () => {
               <p className="hero-description">
                 {currentHeroData.description}
               </p>
-              <button 
-                className="hero-cta"
-                style={{ 
-                  borderColor: currentHeroData.accent,
-                  color: currentHeroData.accent
-                }}
-              >
-                {currentHeroData.cta}
-                <svg className="cta-arrow" width="20" height="12" viewBox="0 0 20 12">
-                  <path 
-                    d="M1 6h16m-6-5l5 5-5 5" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    fill="none"
-                  />
-                </svg>
-              </button>
             </div>
 
             {/* Visual Element */}
@@ -140,19 +154,10 @@ const Hero: React.FC = () => {
               key={index}
               className={`nav-dot ${index === currentHero ? 'active' : ''}`}
               onClick={() => handleHeroChange(index)}
-              style={{
-                backgroundColor: index === currentHero ? currentHeroData.accent : 'rgba(255,255,255,0.3)'
-              }}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
-      </div>
-
-      {/* Floating Elements */}
-      <div className="floating-elements">
-        <div className="float-element" style={{ backgroundColor: currentHeroData.accent }}></div>
-        <div className="float-element" style={{ backgroundColor: 'var(--secondary-color)' }}></div>
-        <div className="float-element" style={{ backgroundColor: currentHeroData.accent }}></div>
       </div>
     </section>
   );

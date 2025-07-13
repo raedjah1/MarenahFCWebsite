@@ -6,5 +6,12 @@ export default defineConfig({
   plugins: [react()],
   css: {
     devSourcemap: false
+  },
+  assetsInclude: ['**/*.PNG', '**/*.JPG', '**/*.png', '**/*.jpg', '**/*.jpeg'],
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@assets': '/src/assets'
+    }
   }
 })
