@@ -12,31 +12,48 @@ export const Navigation = () => {
   const location = useLocation();
   const { transitionNavigate, supportsViewTransitions } = useViewTransition();
 
-  // Modern scroll behavior - hide on scroll down, show on scroll up
+  // Improved scroll behavior with debouncing and better threshold detection
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    let lastScrollPosition = window.scrollY;
+    const scrollThreshold = 5; // Minimum scroll distance to trigger header visibility change
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      
-      // Always show header at the very top or bottom of page
-      if (currentScrollY < 10 || Math.abs(maxScroll - currentScrollY) < 10) {
-        setIsVisible(true);
+      const scrollingUp = currentScrollY < lastScrollPosition;
+      const scrollingDown = currentScrollY > lastScrollPosition;
+      const isAtTop = currentScrollY < 10;
+      const isAtBottom = window.innerHeight + currentScrollY >= document.documentElement.scrollHeight - 10;
+      const hasScrolledPastThreshold = Math.abs(currentScrollY - lastScrollPosition) > scrollThreshold;
+
+      // Clear any existing timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-      // Hide when scrolling down past 100px
-      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      }
-      // Show when scrolling up
-      else if (currentScrollY < lastScrollY) {
-        setIsVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
+
+      // Set a timeout to update the header state
+      timeoutId = setTimeout(() => {
+        if (isAtTop || isAtBottom) {
+          setIsVisible(true);
+        } else if (hasScrolledPastThreshold) {
+          if (scrollingDown) {
+            setIsVisible(false);
+          } else if (scrollingUp) {
+            setIsVisible(true);
+          }
+        }
+        lastScrollPosition = currentScrollY;
+      }, 50); // Small delay to debounce scroll events
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   // Apply visibility classes to the parent header element
   useEffect(() => {
@@ -81,8 +98,8 @@ export const Navigation = () => {
         >
             <img 
               src={logoImage}
-            alt="Right To Dream Logo" 
-            className="logo-img"
+              alt="Marenah FC Logo" 
+              className="logo-img"
             />
           </Link>
         </div>
@@ -160,6 +177,7 @@ export const Navigation = () => {
                 className={`language-option ${selectedLanguage === lang.code ? 'active' : ''}`}
                 onClick={() => {
                   setSelectedLanguage(lang.code);
+                  setIsMenuOpen(false);
                 }}
               >
                 <span className="flag">{lang.flag}</span>

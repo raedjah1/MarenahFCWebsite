@@ -1,8 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logoImage from '../assets/images/Logo.png';
 import './Footer.css';
 
 export const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    // Instant scroll to top before navigation
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
+
   return (
     <footer className="footer-container">
       {/* Glassmorphism Overlay */}
@@ -21,48 +29,23 @@ export const Footer = () => {
         {/* Navigation Links */}
         <div className="footer-navigation">
           <div className="footer-section">
-            <h4>TEAM</h4>
-            <ul>
-              <li><Link to="/team">SQUAD</Link></li>
-              <li><Link to="/team/coaching">COACHING STAFF</Link></li>
-              <li><Link to="/team/management">MANAGEMENT</Link></li>
-            </ul>
+            <Link to="/team" onClick={() => window.scrollTo(0, 0)}><h4>TEAM</h4></Link>
           </div>
 
           <div className="footer-section">
-            <h4>MATCHES</h4>
-            <ul>
-              <li><Link to="/matches">FIXTURES</Link></li>
-              <li><Link to="/matches/results">RESULTS</Link></li>
-              <li><Link to="/matches/statistics">STATISTICS</Link></li>
-            </ul>
+            <Link to="/matches" onClick={() => window.scrollTo(0, 0)}><h4>MATCHES</h4></Link>
           </div>
 
           <div className="footer-section">
-            <h4>FACILITY</h4>
-            <ul>
-              <li><Link to="/facility">FUTURE COMPLEX</Link></li>
-              <li><Link to="/facility/academy">ACADEMY</Link></li>
-              <li><Link to="/facility/tours">VIRTUAL TOURS</Link></li>
-            </ul>
+            <Link to="/facility" onClick={() => window.scrollTo(0, 0)}><h4>FACILITY</h4></Link>
           </div>
 
           <div className="footer-section">
-            <h4>STORE</h4>
-            <ul>
-              <li><Link to="/store">MERCHANDISE</Link></li>
-              <li><Link to="/store/jerseys">JERSEYS</Link></li>
-              <li><Link to="/store/accessories">ACCESSORIES</Link></li>
-            </ul>
+            <Link to="/store" onClick={() => window.scrollTo(0, 0)}><h4>STORE</h4></Link>
           </div>
 
           <div className="footer-section">
-            <h4>PARTNERS</h4>
-            <ul>
-              <li><Link to="/sponsorship">BECOME A SPONSOR</Link></li>
-              <li><Link to="/sponsorship#current-partners">CURRENT PARTNERS</Link></li>
-              <li><Link to="/sponsorship#opportunities">OPPORTUNITIES</Link></li>
-            </ul>
+            <Link to="/sponsorship" onClick={() => window.scrollTo(0, 0)}><h4>PARTNERS</h4></Link>
           </div>
         </div>
 
@@ -79,7 +62,7 @@ export const Footer = () => {
             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link">
               <i className="fab fa-youtube"></i>
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://www.instagram.com/marenahfc/" target="_blank" rel="noopener noreferrer" className="social-link">
               <i className="fab fa-instagram"></i>
             </a>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">
@@ -100,9 +83,9 @@ export const Footer = () => {
         <div className="footer-bottom-content">
           <p className="footer-copyright">© 2024 Marenah Futbol Club. All Rights Reserved.</p>
           <div className="footer-legal">
-            <Link to="/privacy">Privacy Policy</Link>
-            <Link to="/terms">Terms of Service</Link>
-            <Link to="/admin" className="admin-link">Admin</Link>
+            <Link to="/privacy" onClick={() => window.scrollTo(0, 0)}>Privacy Policy</Link>
+            <Link to="/terms" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link>
+            <Link to="/admin" onClick={() => window.scrollTo(0, 0)} className="admin-link">Admin</Link>
           </div>
         </div>
       </div>
