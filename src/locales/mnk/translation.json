@@ -1,0 +1,85 @@
+{
+  "navigation": {
+    "team": "KUNTIO",
+    "matches": "TULUNŊOLU",
+    "facility": "TULUNŊ KUNDA",
+    "store": "JULA KUNDA",
+    "partners": "KAFO TIOLU"
+  },
+  "footer": {
+    "club_name": "MARENAH FUTBOL CLUB",
+    "tagline": "Ka Ball Kuntioya Lafita",
+    "connect": "I BE FO LA",
+    "location": "Marenah, Gambia",
+    "email": "info@marenahfc.com",
+    "phone": "+221 XX XXX XXXX",
+    "copyright": "© 2024 Marenah Futbol Club. Hakilo Baa Be.",
+    "privacy": "Suturo Sariya",
+    "terms": "Sariya Kuntiolu",
+    "admin": "Admin"
+  },
+  "facility": {
+    "title": "MARENAH FC KARANDIŊ KUNDA",
+    "subtitle": "Ka Gambia dindino karandi ball kuntioya la",
+    "future_complex": "Marenah FC Tulunŋ Kunda Nato",
+    "architectural_vision": "Ntelu minna ye tulunŋ kunda kura kanu",
+    "stats": {
+      "pitches": "Tulunŋ Kunda 6",
+      "players": "Karandila 200+ ",
+      "education": "Karandiŋ Kuntio Baa"
+    },
+    "vision": {
+      "title": "Ntelu La Mira",
+      "description": "Ka karandiŋ kunda samba soto min be ball kuntioya ni karandiŋ kafoo, ka dindino lafita min be se ka tulunŋ ke duniya kono ka Gambia la namunya ni laada tanka."
+    },
+    "programs": {
+      "title": "Karandiŋ Kuntio",
+      "youth": {
+        "title": "Dindino Karandiŋ",
+        "description": "Ka ball kuntioya folo folo karandiŋ ke",
+        "features": [
+          "San 8-14",
+          "Kuntioya Folo",
+          "Fanka Karandiŋ"
+        ]
+      },
+      "pre_professional": {
+        "title": "Pro Kuntioya",
+        "description": "Ka karandiŋ kuntioya ke pro kuntio ye",
+        "features": [
+          "San 15-17",
+          "Kuntioya Karandiŋ",
+          "Tulunŋ Kuntioya"
+        ]
+      },
+      "elite": {
+        "title": "Elite Sila",
+        "description": "Sila telen Marenah FC kuntio ba ye",
+        "features": [
+          "San 18-21",
+          "Pro Kuntioya",
+          "Elite Tulunŋ"
+        ]
+      }
+    },
+    "facilities": {
+      "title": "Karandiŋ Kunda Fenolu",
+      "training": {
+        "title": "Tulunŋ Kundolu",
+        "description": "Ji ni Yelemani Kura"
+      },
+      "accommodation": {
+        "title": "Siiniŋ Kunda",
+        "description": "Siiniŋ Kunda Kura ni Karandiŋ Yoro"
+      },
+      "education": {
+        "title": "Karandiŋ Kunda",
+        "description": "Karandiŋ Kunda Kura"
+      },
+      "medical": {
+        "title": "Kendeyandi Kunda",
+        "description": "Kendeyandila Ball Kuntioya La"
+      }
+    }
+  }
+} 

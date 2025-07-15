@@ -1,0 +1,85 @@
+{
+  "navigation": {
+    "team": "TEAM",
+    "matches": "MATCHES",
+    "facility": "FACILITY",
+    "store": "STORE",
+    "partners": "PARTNERS"
+  },
+  "footer": {
+    "club_name": "MARENAH FUTBOL CLUB",
+    "tagline": "Redefining Football Excellence",
+    "connect": "CONNECT WITH US",
+    "location": "Marenah, Gambia",
+    "email": "info@marenahfc.com",
+    "phone": "+221 XX XXX XXXX",
+    "copyright": "© 2024 Marenah Futbol Club. All Rights Reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "admin": "Admin"
+  },
+  "facility": {
+    "title": "MARENAH FC ACADEMY",
+    "subtitle": "Developing the next generation of Gambian football talent",
+    "future_complex": "Future Marenah FC Complex",
+    "architectural_vision": "Architectural vision of our world-class facility",
+    "stats": {
+      "pitches": "6 Training Pitches",
+      "players": "200+ Academy Players",
+      "education": "Full Education Program"
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To create a world-class youth development program that combines football excellence with education, producing well-rounded individuals who can compete at the highest levels of international football while representing Gambian values and culture."
+    },
+    "programs": {
+      "title": "Development Programs",
+      "youth": {
+        "title": "Youth Development",
+        "description": "Foundational skills development with emphasis on technical ability",
+        "features": [
+          "Ages 8-14",
+          "Technical fundamentals",
+          "Physical literacy"
+        ]
+      },
+      "pre_professional": {
+        "title": "Pre-Professional",
+        "description": "Advanced training preparing players for professional pathways",
+        "features": [
+          "Ages 15-17",
+          "Tactical development",
+          "Competition focus"
+        ]
+      },
+      "elite": {
+        "title": "Elite Pathway",
+        "description": "Direct route to Marenah FC first team opportunities",
+        "features": [
+          "Ages 18-21",
+          "Professional integration",
+          "Elite competition"
+        ]
+      }
+    },
+    "facilities": {
+      "title": "Academy Facilities",
+      "training": {
+        "title": "Training Pitches",
+        "description": "Modern drainage and lighting systems"
+      },
+      "accommodation": {
+        "title": "Accommodation",
+        "description": "Modern dormitories with study areas"
+      },
+      "education": {
+        "title": "Education Center",
+        "description": "Dedicated learning facilities"
+      },
+      "medical": {
+        "title": "Medical Center",
+        "description": "Sports medicine specialists"
+      }
+    }
+  }
+} 

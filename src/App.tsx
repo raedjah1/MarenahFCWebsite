@@ -27,6 +27,9 @@ import { BlogPostPage } from "./pages/BlogPostPage";
 import SponsorshipPage from "./pages/SponsorshipPage";
 import AdminDashboard from "./pages/AdminDashboard";
 
+// Initialize i18next
+import "./i18n";
+
 // Styles
 import "./styles/vendor/bootstrap.min.css";
 import "./styles/vendor/fontawesome.min.css";

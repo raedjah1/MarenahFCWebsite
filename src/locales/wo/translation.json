@@ -1,0 +1,85 @@
+{
+  "navigation": {
+    "team": "EKIP BI",
+    "matches": "MATCH YI",
+    "facility": "TERRAIN BI",
+    "store": "BUTIK BI",
+    "partners": "PARTENAIRES YI"
+  },
+  "footer": {
+    "club_name": "MARENAH FUTBOL CLUB",
+    "tagline": "Yokk Kàttan gi ci Mbëppat",
+    "connect": "JOKKOO AK NUN",
+    "location": "Marenah, Gambi",
+    "email": "info@marenahfc.com",
+    "phone": "+221 XX XXX XXXX",
+    "copyright": "© 2024 Marenah Futbol Club. Yépp am na boroom.",
+    "privacy": "Politig Sutura",
+    "terms": "Sartu yi",
+    "admin": "Admin"
+  },
+  "facility": {
+    "title": "MARENAH FC AKADEMI",
+    "subtitle": "Di jàngal xale yi ci Gambi ngir ñu doon ay mbëppat yu mag",
+    "future_complex": "Terrain Marenah FC bi Di Nëw",
+    "architectural_vision": "Ni nu bëgg terrain bi mel",
+    "stats": {
+      "pitches": "6 Terrain yu Ndaw",
+      "players": "Lu ëpp 200 Xale",
+      "education": "Programu Jàng bu Mat"
+    },
+    "vision": {
+      "title": "Sunu Aajo",
+      "description": "Defar programu jàngale mbëppat bu am solo te boole ci jàng, ngir am ay mbëppat yu mat te mën di joŋante ci àdduna bi, te di wone sunu aada ak sunuy pexe."
+    },
+    "programs": {
+      "title": "Programu Jàngale yi",
+      "youth": {
+        "title": "Jàngale Xale yi",
+        "description": "Jàngal leen mbëppat ci lu gëna sufeelu",
+        "features": [
+          "At 8-14",
+          "Lu Njëkk yi",
+          "Doxalin wu Mat"
+        ]
+      },
+      "pre_professional": {
+        "title": "Lu Jiitu Pro",
+        "description": "Waxtaan yu Xóot ngir Doon Pro",
+        "features": [
+          "At 15-17",
+          "Njàng mu Xóot",
+          "Joŋante"
+        ]
+      },
+      "elite": {
+        "title": "Yoonu Elite",
+        "description": "Yoon bu Jub jëm ci Ekipu Marenah FC bu Mag bi",
+        "features": [
+          "At 18-21",
+          "Dugg ci Pro",
+          "Joŋante bu Mag"
+        ]
+      }
+    },
+    "facilities": {
+      "title": "Jumtukaay yi ci Akademi bi",
+      "training": {
+        "title": "Terrain yi",
+        "description": "Jumtukaay yu Bees ngir Ndox ak Leer"
+      },
+      "accommodation": {
+        "title": "Fu ñu Dëkk",
+        "description": "Néeg yu Bees ak Fu ñu Jàng"
+      },
+      "education": {
+        "title": "Fu ñu Jànge",
+        "description": "Jumtukaay yu ñu Sàkk ngir Jàng"
+      },
+      "medical": {
+        "title": "Fu ñu Faj",
+        "description": "Doktoor yi Xam Faju Mbëppat"
+      }
+    }
+  }
+} 

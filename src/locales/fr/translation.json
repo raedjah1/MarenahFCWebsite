@@ -1,0 +1,85 @@
+{
+  "navigation": {
+    "team": "ÉQUIPE",
+    "matches": "MATCHS",
+    "facility": "INSTALLATION",
+    "store": "BOUTIQUE",
+    "partners": "PARTENAIRES"
+  },
+  "footer": {
+    "club_name": "MARENAH FUTBOL CLUB",
+    "tagline": "Redéfinir l'Excellence du Football",
+    "connect": "NOUS CONTACTER",
+    "location": "Marenah, Gambie",
+    "email": "info@marenahfc.com",
+    "phone": "+221 XX XXX XXXX",
+    "copyright": "© 2024 Marenah Futbol Club. Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "admin": "Admin"
+  },
+  "facility": {
+    "title": "ACADÉMIE MARENAH FC",
+    "subtitle": "Former la prochaine génération de talents du football gambien",
+    "future_complex": "Futur Complexe Marenah FC",
+    "architectural_vision": "Vision architecturale de notre installation de classe mondiale",
+    "stats": {
+      "pitches": "6 Terrains d'Entraînement",
+      "players": "200+ Joueurs Académiciens",
+      "education": "Programme Éducatif Complet"
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Créer un programme de développement de jeunes de classe mondiale qui allie excellence footballistique et éducation, formant des individus complets capables de concourir au plus haut niveau du football international tout en représentant les valeurs et la culture gambiennes."
+    },
+    "programs": {
+      "title": "Programmes de Développement",
+      "youth": {
+        "title": "Développement Jeunesse",
+        "description": "Développement des compétences fondamentales avec accent sur la technique",
+        "features": [
+          "8-14 ans",
+          "Fondamentaux techniques",
+          "Alphabétisation physique"
+        ]
+      },
+      "pre_professional": {
+        "title": "Pré-Professionnel",
+        "description": "Entraînement avancé préparant aux parcours professionnels",
+        "features": [
+          "15-17 ans",
+          "Développement tactique",
+          "Focus compétition"
+        ]
+      },
+      "elite": {
+        "title": "Parcours Élite",
+        "description": "Voie directe vers l'équipe première de Marenah FC",
+        "features": [
+          "18-21 ans",
+          "Intégration professionnelle",
+          "Compétition élite"
+        ]
+      }
+    },
+    "facilities": {
+      "title": "Installations de l'Académie",
+      "training": {
+        "title": "Terrains d'Entraînement",
+        "description": "Systèmes modernes de drainage et d'éclairage"
+      },
+      "accommodation": {
+        "title": "Hébergement",
+        "description": "Dortoirs modernes avec espaces d'étude"
+      },
+      "education": {
+        "title": "Centre Éducatif",
+        "description": "Installations dédiées à l'apprentissage"
+      },
+      "medical": {
+        "title": "Centre Médical",
+        "description": "Spécialistes en médecine du sport"
+      }
+    }
+  }
+} 
