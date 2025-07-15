@@ -1,336 +1,505 @@
-import React, { useState } from 'react';
-import './MatchesPage.css';
-
-interface Match {
-  id: number;
-  homeTeam: string;
-  awayTeam: string;
-  homeScore?: number;
-  awayScore?: number;
-  date: string;
-  time: string;
-  competition: string;
-  status: 'upcoming' | 'live' | 'finished';
-  venue: string;
-  isHome: boolean;
-}
-
-interface MatchStats {
-  possession: { home: number; away: number };
-  shots: { home: number; away: number };
-  shotsOnTarget: { home: number; away: number };
-  corners: { home: number; away: number };
-  fouls: { home: number; away: number };
-}
+import React, { useState } from "react";
+import "./MatchesPage.css";
+import { useUpcomingMatches, useMatches } from "../hooks/useFirebase";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import {
+  formatMatchDate,
+  formatMatchScore,
+  getMatchResultType,
+} from "../firebase";
+import type { Match } from "../firebase/types";
+import logoImage from "../assets/images/Logo.png";
 
 export const MatchesPage = () => {
-  const [activeTab, setActiveTab] = useState<'fixtures' | 'results' | 'statistics'>('fixtures');
+  const [activeTab, setActiveTab] = useState<
+    "fixtures" | "results" | "statistics"
+  >("fixtures");
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
 
-  const matches: Match[] = [
-    // Upcoming Matches
-    {
-      id: 1,
-      homeTeam: "Marenah FC",
-      awayTeam: "AS Douanes",
-      date: "2024-02-15",
-      time: "16:00",
-      competition: "Ligue 1 Gambia",
-      status: "upcoming",
-      venue: "Stade Marenah",
-      isHome: true
+  // Fetch upcoming matches
+  const {
+    data: upcomingMatches,
+    loading: upcomingLoading,
+    error: upcomingError,
+  } = useUpcomingMatches(10);
+
+  // Fetch past matches (results)
+  const {
+    data: pastMatches,
+    loading: pastLoading,
+    error: pastError,
+  } = useMatches({
+    dateRange: {
+      start: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // Last year
+      end: new Date(),
     },
-    {
-      id: 2,
-      homeTeam: "Casa Sports",
-      awayTeam: "Marenah FC",
-      date: "2024-02-22",
-      time: "18:30",
-      competition: "Ligue 1 Gambia",
-      status: "upcoming",
-      venue: "Stade Aline Sitoe Diatta",
-      isHome: false
-    },
-    // Finished Matches
-    {
-      id: 4,
-      homeTeam: "Marenah FC",
-      awayTeam: "Diambars FC",
-      homeScore: 3,
-      awayScore: 1,
-      date: "2024-02-01",
-      time: "16:00",
-      competition: "Ligue 1 Gambia",
-      status: "finished",
-      venue: "Stade Marenah",
-      isHome: true
-    },
-    {
-      id: 5,
-      homeTeam: "Jaraaf",
-      awayTeam: "Marenah FC",
-      homeScore: 0,
-      awayScore: 2,
-      date: "2024-01-25",
-      time: "18:30",
-      competition: "Ligue 1 Gambia",
-      status: "finished",
-      venue: "Stade Demba Diop",
-      isHome: false
+    orderBy: "date",
+    orderDirection: "desc",
+    limit: 20,
+  });
+
+  // Helper function to get team logo
+  const getTeamLogo = (teamName: string, isMarenah: boolean = false, logoUrl?: string) => {
+    if (isMarenah) {
+      // Use the imported logo for Marenah FC
+      return (
+        <div className="team-logo marenah-logo">
+          <img 
+            src={logoImage} 
+            alt="Marenah FC" 
+            className="team-logo-img"
+          />
+        </div>
+      );
     }
-  ];
-
-  const upcomingMatches = matches.filter(m => m.status === 'upcoming');
-  const finishedMatches = matches.filter(m => m.status === 'finished');
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'short', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+    
+    // If opponent has a logo URL from Firebase, use it
+    if (logoUrl) {
+      return (
+        <div className="team-logo opponent-logo">
+          <img 
+            src={logoUrl} 
+            alt={teamName} 
+            className="team-logo-img"
+            onError={(e) => {
+              // Fallback to initials if image fails to load
+              const target = e.target as HTMLImageElement;
+              const parent = target.parentElement;
+              if (parent) {
+                const initials = teamName
+                  .split(' ')
+                  .map(word => word.charAt(0))
+                  .join('')
+                  .substring(0, 3)
+                  .toUpperCase();
+                parent.innerHTML = `<span class="logo-text">${initials}</span>`;
+              }
+            }}
+          />
+        </div>
+      );
+    }
+    
+    // Generate a simple logo based on team name as fallback
+    const initials = teamName
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+      .substring(0, 3)
+      .toUpperCase();
+    
+    return (
+      <div className="team-logo opponent-logo">
+        <span className="logo-text">{initials}</span>
+      </div>
+    );
   };
 
-  const renderMatchCard = (match: Match) => (
-    <div 
-      key={match.id} 
-      className={`match-card ${match.status}`}
-      onClick={() => setSelectedMatch(match)}
-    >
-      <div className="match-header">
-        <span className="competition">{match.competition}</span>
-      </div>
-      
-      <div className="match-teams">
-        <div className="team home">
-          <div className="team-logo">
-            {match.homeTeam === 'Marenah FC' ? (
-              <div className="mfc-logo">MFC</div>
-            ) : (
-              <i className="fas fa-shield-alt"></i>
+  const renderMatchCard = (match: Match) => {
+    const isUpcoming = match.status === "scheduled";
+    const resultType = getMatchResultType(match);
+    const matchTime = new Date(match.date.seconds * 1000); // Convert Firestore timestamp to Date
+
+    return (
+      <div
+        key={match.id}
+        className={`match-card ${match.status} ${resultType || ""} ${isUpcoming ? 'upcoming' : 'completed'}`}
+        onClick={() => setSelectedMatch(match)}
+      >
+        <div className="match-header">
+          <div className="competition-badge">
+            <i className="fas fa-trophy"></i>
+            <span>{match.competition || "Friendly"}</span>
+          </div>
+          <div className="match-date-time">
+            <span className="date">{formatMatchDate(match.date, true)}</span>
+            <span className="time">{matchTime.toLocaleTimeString('en-US', { 
+              hour: '2-digit', 
+              minute: '2-digit',
+              hour12: true 
+            })}</span>
+          </div>
+        </div>
+
+        <div className="match-teams-container">
+          <div className="team-section home-team">
+            {getTeamLogo("Marenah FC", true)}
+            <div className="team-info">
+              <span className="team-name">Marenah FC</span>
+              <span className="team-label">{match.isHome ? "HOME" : "AWAY"}</span>
+            </div>
+            {match.result && (
+              <div className="team-score">
+                {match.isHome ? match.result.homeScore : match.result.awayScore}
+              </div>
             )}
           </div>
-          <span className="team-name">{match.homeTeam}</span>
-        </div>
-        
-        <div className="match-score">
-          {match.status === 'upcoming' ? (
-            <div className="match-time">
-              <span className="time">{match.time}</span>
-              <span className="date">{formatDate(match.date)}</span>
+
+          <div className="match-center">
+            {isUpcoming ? (
+              <div className="vs-indicator">
+                <span className="vs-text">VS</span>
+                <div className="match-countdown">
+                  <i className="fas fa-clock"></i>
+                </div>
+              </div>
+            ) : (
+              <div className="final-score">
+                <span className="score-display">{formatMatchScore(match)}</span>
+                <span className="final-text">FINAL</span>
+              </div>
+            )}
+          </div>
+
+          <div className="team-section away-team">
+            {match.result && (
+              <div className="team-score">
+                {match.isHome ? match.result.awayScore : match.result.homeScore}
+              </div>
+            )}
+            <div className="team-info">
+              <span className="team-name">{match.opponent}</span>
+              <span className="team-label">{!match.isHome ? "HOME" : "AWAY"}</span>
             </div>
-          ) : (
-            <div className="score">
-              <span className="home-score">{match.homeScore}</span>
-              <span className="separator">-</span>
-              <span className="away-score">{match.awayScore}</span>
+            {getTeamLogo(match.opponent, false, match.opponentLogo)}
+          </div>
+        </div>
+
+        <div className="match-footer">
+          <div className="venue-info">
+            <i className={`fas ${match.isHome ? "fa-home" : "fa-plane"}`}></i>
+            <span>{match.location}</span>
+          </div>
+          
+          {match.result && resultType && (
+            <div className={`result-badge ${resultType}`}>
+              <span className="result-text">
+                {resultType === "win" ? "WIN" : resultType === "draw" ? "DRAW" : "LOSS"}
+              </span>
+            </div>
+          )}
+          
+          {isUpcoming && (
+            <div className="upcoming-badge">
+              <i className="fas fa-calendar-alt"></i>
+              <span>UPCOMING</span>
             </div>
           )}
         </div>
-        
-        <div className="team away">
-          <div className="team-logo">
-            {match.awayTeam === 'Marenah FC' ? (
-              <div className="mfc-logo">MFC</div>
-            ) : (
-              <i className="fas fa-shield-alt"></i>
-            )}
-          </div>
-          <span className="team-name">{match.awayTeam}</span>
+
+        <div className="match-hover-overlay">
+          <i className="fas fa-eye"></i>
+          <span>View Details</span>
         </div>
       </div>
-      
-      <div className="match-footer">
-        <span className="venue">
-          <i className="fas fa-map-marker-alt"></i>
-          {match.venue}
-        </span>
-        {match.isHome && <span className="home-indicator">HOME</span>}
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="matches-page">
       {/* Navigation Tabs */}
       <div className="matches-navigation">
         <div className="matches-nav-container">
-          <button 
-            className={`matches-nav-tab ${activeTab === 'fixtures' ? 'active' : ''}`}
-            onClick={() => setActiveTab('fixtures')}
+          <button
+            className={`matches-nav-tab ${activeTab === "fixtures" ? "active" : ""}`}
+            onClick={() => setActiveTab("fixtures")}
           >
-            <i className="fas fa-calendar-alt"></i>
+            <i className="fas fa-calendar-plus"></i>
             FIXTURES
           </button>
-          <button 
-            className={`matches-nav-tab ${activeTab === 'results' ? 'active' : ''}`}
-            onClick={() => setActiveTab('results')}
+          <button
+            className={`matches-nav-tab ${activeTab === "results" ? "active" : ""}`}
+            onClick={() => setActiveTab("results")}
           >
-            <i className="fas fa-chart-line"></i>
+            <i className="fas fa-trophy"></i>
             RESULTS
           </button>
-          <button 
-            className={`matches-nav-tab ${activeTab === 'statistics' ? 'active' : ''}`}
-            onClick={() => setActiveTab('statistics')}
+          <button
+            className={`matches-nav-tab ${activeTab === "statistics" ? "active" : ""}`}
+            onClick={() => setActiveTab("statistics")}
           >
-            <i className="fas fa-chart-bar"></i>
+            <i className="fas fa-chart-line"></i>
             STATISTICS
           </button>
         </div>
       </div>
 
-      {/* Content */}
+      {/* Content Sections */}
       <div className="matches-content">
-        {activeTab === 'fixtures' && (
+        {activeTab === "fixtures" && (
           <div className="fixtures-section">
-            {/* Upcoming Matches */}
-            <div className="matches-group">
-              <h2><i className="fas fa-clock"></i> UPCOMING FIXTURES</h2>
+            <div className="section-header">
+              <h2>UPCOMING FIXTURES</h2>
+              <p>Our scheduled matches</p>
+            </div>
+
+            {upcomingLoading ? (
+              <div className="loading-container">
+                <LoadingSpinner />
+                <p>Loading upcoming fixtures...</p>
+              </div>
+            ) : upcomingError ? (
+              <div className="error-container">
+                <p>Error loading fixtures: {upcomingError}</p>
+              </div>
+            ) : upcomingMatches.length === 0 ? (
+              <div className="empty-state">
+                <i className="fas fa-calendar-times"></i>
+                <p>No upcoming fixtures scheduled.</p>
+              </div>
+            ) : (
               <div className="matches-grid">
                 {upcomingMatches.map(renderMatchCard)}
               </div>
-            </div>
+            )}
           </div>
         )}
 
-        {activeTab === 'results' && (
+        {activeTab === "results" && (
           <div className="results-section">
-            <div className="matches-group">
-              <h2><i className="fas fa-check-circle"></i> RECENT RESULTS</h2>
-              <div className="matches-grid">
-                {finishedMatches.map(renderMatchCard)}
-              </div>
+            <div className="section-header">
+              <h2>RECENT RESULTS</h2>
+              <p>Latest match outcomes</p>
             </div>
+
+            {pastLoading ? (
+              <div className="loading-container">
+                <LoadingSpinner />
+                <p>Loading recent results...</p>
+              </div>
+            ) : pastError ? (
+              <div className="error-container">
+                <p>Error loading results: {pastError}</p>
+              </div>
+            ) : pastMatches.length === 0 ? (
+              <div className="empty-state">
+                <i className="fas fa-trophy"></i>
+                <p>No recent results available.</p>
+              </div>
+            ) : (
+              <div className="matches-grid">
+                {pastMatches.map(renderMatchCard)}
+              </div>
+            )}
           </div>
         )}
 
-        {activeTab === 'statistics' && (
+        {activeTab === "statistics" && (
           <div className="statistics-section">
-            <div className="stats-overview">
+            <div className="section-header">
               <h2>SEASON STATISTICS</h2>
-              <div className="stats-cards">
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-futbol"></i>
-                  </div>
-                  <div className="stat-info">
-                    <span className="stat-number">24</span>
-                    <span className="stat-label">Matches Played</span>
-                  </div>
+              <p>Performance overview</p>
+            </div>
+
+            <div className="stats-overview">
+              <div className="stat-card wins">
+                <div className="stat-icon">
+                  <i className="fas fa-trophy"></i>
                 </div>
-                
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-trophy"></i>
-                  </div>
-                  <div className="stat-info">
-                    <span className="stat-number">18</span>
-                    <span className="stat-label">Wins</span>
-                  </div>
+                <div className="stat-content">
+                  <h3>{pastMatches.filter((m) => getMatchResultType(m) === "win").length}</h3>
+                  <p>Wins</p>
                 </div>
-                
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-handshake"></i>
-                  </div>
-                  <div className="stat-info">
-                    <span className="stat-number">4</span>
-                    <span className="stat-label">Draws</span>
-                  </div>
+              </div>
+              <div className="stat-card draws">
+                <div className="stat-icon">
+                  <i className="fas fa-handshake"></i>
                 </div>
-                
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-times-circle"></i>
-                  </div>
-                  <div className="stat-info">
-                    <span className="stat-number">2</span>
-                    <span className="stat-label">Losses</span>
-                  </div>
+                <div className="stat-content">
+                  <h3>{pastMatches.filter((m) => getMatchResultType(m) === "draw").length}</h3>
+                  <p>Draws</p>
                 </div>
-                
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-bullseye"></i>
-                  </div>
-                  <div className="stat-info">
-                    <span className="stat-number">58</span>
-                    <span className="stat-label">Goals Scored</span>
-                  </div>
+              </div>
+              <div className="stat-card losses">
+                <div className="stat-icon">
+                  <i className="fas fa-times-circle"></i>
                 </div>
-                
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-shield-alt"></i>
-                  </div>
-                  <div className="stat-info">
-                    <span className="stat-number">18</span>
-                    <span className="stat-label">Goals Conceded</span>
-                  </div>
+                <div className="stat-content">
+                  <h3>{pastMatches.filter((m) => getMatchResultType(m) === "loss").length}</h3>
+                  <p>Losses</p>
+                </div>
+              </div>
+              <div className="stat-card total">
+                <div className="stat-icon">
+                  <i className="fas fa-futbol"></i>
+                </div>
+                <div className="stat-content">
+                  <h3>{pastMatches.length}</h3>
+                  <p>Total Games</p>
                 </div>
               </div>
             </div>
+
+            {pastMatches.length > 0 && (
+              <div className="additional-stats">
+                <div className="stat-row">
+                  <div className="stat-item">
+                    <span className="stat-label">Win Rate</span>
+                    <span className="stat-value">
+                      {Math.round((pastMatches.filter((m) => getMatchResultType(m) === "win").length / pastMatches.length) * 100)}%
+                    </span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Goals Scored</span>
+                    <span className="stat-value">
+                      {pastMatches.reduce((total, match) => {
+                        if (match.result) {
+                          return total + (match.isHome ? match.result.homeScore : match.result.awayScore);
+                        }
+                        return total;
+                      }, 0)}
+                    </span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Goals Conceded</span>
+                    <span className="stat-value">
+                      {pastMatches.reduce((total, match) => {
+                        if (match.result) {
+                          return total + (match.isHome ? match.result.awayScore : match.result.homeScore);
+                        }
+                        return total;
+                      }, 0)}
+                    </span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Goal Difference</span>
+                    <span className="stat-value">
+                      {pastMatches.reduce((total, match) => {
+                        if (match.result) {
+                          const scored = match.isHome ? match.result.homeScore : match.result.awayScore;
+                          const conceded = match.isHome ? match.result.awayScore : match.result.homeScore;
+                          return total + (scored - conceded);
+                        }
+                        return total;
+                      }, 0)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
 
-      {/* Match Detail Modal */}
+      {/* Enhanced Match Detail Modal */}
       {selectedMatch && (
-        <div className="match-modal-overlay" onClick={() => setSelectedMatch(null)}>
+        <div
+          className="match-modal-overlay"
+          onClick={() => setSelectedMatch(null)}
+        >
           <div className="match-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>Match Details</h3>
-              <button 
-                className="close-btn"
+              <div className="modal-competition">
+                <i className="fas fa-trophy"></i>
+                <span>{selectedMatch.competition || "Friendly"}</span>
+              </div>
+              <button
+                className="close-button"
                 onClick={() => setSelectedMatch(null)}
               >
                 <i className="fas fa-times"></i>
               </button>
             </div>
+
             <div className="modal-content">
-              <div className="match-info">
-                <div className="teams-display">
-                  <div className="team-display">
-                    <div className="team-logo-large">
-                      {selectedMatch.homeTeam === 'Marenah FC' ? 'MFC' : 'OPP'}
+              <div className="modal-teams-display">
+                <div className="modal-team">
+                  {getTeamLogo("Marenah FC", true)}
+                  <div className="modal-team-info">
+                    <h3>Marenah FC</h3>
+                    <span className="modal-team-label">{selectedMatch.isHome ? "HOME" : "AWAY"}</span>
+                  </div>
+                  {selectedMatch.result && (
+                    <div className="modal-team-score">
+                      {selectedMatch.isHome ? selectedMatch.result.homeScore : selectedMatch.result.awayScore}
                     </div>
-                    <span className="team-name-large">{selectedMatch.homeTeam}</span>
-                  </div>
-                  
-                  <div className="score-display">
-                    {selectedMatch.status === 'upcoming' ? (
-                      <div className="upcoming-time">
-                        <span className="time-large">{selectedMatch.time}</span>
-                        <span className="date-large">{formatDate(selectedMatch.date)}</span>
-                      </div>
-                    ) : (
-                      <div className="score-large">
-                        <span className="score-number">{selectedMatch.homeScore}</span>
-                        <span className="score-separator">-</span>
-                        <span className="score-number">{selectedMatch.awayScore}</span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="team-display">
-                    <div className="team-logo-large">
-                      {selectedMatch.awayTeam === 'Marenah FC' ? 'MFC' : 'OPP'}
-                    </div>
-                    <span className="team-name-large">{selectedMatch.awayTeam}</span>
-                  </div>
+                  )}
                 </div>
-                
-                <div className="match-details">
-                  <p><strong>Competition:</strong> {selectedMatch.competition}</p>
-                  <p><strong>Venue:</strong> {selectedMatch.venue}</p>
-                  <p><strong>Date:</strong> {formatDate(selectedMatch.date)} at {selectedMatch.time}</p>
+
+                <div className="modal-match-center">
+                  {selectedMatch.status === "scheduled" ? (
+                    <div className="modal-upcoming">
+                      <span className="modal-vs">VS</span>
+                      <div className="modal-match-time">
+                        <span className="modal-date">{formatMatchDate(selectedMatch.date)}</span>
+                        <span className="modal-time">
+                          {new Date(selectedMatch.date.seconds * 1000).toLocaleTimeString('en-US', { 
+                            hour: '2-digit', 
+                            minute: '2-digit',
+                            hour12: true 
+                          })}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="modal-result">
+                      <span className="modal-final-score">{formatMatchScore(selectedMatch)}</span>
+                      <span className="modal-final-text">FINAL</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="modal-team">
+                  {getTeamLogo(selectedMatch.opponent, false, selectedMatch.opponentLogo)}
+                  <div className="modal-team-info">
+                    <h3>{selectedMatch.opponent}</h3>
+                    <span className="modal-team-label">{!selectedMatch.isHome ? "HOME" : "AWAY"}</span>
+                  </div>
+                  {selectedMatch.result && (
+                    <div className="modal-team-score">
+                      {selectedMatch.isHome ? selectedMatch.result.awayScore : selectedMatch.result.homeScore}
+                    </div>
+                  )}
                 </div>
               </div>
+
+              <div className="modal-match-details">
+                <div className="modal-detail-item">
+                  <i className={`fas ${selectedMatch.isHome ? "fa-home" : "fa-plane"}`}></i>
+                  <div className="modal-detail-content">
+                    <span className="modal-detail-label">Venue</span>
+                    <span className="modal-detail-value">{selectedMatch.location}</span>
+                  </div>
+                </div>
+
+                <div className="modal-detail-item">
+                  <i className="fas fa-calendar-alt"></i>
+                  <div className="modal-detail-content">
+                    <span className="modal-detail-label">Date & Time</span>
+                    <span className="modal-detail-value">
+                      {formatMatchDate(selectedMatch.date)} at {new Date(selectedMatch.date.seconds * 1000).toLocaleTimeString('en-US', { 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        hour12: true 
+                      })}
+                    </span>
+                  </div>
+                </div>
+
+                {selectedMatch.result && (
+                  <div className="modal-detail-item">
+                    <i className="fas fa-futbol"></i>
+                    <div className="modal-detail-content">
+                      <span className="modal-detail-label">Result</span>
+                      <span className="modal-detail-value">
+                        {getMatchResultType(selectedMatch) === "win" ? "Victory" : 
+                         getMatchResultType(selectedMatch) === "draw" ? "Draw" : "Defeat"}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {selectedMatch.notes && (
+                <div className="modal-notes">
+                  <h4>Match Notes</h4>
+                  <p>{selectedMatch.notes}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
     </div>
   );
-}; 
+};

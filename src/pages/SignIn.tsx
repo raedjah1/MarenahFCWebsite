@@ -1,23 +1,99 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './SignIn.css';
-import logoImage from '../assets/images/Logo.png';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import "./SignIn.css";
+import logoImage from "../assets/images/Logo.png";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [localError, setLocalError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const {
+    signIn,
+    loading,
+    error: authError,
+    isAuthenticated,
+    isAdmin,
+    clearError,
+  } = useFirebaseAuth();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated && isAdmin) {
+      navigate("/admin");
+    }
+  }, [isAuthenticated, isAdmin, navigate]);
+
+  // Clear errors when component mounts or when user starts typing
+  useEffect(() => {
+    return () => {
+      clearError();
+    };
+  }, [clearError]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement actual authentication
-    if (email && password) {
-      navigate('/admin');
-    } else {
-      setError('Please fill in all fields');
+    setLocalError("");
+    clearError();
+
+    // Basic validation
+    if (!email.trim()) {
+      setLocalError("Email is required");
+      return;
+    }
+
+    if (!password) {
+      setLocalError("Password is required");
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setLocalError("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await signIn(email.trim(), password);
+
+      if (result.success) {
+        // Navigation will be handled by the useEffect above
+        console.log("Sign in successful");
+      } else {
+        setLocalError(result.error || "Sign in failed");
+      }
+    } catch (error) {
+      setLocalError("An unexpected error occurred. Please try again.");
+      console.error("Sign in error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  const handleInputChange = () => {
+    // Clear errors when user starts typing
+    if (localError) setLocalError("");
+    if (authError) clearError();
+  };
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="admin-signin">
+        <div className="signin-overlay"></div>
+        <div className="signin-container">
+          <LoadingSpinner size="large" text="Checking authentication..." />
+        </div>
+      </div>
+    );
+  }
+
+  const displayError = localError || authError;
 
   return (
     <div className="admin-signin">
@@ -28,22 +104,33 @@ const SignIn = () => {
         <div className="signin-logo">
           <img src={logoImage} alt="Marenah FC" />
           <h1>ADMIN ACCESS</h1>
+          <p>Sign in to manage your club</p>
         </div>
 
         <form className="signin-form" onSubmit={handleSubmit}>
-          {error && <div className="error-message">{error}</div>}
-          
+          {displayError && (
+            <div className="error-message">
+              <i className="fas fa-exclamation-circle"></i>
+              {displayError}
+            </div>
+          )}
+
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             <div className="input-wrapper">
               <i className="fas fa-envelope"></i>
               <input
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  handleInputChange();
+                }}
+                placeholder="Enter your admin email"
                 required
+                disabled={isSubmitting}
+                autoComplete="email"
               />
             </div>
           </div>
@@ -56,9 +143,14 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  handleInputChange();
+                }}
                 placeholder="Enter your password"
                 required
+                disabled={isSubmitting}
+                autoComplete="current-password"
               />
             </div>
           </div>
@@ -71,11 +163,14 @@ const SignIn = () => {
 
         <div className="signin-footer">
           <p>Authorized Personnel Only</p>
-          <a href="mailto:support@marenahfc.com">Need Help?</a>
+          <p className="signin-help">
+            Contact the system administrator if you need access or are
+            experiencing issues.
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignIn; 
+export default SignIn;

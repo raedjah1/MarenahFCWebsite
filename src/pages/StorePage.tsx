@@ -1,82 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './StorePage.css';
-import whiteShirtBack from '../assets/images/whiteshirt.png';
-import whiteShirtFront from '../assets/images/whiteshirtfront.png';
-import blackShirtBack from '../assets/images/blackshirt.png';
-import blackShirtFront from '../assets/images/blackshirtfront.png';
-import yellowShirtBack from '../assets/images/yellowshirt.png';
-import yellowShirtFront from '../assets/images/yellowshirtfront.png';
-import blueShirtFront from '../assets/images/blueshirtfront.png';
-import blueShorts from '../assets/images/blueshorts.png';
-
-interface StoreItem {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  images: string[];
-  sizes: string[];
-  category: 'jersey' | 'shorts';
-}
+import { storeService, Product, ProductSize, formatPrice, isProductInStock } from '../firebase';
 
 export const StorePage = () => {
   const [selectedSize, setSelectedSize] = useState<string>('');
-  const [selectedItem, setSelectedItem] = useState<StoreItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Product | null>(null);
+  const [storeItems, setStoreItems] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const storeItems: StoreItem[] = [
-    {
-      id: 1,
-      name: "Marenah FC Home Jersey 2024",
-      price: 59.99,
-      description: "Official Marenah FC home jersey for the 2024 season. Features breathable fabric and club crest.",
-      images: [whiteShirtFront, whiteShirtBack],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      category: 'jersey'
-    },
-    {
-      id: 2,
-      name: "Marenah FC Away Jersey 2024",
-      price: 59.99,
-      description: "Official Marenah FC away jersey for the 2024 season. Sleek black design with premium materials.",
-      images: [blackShirtFront, blackShirtBack],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      category: 'jersey'
-    },
-    {
-      id: 3,
-      name: "Marenah FC Third Jersey 2024",
-      price: 59.99,
-      description: "Official Marenah FC third kit for the 2024 season. Bold yellow design celebrating our heritage.",
-      images: [yellowShirtFront, yellowShirtBack],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      category: 'jersey'
-    },
-    {
-      id: 4,
-      name: "Marenah FC Training Jersey",
-      price: 49.99,
-      description: "Official training jersey in vibrant blue. Perfect for practice sessions and casual wear.",
-      images: [blueShirtFront],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      category: 'jersey'
-    },
-    {
-      id: 5,
-      name: "Marenah FC Match Shorts",
-      price: 29.99,
-      description: "Official Marenah FC match shorts. Lightweight and comfortable design.",
-      images: [blueShorts],
-      sizes: ['S', 'M', 'L', 'XL'],
-      category: 'shorts'
-    }
-  ];
+  useEffect(() => {
+    const fetchStoreItems = async () => {
+      try {
+        setLoading(true);
+        const result = await storeService.getProducts({
+          isActive: true,
+          orderBy: 'isFeatured',
+          orderDirection: 'desc'
+        });
+        
+        if (result.success && result.data) {
+          setStoreItems(result.data.data);
+        } else {
+          setError(result.error || 'Failed to fetch store items');
+        }
+      } catch (err) {
+        console.error('Error fetching store items:', err);
+        setError('An unexpected error occurred while fetching store items');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStoreItems();
+  }, []);
 
   const handleSizeSelect = (size: string) => {
     setSelectedSize(size);
   };
 
-  const handleItemClick = (item: StoreItem) => {
+  const handleItemClick = (item: Product) => {
     setSelectedItem(item);
+  };
+
+  const getAvailableSizes = (product: Product): ProductSize[] => {
+    return Object.entries(product.sizes)
+      .filter(([_, stock]) => stock > 0)
+      .map(([size, _]) => size as ProductSize);
   };
 
   return (
@@ -87,47 +57,70 @@ export const StorePage = () => {
       </div>
 
       <div className="store-content">
-        <div className="store-grid">
-          {storeItems.map((item) => (
-            <div 
-              key={item.id} 
-              className="store-item"
-              onClick={() => handleItemClick(item)}
-            >
-              <div className="item-images">
-                {item.images.map((image, index) => (
-                  <img 
-                    key={index}
-                    src={image} 
-                    alt={`${item.name} view ${index + 1}`}
-                    className="item-image"
-                  />
-                ))}
-              </div>
-              <div className="item-details">
-                <h3>{item.name}</h3>
-                <p className="item-price">${item.price}</p>
-                <div className="size-selector">
-                  {item.sizes.map((size) => (
-                    <button
-                      key={size}
-                      className={`size-button ${selectedSize === size ? 'selected' : ''}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleSizeSelect(size);
-                      }}
-                    >
-                      {size}
-                    </button>
-                  ))}
+        {loading ? (
+          <div className="loading-container">
+            <p>Loading store items...</p>
+          </div>
+        ) : error ? (
+          <div className="error-container">
+            <p>Error: {error}</p>
+          </div>
+        ) : storeItems.length === 0 ? (
+          <div className="empty-container">
+            <p>No products available at the moment.</p>
+          </div>
+        ) : (
+          <div className="store-grid">
+            {storeItems.map((item) => (
+              <div 
+                key={item.id} 
+                className="store-item"
+                onClick={() => handleItemClick(item)}
+              >
+                <div className="item-images">
+                  {item.imageURLs && item.imageURLs.length > 0 ? (
+                    <img 
+                      src={item.imageURLs[0]} 
+                      alt={item.name}
+                      className="item-image"
+                    />
+                  ) : (
+                    <div className="no-image">No Image Available</div>
+                  )}
                 </div>
-                <button className="add-to-cart-btn">
-                  Add to Cart
-                </button>
+                <div className="item-details">
+                  <h3>{item.name}</h3>
+                  <p className="item-price">{formatPrice(item.price, item.currency)}</p>
+                  <div className="size-selector">
+                    {getAvailableSizes(item).map((size) => (
+                      <button
+                        key={size}
+                        className={`size-button ${selectedSize === size ? 'selected' : ''}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSizeSelect(size);
+                        }}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                  <button 
+                    className="add-to-cart-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Add to cart functionality would go here
+                      console.log('Add to cart:', item.id, selectedSize);
+                    }}
+                    disabled={!selectedSize}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Item Detail Modal */}
@@ -142,7 +135,7 @@ export const StorePage = () => {
             </button>
             <div className="modal-content">
               <div className="modal-images">
-                {selectedItem.images.map((image, index) => (
+                {selectedItem.imageURLs && selectedItem.imageURLs.map((image, index) => (
                   <img 
                     key={index}
                     src={image} 
@@ -153,12 +146,12 @@ export const StorePage = () => {
               </div>
               <div className="modal-details">
                 <h2>{selectedItem.name}</h2>
-                <p className="modal-price">${selectedItem.price}</p>
+                <p className="modal-price">{formatPrice(selectedItem.price, selectedItem.currency)}</p>
                 <p className="modal-description">{selectedItem.description}</p>
                 <div className="modal-sizes">
                   <h4>Select Size:</h4>
                   <div className="size-buttons">
-                    {selectedItem.sizes.map((size) => (
+                    {getAvailableSizes(selectedItem).map((size) => (
                       <button
                         key={size}
                         className={`size-button ${selectedSize === size ? 'selected' : ''}`}
@@ -169,7 +162,14 @@ export const StorePage = () => {
                     ))}
                   </div>
                 </div>
-                <button className="add-to-cart-btn large">
+                <button 
+                  className="add-to-cart-btn large"
+                  onClick={() => {
+                    // Add to cart functionality would go here
+                    console.log('Add to cart from modal:', selectedItem.id, selectedSize);
+                  }}
+                  disabled={!selectedSize}
+                >
                   Add to Cart
                 </button>
               </div>
@@ -179,4 +179,4 @@ export const StorePage = () => {
       )}
     </div>
   );
-}; 
+};
