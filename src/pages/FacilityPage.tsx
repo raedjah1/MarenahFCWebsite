@@ -9,10 +9,10 @@ export const FacilityPage = () => {
         <div className="academy-section">
           <div className="section-header">
             <h2>MARENAH FC ACADEMY</h2>
-            <p>Developing the next generation of Gambiaese football talent</p>
+            <p>Developing the next generation of Gambian football talent</p>
           </div>
 
-          {/* Future Facility Image */}
+          {/* Future Facility Showcase */}
           <div className="future-facility-showcase">
             <div className="facility-image-container">
               <img 
@@ -25,69 +25,30 @@ export const FacilityPage = () => {
                 <p>Architectural vision of our world-class facility</p>
               </div>
             </div>
-          </div>
-
-          <div className="academy-content">
-            <div className="academy-overview">
-              <div className="academy-vision">
-                <h3>Our Vision</h3>
-                <p>To create a world-class youth development program that combines football excellence with education, producing well-rounded individuals who can compete at the highest levels of international football while representing Gambiaese values and culture.</p>
-              </div>
-
-              <div className="academy-programs">
-                <h3>Development Programs</h3>
-                <div className="programs-grid">
-                  <div className="program-card">
-                    <div className="program-icon">
-                      <i className="fas fa-child"></i>
-                    </div>
-                    <h4>Youth Development (12-16)</h4>
-                    <p>Foundational skills development with emphasis on technical ability and game intelligence</p>
-                  </div>
-                  
-                  <div className="program-card">
-                    <div className="program-icon">
-                      <i className="fas fa-user-graduate"></i>
-                    </div>
-                    <h4>Pre-Professional (17-19)</h4>
-                    <p>Advanced training preparing players for professional football and higher education pathways</p>
-                  </div>
-                  
-                  <div className="program-card">
-                    <div className="program-icon">
-                      <i className="fas fa-trophy"></i>
-                    </div>
-                    <h4>Elite Pathway</h4>
-                    <p>Direct route to Marenah FC first team and international opportunities</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div className="academy-facilities">
               <h3>Academy Facilities</h3>
               <div className="academy-features">
                 <div className="academy-feature">
                   <i className="fas fa-futbol"></i>
                   <div>
-                    <h4>6 Training Pitches</h4>
-                    <p>Age-appropriate sized pitches with modern drainage and lighting</p>
+                    <h4>Training Pitches</h4>
+                    <p>Modern drainage and lighting systems</p>
                   </div>
                 </div>
                 
                 <div className="academy-feature">
                   <i className="fas fa-home"></i>
                   <div>
-                    <h4>Residential Accommodation</h4>
-                    <p>Modern dormitories for 200 academy players with study areas</p>
+                    <h4>Accommodation</h4>
+                    <p>Modern dormitories with study areas</p>
                   </div>
                 </div>
                 
                 <div className="academy-feature">
                   <i className="fas fa-book"></i>
                   <div>
-                    <h4>Educational Center</h4>
-                    <p>Classrooms and learning facilities ensuring academic excellence</p>
+                    <h4>Education Center</h4>
+                    <p>Dedicated learning facilities</p>
                   </div>
                 </div>
                 
@@ -95,7 +56,66 @@ export const FacilityPage = () => {
                   <i className="fas fa-heartbeat"></i>
                   <div>
                     <h4>Medical Center</h4>
-                    <p>Dedicated healthcare facility with sports medicine specialists</p>
+                    <p>Sports medicine specialists</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="vision-section">
+            <div className="vision-content">
+              <div className="vision-header">
+                <h3>Our Vision</h3>
+                <p>To create a world-class youth development program that combines football excellence with education, producing well-rounded individuals who can compete at the highest levels of international football while representing Gambian values and culture.</p>
+              </div>
+              
+              <div className="programs-container">
+                <h4>Development Programs</h4>
+                <div className="programs-grid">
+                  <div className="program-card">
+                    <div className="program-icon">
+                      <i className="fas fa-child"></i>
+                    </div>
+                    <div className="program-content">
+                      <h4>Youth Development</h4>
+                      <p>Foundational skills development with emphasis on technical ability</p>
+                      <ul className="program-features">
+                        <li><i className="fas fa-check"></i>Ages 8-14</li>
+                        <li><i className="fas fa-check"></i>Technical fundamentals</li>
+                        <li><i className="fas fa-check"></i>Physical literacy</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="program-card">
+                    <div className="program-icon">
+                      <i className="fas fa-user-graduate"></i>
+                    </div>
+                    <div className="program-content">
+                      <h4>Pre-Professional</h4>
+                      <p>Advanced training preparing players for professional pathways</p>
+                      <ul className="program-features">
+                        <li><i className="fas fa-check"></i>Ages 15-17</li>
+                        <li><i className="fas fa-check"></i>Tactical development</li>
+                        <li><i className="fas fa-check"></i>Competition focus</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="program-card">
+                    <div className="program-icon">
+                      <i className="fas fa-trophy"></i>
+                    </div>
+                    <div className="program-content">
+                      <h4>Elite Pathway</h4>
+                      <p>Direct route to Marenah FC first team opportunities</p>
+                      <ul className="program-features">
+                        <li><i className="fas fa-check"></i>Ages 18-21</li>
+                        <li><i className="fas fa-check"></i>Professional integration</li>
+                        <li><i className="fas fa-check"></i>Elite competition</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
