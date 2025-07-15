@@ -16,9 +16,10 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       
-      // Always show header at the very top
-      if (currentScrollY < 10) {
+      // Always show header at the very top or bottom of page
+      if (currentScrollY < 10 || Math.abs(maxScroll - currentScrollY) < 10) {
         setIsVisible(true);
       }
       // Hide when scrolling down past 100px

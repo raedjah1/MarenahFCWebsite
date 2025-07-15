@@ -94,27 +94,15 @@
     transition: all 0.3s ease;
 }
 
-/* Navigation Menu - Glassmorphism Container */
+/* Navigation Menu - Clean and minimal */
 .header-nav {
     position: absolute;
-    width: 750px; /* Increased from 600px to accommodate 5 items */
+    width: 750px;
     height: 50px;
     left: 50%;
     transform: translateX(-50%);
     top: 25px;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.08) 0%,
-        rgba(230, 166, 76, 0.12) 50%,
-        rgba(118, 87, 43, 0.08) 100%
-    );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: transparent;
     z-index: 1001;
 }
 
@@ -188,56 +176,62 @@
         Roboto,
         sans-serif;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
     text-align: center;
-    color: var(--text-color);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease-out;
     white-space: nowrap;
-    border-radius: 20px;
-    outline: none;
-    border: none;
+    outline: 0;
+    border: 0;
     letter-spacing: 0.5px;
     padding: 0;
     margin: 0;
     left: 0;
     top: 0;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-link:focus {
-    outline: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+.nav-link:focus-visible {
+    outline: 0;
+    border: 0;
+    box-shadow: none;
 }
 
 .nav-link::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        135deg,
-        var(--primary-color),
-        var(--secondary-color)
-    );
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: #ffffff;
+    transition: all 0.2s ease-out;
+    transform: translateX(-50%);
     opacity: 0;
-    border-radius: 20px;
-    transition: opacity 0.3s ease;
-    z-index: -1;
 }
 
 .nav-link:hover::before,
 .nav-link.active::before {
-    opacity: 0.2;
+    width: 24px;
+    opacity: 1;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--primary-color);
-    transform: translateY(-1px);
-    text-shadow: 0 2px 8px rgba(230, 166, 76, 0.4);
-    box-shadow: 0 4px 12px rgba(230, 166, 76, 0.2);
+    color: #ffffff;
+}
+
+.nav-link.active {
+    font-weight: 600;
 }
 
 /* Language Selector - Glassmorphism style */
