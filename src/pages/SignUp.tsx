@@ -345,7 +345,6 @@ const SignUp: React.FC = () => {
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <div className="input-wrapper">
-                <i className="fas fa-lock input-icon"></i>
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
@@ -374,7 +373,6 @@ const SignUp: React.FC = () => {
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
               <div className="input-wrapper">
-                <i className="fas fa-lock input-icon"></i>
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   id="confirmPassword"
