@@ -70,8 +70,10 @@
 
 /* Modern Navigation Tabs */
 .team-navigation {
-  position: sticky;
-  top: 100px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
@@ -156,7 +158,8 @@
 .team-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
+  padding-top: 115px; /* Brought content up by 5px more */
 }
 
 /* Modern Section Headers */

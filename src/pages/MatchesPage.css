@@ -69,8 +69,10 @@
 
 /* Navigation Tabs */
 .matches-navigation {
-  position: sticky;
-  top: 100px;
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
@@ -157,6 +159,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 2rem 3rem;
+  padding-top: 115px; /* Account for fixed header + tabs */
 }
 
 .matches-group {

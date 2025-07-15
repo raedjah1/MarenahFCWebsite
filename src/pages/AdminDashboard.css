@@ -441,18 +441,19 @@
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .modal-header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -460,7 +461,7 @@
 
 .modal-header h3 {
   margin: 0;
-  color: #1f2937;
+  color: white;
   font-size: 1.25rem;
   font-weight: 600;
 }
@@ -469,7 +470,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
@@ -477,8 +478,8 @@
 }
 
 .close-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
-  color: #374151;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .modal-body {
@@ -499,7 +500,7 @@
 }
 
 .form-group label {
-  color: #374151;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   font-size: 0.95rem;
 }
@@ -508,11 +509,12 @@
 .form-group select,
 .form-group textarea {
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .form-group input:focus,
@@ -520,7 +522,13 @@
 .form-group textarea:focus {
   outline: none;
   border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form-group input[type="checkbox"] {
@@ -539,7 +547,7 @@
   justify-content: flex-end;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-actions .btn {
@@ -547,13 +555,14 @@
 }
 
 .form-actions .btn-secondary {
-  background: #f3f4f6;
-  color: #374151;
-  border: 1px solid #d1d5db;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .form-actions .btn-secondary:hover {
-  background: #e5e7eb;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 /* Loading and Error States */
@@ -576,30 +585,31 @@
 /* Product Form Specific Styles */
 .file-input {
   padding: 0.5rem;
-  border: 2px dashed #d1d5db;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
   border-radius: 6px;
-  background: #f9fafb;
+  background: rgba(255, 255, 255, 0.05);
   cursor: pointer;
   transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .file-input:hover {
   border-color: #4f46e5;
-  background: #f0f9ff;
+  background: rgba(79, 70, 229, 0.1);
 }
 
 .image-preview {
   margin-top: 1rem;
   padding: 1rem;
-  background: #f9fafb;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 6px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .image-preview p {
   margin: 0 0 0.5rem 0;
   font-size: 0.9rem;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .image-list {
@@ -613,14 +623,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .image-item span {
   font-size: 0.9rem;
-  color: #374151;
+  color: rgba(255, 255, 255, 0.9);
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -652,9 +662,9 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  background: #f9fafb;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 6px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .size-input {
@@ -662,31 +672,34 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .size-input label {
   min-width: 40px;
   font-weight: 600;
-  color: #374151;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
 }
 
 .size-input input {
   flex: 1;
   padding: 0.5rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   font-size: 0.9rem;
   margin: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .size-input input:focus {
   outline: none;
   border-color: #4f46e5;
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .remove-size {

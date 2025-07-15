@@ -690,7 +690,7 @@ const AdminDashboard = () => {
 
     return (
       <div className="modal-overlay" onClick={handleCloseForm}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ width: 'auto', background: '#fff !important' }}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ width: 'auto' }}>
           <div className="modal-header">
             <h3>
               {editingItem ? 'Edit' : 'Add'} {

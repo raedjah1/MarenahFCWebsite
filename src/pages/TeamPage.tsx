@@ -154,7 +154,7 @@ export const TeamPage = () => {
       </div>
 
       {/* Content Sections */}
-      <div className="team-content" style={{ paddingTop: 128 }}>
+      <div className="team-content">
         {activeTab === "management" && (
           <div className="management-section">
             <div className="section-header">
