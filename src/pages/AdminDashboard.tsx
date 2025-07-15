@@ -690,7 +690,7 @@ const AdminDashboard = () => {
 
     return (
       <div className="modal-overlay" onClick={handleCloseForm}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ width: 'auto', background: '#fff !important' }}>
           <div className="modal-header">
             <h3>
               {editingItem ? 'Edit' : 'Add'} {
@@ -1352,6 +1352,31 @@ const AdminDashboard = () => {
           <img src={logoImage} alt="Marenah FC" />
           <h2>ADMIN PANEL</h2>
           <p>Welcome, {user?.displayName || user?.email}</p>
+          
+          {/* Navigation buttons moved below user email */}
+          <div className="admin-main-nav">
+            <button
+              className={`main-nav-btn ${activeSection === "team" ? "active" : ""}`}
+              onClick={() => setActiveSection("team")}
+            >
+              <i className="fas fa-users"></i>
+              <span>Team</span>
+            </button>
+            <button
+              className={`main-nav-btn ${activeSection === "matches" ? "active" : ""}`}
+              onClick={() => setActiveSection("matches")}
+            >
+              <i className="fas fa-futbol"></i>
+              <span>Matches</span>
+            </button>
+            <button
+              className={`main-nav-btn ${activeSection === "store" ? "active" : ""}`}
+              onClick={() => setActiveSection("store")}
+            >
+              <i className="fas fa-shopping-bag"></i>
+              <span>Store</span>
+            </button>
+          </div>
         </div>
         <nav className="admin-nav">
           <button
@@ -1360,27 +1385,6 @@ const AdminDashboard = () => {
           >
             <i className="fas fa-tachometer-alt"></i>
             <span>Overview</span>
-          </button>
-          <button
-            className={`nav-item ${activeSection === "team" ? "active" : ""}`}
-            onClick={() => setActiveSection("team")}
-          >
-            <i className="fas fa-users"></i>
-            <span>Team</span>
-          </button>
-          <button
-            className={`nav-item ${activeSection === "matches" ? "active" : ""}`}
-            onClick={() => setActiveSection("matches")}
-          >
-            <i className="fas fa-futbol"></i>
-            <span>Matches</span>
-          </button>
-          <button
-            className={`nav-item ${activeSection === "store" ? "active" : ""}`}
-            onClick={() => setActiveSection("store")}
-          >
-            <i className="fas fa-shopping-bag"></i>
-            <span>Store</span>
           </button>
         </nav>
 

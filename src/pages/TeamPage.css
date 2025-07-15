@@ -821,6 +821,11 @@
 
 .modal-content {
   padding: 2rem;
+  /* background: #110c05 !important; */
+}
+
+.black-modal-content {
+  padding: 2rem;
   background: #110c05 !important;
 }
 

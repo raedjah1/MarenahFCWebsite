@@ -275,7 +275,7 @@ export const TeamPage = () => {
               </button>
             </div>
 
-            <div className="modal-content">
+            <div className="black-modal-content modal-content" >
               {selectedMember.nationality && (
                 <div className="modal-section">
                   <h4>Nationality</h4>

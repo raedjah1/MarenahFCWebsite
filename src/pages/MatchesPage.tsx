@@ -401,7 +401,7 @@ export const MatchesPage = () => {
               </button>
             </div>
 
-            <div className="modal-content">
+            <div className="black-modal-content modal-content">
               <div className="modal-teams-display">
                 <div className="modal-team">
                   {getTeamLogo("Marenah FC", true)}
