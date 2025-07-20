@@ -11,14 +11,9 @@ import {
   where,
   orderBy,
   limit,
-  startAfter,
   onSnapshot,
   Timestamp,
-  DocumentSnapshot,
-  QuerySnapshot,
-  WriteBatch,
   writeBatch,
-  increment,
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { db, storage } from './config';
@@ -37,7 +32,7 @@ import type {
 // ============================================================================
 
 const TEAM_MEMBERS_COLLECTION = 'teamMembers';
-const PLAYER_STATS_COLLECTION = 'playerStats';
+
 const STORAGE_PATH = 'team-photos';
 
 // ============================================================================

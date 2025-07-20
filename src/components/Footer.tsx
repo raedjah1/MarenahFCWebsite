@@ -1,16 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logoImage from '../assets/images/Logo.png';
 import './Footer.css';
 
 export const Footer = () => {
-  const navigate = useNavigate();
+
   const { t } = useTranslation();
 
-  const handleNavigation = (path: string) => {
-    window.scrollTo(0, 0);
-    navigate(path);
-  };
+
 
   return (
     <footer className="footer-container">

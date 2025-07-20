@@ -738,7 +738,7 @@ const AdminDashboard = () => {
         date: new Date(matchFormData.date || ''),
         isHome: matchFormData.isHome,
         matchType: matchFormData.matchType as any,
-        status: matchFormData.status as any,
+
       };
 
       // Add result data if status is finished or live
@@ -803,7 +803,9 @@ const AdminDashboard = () => {
       const sku = productFormData.sku || `${productFormData.category?.toUpperCase()}-${Date.now()}`;
 
       // Convert productSizes to proper ProductSize keys
-      const validSizes: Record<ProductSize, number> = {};
+      const validSizes: Record<ProductSize, number> = {
+        XS: 0, S: 0, M: 0, L: 0, XL: 0, XXL: 0, XXXL: 0
+      };
       const validProductSizes: ProductSize[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
       Object.entries(productSizes).forEach(([size, quantity]) => {
@@ -813,7 +815,7 @@ const AdminDashboard = () => {
       });
 
       // Ensure at least one size is provided with stock
-      if (Object.keys(validSizes).length === 0) {
+      if (Object.values(validSizes).every(qty => qty === 0)) {
         alert('Please add at least one size with stock quantity greater than 0.');
         return;
       }
@@ -1043,7 +1045,7 @@ const AdminDashboard = () => {
                   onChange={(e) => setMatchFormData({
                     ...matchFormData,
                     result: {
-                      ...matchFormData.result || {},
+                      ...matchFormData.result || { homeScore: 0, awayScore: 0 },
                       homeScore: parseInt(e.target.value) || 0
                     }
                   })}
@@ -1058,7 +1060,7 @@ const AdminDashboard = () => {
                   onChange={(e) => setMatchFormData({
                     ...matchFormData,
                     result: {
-                      ...matchFormData.result || {},
+                      ...matchFormData.result || { homeScore: 0, awayScore: 0 },
                       awayScore: parseInt(e.target.value) || 0
                     }
                   })}
@@ -1099,7 +1101,7 @@ const AdminDashboard = () => {
                         result: {
                           ...matchFormData.result || { homeScore: 0, awayScore: 0 },
                           penaltyShootout: {
-                            ...matchFormData.result?.penaltyShootout || {},
+                            ...matchFormData.result?.penaltyShootout || { homeScore: 0, awayScore: 0 },
                             homeScore: parseInt(e.target.value) || 0
                           }
                         }
@@ -1117,7 +1119,7 @@ const AdminDashboard = () => {
                         result: {
                           ...matchFormData.result || { homeScore: 0, awayScore: 0 },
                           penaltyShootout: {
-                            ...matchFormData.result?.penaltyShootout || {},
+                            ...matchFormData.result?.penaltyShootout || { homeScore: 0, awayScore: 0 },
                             awayScore: parseInt(e.target.value) || 0
                           }
                         }

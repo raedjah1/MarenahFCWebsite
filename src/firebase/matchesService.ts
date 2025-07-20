@@ -11,12 +11,8 @@ import {
   where,
   orderBy,
   limit,
-  startAfter,
   onSnapshot,
   Timestamp,
-  DocumentSnapshot,
-  QuerySnapshot,
-  WriteBatch,
   writeBatch,
 } from "firebase/firestore";
 import {
@@ -33,7 +29,6 @@ import type {
   MatchStatus,
   MatchResult,
   MatchEvent,
-  Substitution,
   QueryResult,
   PaginationParams,
   ValidationError,
@@ -856,7 +851,7 @@ class MatchesService {
   /**
    * Get season statistics
    */
-  async getSeasonStats(season?: string): Promise<{
+  async getSeasonStats(): Promise<{
     gamesPlayed: number;
     wins: number;
     draws: number;

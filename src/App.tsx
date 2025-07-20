@@ -4,7 +4,7 @@ import { LoadingProvider } from "./contexts/LoadingContext";
 import { FirebaseAuthProvider } from "./contexts/FirebaseAuthContext";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { CookieNotification } from "./components/CookieNotification";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+
 import { ViewTransition } from "./components/ViewTransition";
 import { RootLayout } from "./layouts/RootLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
@@ -41,7 +41,7 @@ import "./styles/style.css";
 import "./styles/view-transitions.css";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
+  const [isDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     return (
       savedTheme === "dark" ||
@@ -59,9 +59,7 @@ function App() {
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev);
-  };
+
 
   return (
     <FirebaseAuthProvider>
@@ -72,7 +70,6 @@ function App() {
             <ViewTransition>
               <MainContent
                 isDarkMode={isDarkMode}
-                onToggleTheme={toggleTheme}
               />
             </ViewTransition>
           </Router>
@@ -85,10 +82,8 @@ function App() {
 // Separate component for main content that only renders after loading
 const MainContent = ({
   isDarkMode,
-  onToggleTheme,
 }: {
   isDarkMode: boolean;
-  onToggleTheme: () => void;
 }) => {
   const { isLoading } = useLoading();
 

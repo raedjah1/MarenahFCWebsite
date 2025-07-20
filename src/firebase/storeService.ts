@@ -11,16 +11,8 @@ import {
   where,
   orderBy,
   limit,
-  startAfter,
-  onSnapshot,
   Timestamp,
-  DocumentSnapshot,
-  QuerySnapshot,
-  WriteBatch,
   writeBatch,
-  increment,
-  arrayUnion,
-  arrayRemove,
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { db, storage } from './config';
@@ -32,7 +24,6 @@ import type {
   CartItem,
   ShoppingCart,
   Order,
-  OrderStatus,
   QueryResult,
   PaginationParams,
   ValidationError,
@@ -44,7 +35,7 @@ import type {
 
 const PRODUCTS_COLLECTION = 'products';
 const CARTS_COLLECTION = 'carts';
-const ORDERS_COLLECTION = 'orders';
+
 const PRODUCT_IMAGES_STORAGE_PATH = 'product-images';
 
 // ============================================================================
@@ -106,7 +97,7 @@ export interface InventoryUpdate {
 class StoreService {
   private productsCollection = collection(db, PRODUCTS_COLLECTION);
   private cartsCollection = collection(db, CARTS_COLLECTION);
-  private ordersCollection = collection(db, ORDERS_COLLECTION);
+
 
   // ==========================================================================
   // PRODUCT CRUD OPERATIONS
@@ -255,7 +246,7 @@ class StoreService {
         products = products.filter(product =>
           product.name.toLowerCase().includes(searchLower) ||
           product.description.toLowerCase().includes(searchLower) ||
-          product.tags.some(tag => tag.toLowerCase().includes(searchLower))
+          product.tags?.some(tag => tag.toLowerCase().includes(searchLower))
         );
       }
 

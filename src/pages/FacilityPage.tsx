@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import './FacilityPage.css';
 import futureFacilityImage from '../assets/images/futurefacility.png';
@@ -7,9 +7,9 @@ export const FacilityPage = () => {
   const { t } = useTranslation();
 
   // Get features arrays with proper typing
-  const youthFeatures = t<string, string[]>('facility.programs.youth.features', { returnObjects: true });
-  const preProFeatures = t<string, string[]>('facility.programs.pre_professional.features', { returnObjects: true });
-  const eliteFeatures = t<string, string[]>('facility.programs.elite.features', { returnObjects: true });
+  const youthFeatures = t('facility.programs.youth.features', { returnObjects: true }) as string[];
+  const preProFeatures = t('facility.programs.pre_professional.features', { returnObjects: true }) as string[];
+  const eliteFeatures = t('facility.programs.elite.features', { returnObjects: true }) as string[];
 
   return (
     <div className="facility-page">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./TeamPage.css";
 import { useTeamMembersByRole } from "../hooks/useFirebase";
 import { LoadingSpinner } from "../components/LoadingSpinner";

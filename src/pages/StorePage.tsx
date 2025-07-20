@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './StorePage.css';
-import { storeService, Product, ProductSize, formatPrice, isProductInStock } from '../firebase';
+import { storeService, Product, ProductSize, formatPrice } from '../firebase';
 
 export const StorePage = () => {
   const [selectedSize, setSelectedSize] = useState<string>('');

@@ -1,7 +1,6 @@
 // Firebase-based Authentication Context
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
-import { User } from 'firebase/auth';
-import { firebaseAuthService, type AuthResult, type AuthState } from '../firebase/auth';
+import { firebaseAuthService, type AuthResult } from '../firebase/auth';
 import type { FirebaseUser } from '../firebase/types';
 
 // ============================================================================

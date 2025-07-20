@@ -247,7 +247,7 @@ class FirebaseAuthService {
    * Check if user has admin claims
    */
   private checkAdminClaims(idTokenResult: IdTokenResult): boolean {
-    const claims = idTokenResult.claims as AdminClaims;
+    const claims = idTokenResult.claims as unknown as AdminClaims;
     return claims.admin === true || claims.role === 'admin';
   }
 

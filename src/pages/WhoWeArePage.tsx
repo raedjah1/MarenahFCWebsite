@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './WhoWeArePage.css';
 // Import the who we are image
 import whoWeAreImage from '../assets/images/whowearemarenah.png';

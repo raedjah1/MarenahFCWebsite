@@ -9,7 +9,7 @@ export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { i18n, t } = useTranslation();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+
   const location = useLocation();
   const { transitionNavigate, supportsViewTransitions } = useViewTransition();
 

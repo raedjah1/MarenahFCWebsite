@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./MatchesPage.css";
 import { useUpcomingMatches, useMatches } from "../hooks/useFirebase";
 import { LoadingSpinner } from "../components/LoadingSpinner";

@@ -14,10 +14,8 @@ import {
   type ProductInput,
   type ProductQueryOptions,
   type ShoppingCart,
-  type CartItem,
   type ProductSize,
   type TeamMemberRole,
-  type MatchStatus,
   type ProductCategory,
 } from "../firebase";
 
@@ -67,11 +65,11 @@ export const useTeamMembers = (options: TeamMemberQueryOptions = {}) => {
     [
       options.limit,
       options.offset,
-      options.sortBy,
-      options.sortOrder,
+      options.orderBy,
+      options.orderDirection,
       options.role,
       options.isActive,
-      options.position,
+      options.searchTerm,
     ],
   );
 
@@ -337,14 +335,14 @@ export const useMatches = (options: MatchQueryOptions = {}) => {
     [
       options.limit,
       options.offset,
-      options.sortBy,
-      options.sortOrder,
-      options.filters?.status,
-      options.filters?.homeTeam,
-      options.filters?.awayTeam,
-      options.filters?.competition,
-      options.filters?.dateFrom,
-      options.filters?.dateTo,
+      options.orderBy,
+      options.orderDirection,
+      options.status,
+      options.matchType,
+      options.isHome,
+      options.dateRange,
+      options.opponent,
+      options.competition,
     ],
   );
 
@@ -650,13 +648,14 @@ export const useProducts = (options: ProductQueryOptions = {}) => {
     [
       options.limit,
       options.offset,
-      options.sortBy,
-      options.sortOrder,
+      options.orderBy,
+      options.orderDirection,
       options.category,
       options.isActive,
       options.isFeatured,
-      options.minPrice,
-      options.maxPrice,
+      options.searchTerm,
+      options.priceRange,
+      options.inStock,
     ],
   );
 
@@ -972,7 +971,7 @@ export const useCart = (userId?: string) => {
         );
 
         if (result.success && result.data) {
-          setState((prev) => ({ ...prev, data: result.data }));
+          setState((prev) => ({ ...prev, data: result.data || null }));
           setMutationState({ loading: false, error: null, success: true });
           return true;
         } else {
@@ -1013,7 +1012,7 @@ export const useCart = (userId?: string) => {
         );
 
         if (result.success && result.data) {
-          setState((prev) => ({ ...prev, data: result.data }));
+          setState((prev) => ({ ...prev, data: result.data || null }));
           setMutationState({ loading: false, error: null, success: true });
           return true;
         } else {
@@ -1048,7 +1047,7 @@ export const useCart = (userId?: string) => {
       const result = await storeService.clearCart(state.data.id);
 
       if (result.success && result.data) {
-        setState((prev) => ({ ...prev, data: result.data }));
+        setState((prev) => ({ ...prev, data: result.data || null }));
         setMutationState({ loading: false, error: null, success: true });
         return true;
       } else {
@@ -1126,11 +1125,11 @@ export const useRealtimeTeamMembers = (
     [
       options.limit,
       options.offset,
-      options.sortBy,
-      options.sortOrder,
+      options.orderBy,
+      options.orderDirection,
       options.role,
       options.isActive,
-      options.position,
+      options.searchTerm,
     ],
   );
 
@@ -1164,14 +1163,14 @@ export const useRealtimeMatches = (options: MatchQueryOptions = {}) => {
     [
       options.limit,
       options.offset,
-      options.sortBy,
-      options.sortOrder,
-      options.filters?.status,
-      options.filters?.homeTeam,
-      options.filters?.awayTeam,
-      options.filters?.competition,
-      options.filters?.dateFrom,
-      options.filters?.dateTo,
+      options.orderBy,
+      options.orderDirection,
+      options.status,
+      options.matchType,
+      options.isHome,
+      options.dateRange,
+      options.opponent,
+      options.competition,
     ],
   );
 
