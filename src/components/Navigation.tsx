@@ -97,6 +97,16 @@ export const Navigation = () => {
         <ul>
           <li className="nav-item">
             <Link 
+              to="/who-we-are" 
+              className={`nav-link ${location.pathname === '/who-we-are' ? 'active' : ''}`}
+              onClick={(e) => handleNavClick('/who-we-are', e)}
+            >
+              {t('navigation.who_we_are')}
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link 
               to="/team" 
               className={`nav-link ${location.pathname === '/team' ? 'active' : ''}`}
               onClick={(e) => handleNavClick('/team', e)}
@@ -132,16 +142,6 @@ export const Navigation = () => {
               onClick={(e) => handleNavClick('/store', e)}
             >
               {t('navigation.store')}
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link 
-              to="/sponsorship" 
-              className={`nav-link ${location.pathname === '/sponsorship' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/sponsorship', e)}
-            >
-              {t('navigation.partners')}
             </Link>
           </li>
         </ul>

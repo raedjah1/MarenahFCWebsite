@@ -249,9 +249,9 @@
   height: 35px;
   border-radius: 50%;
   background: linear-gradient(135deg, 
-    rgba(230, 166, 76, 0.2) 0%, 
-    rgba(118, 87, 43, 0.2) 100%
-  );
+      rgba(230, 166, 76, 0.2) 0%, 
+      rgba(118, 87, 43, 0.2) 100%
+    );
   border: 1px solid rgba(230, 166, 76, 0.3);
   color: var(--text-color);
   text-decoration: none;
@@ -262,9 +262,9 @@
 
 .social-link:hover {
   background: linear-gradient(135deg, 
-    var(--primary-color) 0%, 
-    var(--secondary-color) 100%
-  );
+      var(--primary-color) 0%, 
+      var(--secondary-color) 100%
+    );
   color: var(--background-color);
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(230, 166, 76, 0.3);
@@ -415,20 +415,20 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
-
+  
   .footer-bottom {
     padding: 0.8rem 1.5rem;
   }
-
+  
   .footer-contact-section {
     padding: 0;
     gap: 1rem;
   }
-
+  
   .contact-info {
     gap: 0.6rem;
   }
-
+  
   .social-links {
     margin-top: 0.3rem;
   }
@@ -443,7 +443,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.2rem;
   }
-
+  
   .footer-bottom {
     padding: 0.8rem 1rem;
   }

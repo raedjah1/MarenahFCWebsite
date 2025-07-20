@@ -31,7 +31,7 @@ export const TeamPage = () => {
     <div
       key={member.id}
       className={`staff-card ${member.role === 'player' ? 'player-card' : ''}`}
-      onClick={() => setSelectedMember(member)}
+      onClick={member.role === 'player' ? () => setSelectedMember(member) : undefined}
     >
       <div className="staff-image-container">
         <div className="staff-image">
@@ -46,10 +46,12 @@ export const TeamPage = () => {
         {member.jerseyNumber && (
           <div className="jersey-badge">#{member.jerseyNumber}</div>
         )}
-        <div className="card-overlay">
-          <i className="fas fa-eye"></i>
-          <span>View Details</span>
-        </div>
+        {member.role === 'player' && (
+          <div className="card-overlay">
+            <i className="fas fa-eye"></i>
+            <span>View Details</span>
+          </div>
+        )}
       </div>
 
       <div className="staff-info">
@@ -82,11 +84,11 @@ export const TeamPage = () => {
           </div>
         )}
 
-        {member.bio && (
+        {member.role === 'player' && member.bio && (
           <p className="staff-bio">{member.bio}</p>
         )}
 
-        {member.socialMedia && (
+        {member.role === 'player' && member.socialMedia && (
           <div className="social-media">
             {member.socialMedia.instagram && (
               <a
@@ -225,8 +227,33 @@ export const TeamPage = () => {
                 <p>Error loading players: {playersError}</p>
               </div>
             ) : players.length === 0 ? (
-              <div className="empty-state">
-                <p>No players found.</p>
+              <div className="players-empty-state">
+                <div className="empty-state-content">
+                  <div className="empty-state-icon">
+                    <i className="fas fa-users"></i>
+                  </div>
+                  <h3 className="empty-state-title">Coming Soon</h3>
+                  <p className="empty-state-subtitle">
+                    Our talented squad is being assembled. Stay tuned for player announcements and roster updates as we build our championship team.
+                  </p>
+                  <div className="empty-state-features">
+                    <div className="empty-state-feature">
+                      <i className="fas fa-star"></i>
+                      <span>Elite Players</span>
+                    </div>
+                    <div className="empty-state-feature">
+                      <i className="fas fa-trophy"></i>
+                      <span>Championship Ready</span>
+                    </div>
+                    <div className="empty-state-feature">
+                      <i className="fas fa-globe"></i>
+                      <span>International Talent</span>
+                    </div>
+                  </div>
+                  <div className="empty-state-cta">
+                    Follow for Updates
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="staff-grid players-grid">

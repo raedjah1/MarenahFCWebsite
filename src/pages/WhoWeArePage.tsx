@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './WhoWeArePage.css';
+// Import the who we are image
+import whoWeAreImage from '../assets/images/whowearemarenah.png';
 
 export const WhoWeArePage = () => {
   const [activePillar, setActivePillar] = useState(0);
@@ -52,6 +54,21 @@ export const WhoWeArePage = () => {
           </p>
         </header>
 
+        {/* Hero Team Photo */}
+        <div className="hero-image-section">
+          <div className="team-photo-container">
+            <div className="team-photo">
+              <img src={whoWeAreImage} alt="Marenah FC Team" />
+              <div className="photo-overlay">
+                <div className="photo-info">
+                  <h3 className="photo-title">Marenah FC</h3>
+                  <p className="photo-subtitle">United in Purpose, Driven by Excellence</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Main Content Grid */}
         <div className="content-grid">
           {/* Left Side - Pillars */}
@@ -74,16 +91,6 @@ export const WhoWeArePage = () => {
                   <div className="pillar-indicator"></div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Center - Image Placeholder */}
-          <div className="image-container">
-            <div className="image-placeholder">
-              <div className="image-content">
-                <i className="fas fa-image"></i>
-                <p>Team Image</p>
-              </div>
             </div>
           </div>
 

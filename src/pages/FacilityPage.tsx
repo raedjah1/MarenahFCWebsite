@@ -54,7 +54,7 @@ export const FacilityPage = () => {
               <div className="academy-vision">
                 <h3>{t('facility.vision.title')}</h3>
                 <p>{t('facility.vision.description')}</p>
-              
+
                 <div className="programs-grid">
                   <div className="program-card">
                     <div className="program-icon">
