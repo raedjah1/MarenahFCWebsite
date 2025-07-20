@@ -2,7 +2,7 @@
 .team-page {
   position: relative;
   min-height: 100vh;
-  background: var(--background-color);
+  background: #000000;
   overflow-x: hidden;
   padding-top: 0; /* Remove top padding since hero is gone */
   margin-top: 0; /* Remove negative margin */

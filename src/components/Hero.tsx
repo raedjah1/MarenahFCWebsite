@@ -146,18 +146,6 @@ const Hero: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Navigation Dots */}
-        <div className="hero-navigation">
-          {heroes.map((_, index) => (
-            <button
-              key={index}
-              className={`nav-dot ${index === currentHero ? 'active' : ''}`}
-              onClick={() => handleHeroChange(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
