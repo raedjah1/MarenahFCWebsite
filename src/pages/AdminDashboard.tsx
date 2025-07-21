@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, Reorder } from "framer-motion";
+import { Reorder } from "framer-motion";
 import "./AdminDashboard.css";
 import logoImage from "../assets/images/Logo.png";
 import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
