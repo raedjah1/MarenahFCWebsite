@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import "./MatchesPage.css";
 import { useUpcomingMatches, useMatches } from "../hooks/useFirebase";
 import { LoadingSpinner } from "../components/LoadingSpinner";
@@ -11,6 +12,7 @@ import type { Match } from "../firebase/types";
 import logoImage from "../assets/images/Logo.png";
 
 export const MatchesPage = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<
     "fixtures" | "results" | "statistics"
   >("fixtures");
@@ -23,16 +25,19 @@ export const MatchesPage = () => {
     error: upcomingError,
   } = useUpcomingMatches(10);
 
+  // Memoize the date range to prevent infinite re-renders
+  const pastMatchesDateRange = useMemo(() => ({
+    start: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // Last year
+    end: new Date(),
+  }), []); // Empty dependency array since we want this to be calculated once
+
   // Fetch past matches (results)
   const {
     data: pastMatches,
     loading: pastLoading,
     error: pastError,
   } = useMatches({
-    dateRange: {
-      start: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // Last year
-      end: new Date(),
-    },
+    dateRange: pastMatchesDateRange,
     orderBy: "date",
     orderDirection: "desc",
     limit: 20,
@@ -41,7 +46,6 @@ export const MatchesPage = () => {
   // Helper function to get team logo
   const getTeamLogo = (teamName: string, isMarenah: boolean = false, logoUrl?: string) => {
     if (isMarenah) {
-      // Use the imported logo for Marenah FC
       return (
         <div className="team-logo marenah-logo">
           <img 
@@ -53,7 +57,6 @@ export const MatchesPage = () => {
       );
     }
     
-    // If opponent has a logo URL from Firebase, use it
     if (logoUrl) {
       return (
         <div className="team-logo opponent-logo">
@@ -62,7 +65,6 @@ export const MatchesPage = () => {
             alt={teamName} 
             className="team-logo-img"
             onError={(e) => {
-              // Fallback to initials if image fails to load
               const target = e.target as HTMLImageElement;
               const parent = target.parentElement;
               if (parent) {
@@ -80,7 +82,6 @@ export const MatchesPage = () => {
       );
     }
     
-    // Generate a simple logo based on team name as fallback
     const initials = teamName
       .split(' ')
       .map(word => word.charAt(0))
@@ -98,7 +99,7 @@ export const MatchesPage = () => {
   const renderMatchCard = (match: Match) => {
     const isUpcoming = match.status === "scheduled";
     const resultType = getMatchResultType(match);
-    const matchTime = new Date(match.date.seconds * 1000); // Convert Firestore timestamp to Date
+    const matchTime = new Date(match.date.seconds * 1000);
 
     return (
       <div
@@ -109,7 +110,7 @@ export const MatchesPage = () => {
         <div className="match-header">
           <div className="competition-badge">
             <i className="fas fa-trophy"></i>
-            <span>{match.competition || "Friendly"}</span>
+            <span>{match.competition || t('matches.friendly')}</span>
           </div>
           <div className="match-date-time">
             <span className="date">{formatMatchDate(match.date, true)}</span>
@@ -126,7 +127,7 @@ export const MatchesPage = () => {
             {getTeamLogo("Marenah FC", true)}
             <div className="team-info">
               <span className="team-name">Marenah FC</span>
-              <span className="team-label">{match.isHome ? "HOME" : "AWAY"}</span>
+              <span className="team-label">{match.isHome ? t('matches.home') : t('matches.away')}</span>
             </div>
             {match.result && (
               <div className="team-score">
@@ -138,7 +139,7 @@ export const MatchesPage = () => {
           <div className="match-center">
             {isUpcoming ? (
               <div className="vs-indicator">
-                <span className="vs-text">VS</span>
+                <span className="vs-text">{t('matches.vs')}</span>
                 <div className="match-countdown">
                   <i className="fas fa-clock"></i>
                 </div>
@@ -146,7 +147,7 @@ export const MatchesPage = () => {
             ) : (
               <div className="final-score">
                 <span className="score-display">{formatMatchScore(match)}</span>
-                <span className="final-text">FINAL</span>
+                <span className="final-text">{t('matches.final')}</span>
               </div>
             )}
           </div>
@@ -159,7 +160,7 @@ export const MatchesPage = () => {
             )}
             <div className="team-info">
               <span className="team-name">{match.opponent}</span>
-              <span className="team-label">{!match.isHome ? "HOME" : "AWAY"}</span>
+              <span className="team-label">{!match.isHome ? t('matches.home') : t('matches.away')}</span>
             </div>
             {getTeamLogo(match.opponent, false, match.opponentLogo)}
           </div>
@@ -174,7 +175,8 @@ export const MatchesPage = () => {
           {match.result && resultType && (
             <div className={`result-badge ${resultType}`}>
               <span className="result-text">
-                {resultType === "win" ? "WIN" : resultType === "draw" ? "DRAW" : "LOSS"}
+                {resultType === "win" ? t('matches.victory') : 
+                 resultType === "draw" ? t('matches.draw') : t('matches.defeat')}
               </span>
             </div>
           )}
@@ -182,14 +184,14 @@ export const MatchesPage = () => {
           {isUpcoming && (
             <div className="upcoming-badge">
               <i className="fas fa-calendar-alt"></i>
-              <span>UPCOMING</span>
+              <span>{t('news.upcoming')}</span>
             </div>
           )}
         </div>
 
         <div className="match-hover-overlay">
           <i className="fas fa-eye"></i>
-          <span>View Details</span>
+          <span>{t('news.view_details')}</span>
         </div>
       </div>
     );
@@ -205,21 +207,21 @@ export const MatchesPage = () => {
             onClick={() => setActiveTab("fixtures")}
           >
             <i className="fas fa-calendar-plus"></i>
-            FIXTURES
+            {t('matches.fixtures')}
           </button>
           <button
             className={`matches-nav-tab ${activeTab === "results" ? "active" : ""}`}
             onClick={() => setActiveTab("results")}
           >
             <i className="fas fa-trophy"></i>
-            RESULTS
+            {t('matches.results')}
           </button>
           <button
             className={`matches-nav-tab ${activeTab === "statistics" ? "active" : ""}`}
             onClick={() => setActiveTab("statistics")}
           >
             <i className="fas fa-chart-line"></i>
-            STATISTICS
+            {t('matches.statistics')}
           </button>
         </div>
       </div>
@@ -229,23 +231,23 @@ export const MatchesPage = () => {
         {activeTab === "fixtures" && (
           <div className="fixtures-section">
             <div className="section-header">
-              <h2>UPCOMING FIXTURES</h2>
-              <p>Our scheduled matches</p>
+              <h2>{t('matches.upcoming_fixtures')}</h2>
+              <p>{t('matches.scheduled_matches')}</p>
             </div>
 
             {upcomingLoading ? (
               <div className="loading-container">
                 <LoadingSpinner />
-                <p>Loading upcoming fixtures...</p>
+                <p>{t('news.loading')}</p>
               </div>
             ) : upcomingError ? (
               <div className="error-container">
-                <p>Error loading fixtures: {upcomingError}</p>
+                <p>{t('news.error')}: {upcomingError}</p>
               </div>
             ) : upcomingMatches.length === 0 ? (
               <div className="empty-state">
                 <i className="fas fa-calendar-times"></i>
-                <p>No upcoming fixtures scheduled.</p>
+                <p>{t('news.no_fixtures')}</p>
               </div>
             ) : (
               <div className="matches-grid">
@@ -258,23 +260,23 @@ export const MatchesPage = () => {
         {activeTab === "results" && (
           <div className="results-section">
             <div className="section-header">
-              <h2>RECENT RESULTS</h2>
-              <p>Latest match outcomes</p>
+              <h2>{t('matches.recent_results')}</h2>
+              <p>{t('matches.latest_outcomes')}</p>
             </div>
 
             {pastLoading ? (
               <div className="loading-container">
                 <LoadingSpinner />
-                <p>Loading recent results...</p>
+                <p>{t('news.loading')}</p>
               </div>
             ) : pastError ? (
               <div className="error-container">
-                <p>Error loading results: {pastError}</p>
+                <p>{t('news.error')}: {pastError}</p>
               </div>
             ) : pastMatches.length === 0 ? (
               <div className="empty-state">
                 <i className="fas fa-trophy"></i>
-                <p>No recent results available.</p>
+                <p>{t('news.no_fixtures')}</p>
               </div>
             ) : (
               <div className="matches-grid">
@@ -287,8 +289,8 @@ export const MatchesPage = () => {
         {activeTab === "statistics" && (
           <div className="statistics-section">
             <div className="section-header">
-              <h2>SEASON STATISTICS</h2>
-              <p>Performance overview</p>
+              <h2>{t('matches.season_statistics')}</h2>
+              <p>{t('matches.performance_overview')}</p>
             </div>
 
             <div className="stats-overview">
@@ -298,7 +300,7 @@ export const MatchesPage = () => {
                 </div>
                 <div className="stat-content">
                   <h3>{pastMatches.filter((m) => getMatchResultType(m) === "win").length}</h3>
-                  <p>Wins</p>
+                  <p>{t('matches.wins')}</p>
                 </div>
               </div>
               <div className="stat-card draws">
@@ -307,7 +309,7 @@ export const MatchesPage = () => {
                 </div>
                 <div className="stat-content">
                   <h3>{pastMatches.filter((m) => getMatchResultType(m) === "draw").length}</h3>
-                  <p>Draws</p>
+                  <p>{t('matches.draws')}</p>
                 </div>
               </div>
               <div className="stat-card losses">
@@ -316,7 +318,7 @@ export const MatchesPage = () => {
                 </div>
                 <div className="stat-content">
                   <h3>{pastMatches.filter((m) => getMatchResultType(m) === "loss").length}</h3>
-                  <p>Losses</p>
+                  <p>{t('matches.losses')}</p>
                 </div>
               </div>
               <div className="stat-card total">
@@ -325,7 +327,7 @@ export const MatchesPage = () => {
                 </div>
                 <div className="stat-content">
                   <h3>{pastMatches.length}</h3>
-                  <p>Total Games</p>
+                  <p>{t('matches.total_games')}</p>
                 </div>
               </div>
             </div>
@@ -334,13 +336,13 @@ export const MatchesPage = () => {
               <div className="additional-stats">
                 <div className="stat-row">
                   <div className="stat-item">
-                    <span className="stat-label">Win Rate</span>
+                    <span className="stat-label">{t('matches.win_rate')}</span>
                     <span className="stat-value">
                       {Math.round((pastMatches.filter((m) => getMatchResultType(m) === "win").length / pastMatches.length) * 100)}%
                     </span>
                   </div>
                   <div className="stat-item">
-                    <span className="stat-label">Goals Scored</span>
+                    <span className="stat-label">{t('matches.goals_scored')}</span>
                     <span className="stat-value">
                       {pastMatches.reduce((total, match) => {
                         if (match.result) {
@@ -351,7 +353,7 @@ export const MatchesPage = () => {
                     </span>
                   </div>
                   <div className="stat-item">
-                    <span className="stat-label">Goals Conceded</span>
+                    <span className="stat-label">{t('matches.goals_conceded')}</span>
                     <span className="stat-value">
                       {pastMatches.reduce((total, match) => {
                         if (match.result) {
@@ -362,7 +364,7 @@ export const MatchesPage = () => {
                     </span>
                   </div>
                   <div className="stat-item">
-                    <span className="stat-label">Goal Difference</span>
+                    <span className="stat-label">{t('matches.goal_difference')}</span>
                     <span className="stat-value">
                       {pastMatches.reduce((total, match) => {
                         if (match.result) {
@@ -391,7 +393,7 @@ export const MatchesPage = () => {
             <div className="modal-header">
               <div className="modal-competition">
                 <i className="fas fa-trophy"></i>
-                <span>{selectedMatch.competition || "Friendly"}</span>
+                <span>{selectedMatch.competition || t('matches.friendly')}</span>
               </div>
               <button
                 className="close-button"
@@ -407,7 +409,7 @@ export const MatchesPage = () => {
                   {getTeamLogo("Marenah FC", true)}
                   <div className="modal-team-info">
                     <h3>Marenah FC</h3>
-                    <span className="modal-team-label">{selectedMatch.isHome ? "HOME" : "AWAY"}</span>
+                    <span className="modal-team-label">{selectedMatch.isHome ? t('matches.home') : t('matches.away')}</span>
                   </div>
                   {selectedMatch.result && (
                     <div className="modal-team-score">
@@ -419,7 +421,7 @@ export const MatchesPage = () => {
                 <div className="modal-match-center">
                   {selectedMatch.status === "scheduled" ? (
                     <div className="modal-upcoming">
-                      <span className="modal-vs">VS</span>
+                      <span className="modal-vs">{t('matches.vs')}</span>
                       <div className="modal-match-time">
                         <span className="modal-date">{formatMatchDate(selectedMatch.date)}</span>
                         <span className="modal-time">
@@ -434,7 +436,7 @@ export const MatchesPage = () => {
                   ) : (
                     <div className="modal-result">
                       <span className="modal-final-score">{formatMatchScore(selectedMatch)}</span>
-                      <span className="modal-final-text">FINAL</span>
+                      <span className="modal-final-text">{t('matches.final')}</span>
                     </div>
                   )}
                 </div>
@@ -443,7 +445,7 @@ export const MatchesPage = () => {
                   {getTeamLogo(selectedMatch.opponent, false, selectedMatch.opponentLogo)}
                   <div className="modal-team-info">
                     <h3>{selectedMatch.opponent}</h3>
-                    <span className="modal-team-label">{!selectedMatch.isHome ? "HOME" : "AWAY"}</span>
+                    <span className="modal-team-label">{!selectedMatch.isHome ? t('matches.home') : t('matches.away')}</span>
                   </div>
                   {selectedMatch.result && (
                     <div className="modal-team-score">
@@ -457,7 +459,7 @@ export const MatchesPage = () => {
                 <div className="modal-detail-item">
                   <i className={`fas ${selectedMatch.isHome ? "fa-home" : "fa-plane"}`}></i>
                   <div className="modal-detail-content">
-                    <span className="modal-detail-label">Venue</span>
+                    <span className="modal-detail-label">{t('matches.venue')}</span>
                     <span className="modal-detail-value">{selectedMatch.location}</span>
                   </div>
                 </div>
@@ -465,7 +467,7 @@ export const MatchesPage = () => {
                 <div className="modal-detail-item">
                   <i className="fas fa-calendar-alt"></i>
                   <div className="modal-detail-content">
-                    <span className="modal-detail-label">Date & Time</span>
+                    <span className="modal-detail-label">{t('matches.date_time')}</span>
                     <span className="modal-detail-value">
                       {formatMatchDate(selectedMatch.date)} at {new Date(selectedMatch.date.seconds * 1000).toLocaleTimeString('en-US', { 
                         hour: '2-digit', 
@@ -480,10 +482,10 @@ export const MatchesPage = () => {
                   <div className="modal-detail-item">
                     <i className="fas fa-futbol"></i>
                     <div className="modal-detail-content">
-                      <span className="modal-detail-label">Result</span>
+                      <span className="modal-detail-label">{t('matches.result')}</span>
                       <span className="modal-detail-value">
-                        {getMatchResultType(selectedMatch) === "win" ? "Victory" : 
-                         getMatchResultType(selectedMatch) === "draw" ? "Draw" : "Defeat"}
+                        {getMatchResultType(selectedMatch) === "win" ? t('matches.victory') : 
+                         getMatchResultType(selectedMatch) === "draw" ? t('matches.draw') : t('matches.defeat')}
                       </span>
                     </div>
                   </div>
@@ -492,7 +494,7 @@ export const MatchesPage = () => {
 
               {selectedMatch.notes && (
                 <div className="modal-notes">
-                  <h4>Match Notes</h4>
+                  <h4>{t('matches.match_notes')}</h4>
                   <p>{selectedMatch.notes}</p>
                 </div>
               )}

@@ -1,4 +1,5 @@
 
+import { useTranslation } from 'react-i18next';
 import './Dreamers.css';
 import actionImage1 from '../assets/images/action_image_4.JPG';
 import actionImage2 from '../assets/images/action_image_2.JPG';
@@ -25,18 +26,20 @@ const actionImages = [
 ];
 
 export const Dreamers = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="players-section">
       <div className="container">
-        <h2 className="players-title">OUR PLAYERS</h2>
-        <p className="players-subtitle">CAPTURING THE MOMENTS</p>
+        <h2 className="players-title">{t('players.title')}</h2>
+        <p className="players-subtitle">{t('players.subtitle')}</p>
         
         <div className="players-carousel-container">
           <div className="players-carousel">
             {actionImages.map((item) => (
               <div key={item.id} className="action-card">
                 <div className="action-image-container">
-                  <img src={item.image} alt="Player in action" className="action-img" />
+                  <img src={item.image} alt={t('players.alt_text')} className="action-img" />
                 </div>
               </div>
             ))}

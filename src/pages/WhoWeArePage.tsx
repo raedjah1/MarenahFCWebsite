@@ -1,33 +1,35 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './WhoWeArePage.css';
 // Import the who we are image
 import whoWeAreImage from '../assets/images/whowearemarenah.png';
 
 export const WhoWeArePage = () => {
+  const { t } = useTranslation();
   const [activePillar, setActivePillar] = useState(0);
 
   const pillars = [
     {
       id: 0,
-      title: "EDUCATION",
-      subtitle: "Foundation of Growth",
-      description: "We believe education is the cornerstone of success. Our players receive formal schooling, trade skills, and life education that opens doors beyond football.",
+      title: t('who_we_are.education.title'),
+      subtitle: t('who_we_are.education.subtitle'),
+      description: t('who_we_are.education.description'),
       icon: "fas fa-graduation-cap",
       color: "#E6A64C"
     },
     {
       id: 1,
-      title: "FOOTBALL",
-      subtitle: "Excellence in Sport",
-      description: "Elite training, professional coaching, and competitive play develop world-class athletes ready for international opportunities.",
+      title: t('who_we_are.football.title'),
+      subtitle: t('who_we_are.football.subtitle'),
+      description: t('who_we_are.football.description'),
       icon: "fas fa-futbol",
       color: "#76572B"
     },
     {
       id: 2,
-      title: "CHARACTER",
-      subtitle: "Building Leaders",
-      description: "Discipline, integrity, and leadership shape our players into role models who inspire their communities and create positive change.",
+      title: t('who_we_are.character.title'),
+      subtitle: t('who_we_are.character.subtitle'),
+      description: t('who_we_are.character.description'),
       icon: "fas fa-star",
       color: "#E6A64C"
     }
@@ -47,10 +49,9 @@ export const WhoWeArePage = () => {
       <div className="page-container">
         {/* Header Section */}
         <header className="page-header">
-          <h1 className="main-title">WHO WE ARE</h1>
+          <h1 className="main-title">{t('who_we_are.title')}</h1>
           <p className="main-subtitle">
-            Marenah FC is more than a football club. We are a catalyst for transformation, 
-            building complete individuals through our three foundational pillars.
+            {t('who_we_are.subtitle')}
           </p>
         </header>
 
@@ -58,11 +59,11 @@ export const WhoWeArePage = () => {
         <div className="hero-image-section">
           <div className="team-photo-container">
             <div className="team-photo">
-              <img src={whoWeAreImage} alt="Marenah FC Team" />
+              <img src={whoWeAreImage} alt={t('who_we_are.photo_title')} />
               <div className="photo-overlay">
                 <div className="photo-info">
-                  <h3 className="photo-title">Marenah FC</h3>
-                  <p className="photo-subtitle">United in Purpose, Driven by Excellence</p>
+                  <h3 className="photo-title">{t('who_we_are.photo_title')}</h3>
+                  <p className="photo-subtitle">{t('who_we_are.photo_subtitle')}</p>
                 </div>
               </div>
             </div>
@@ -73,7 +74,7 @@ export const WhoWeArePage = () => {
         <div className="content-grid">
           {/* Left Side - Pillars */}
           <div className="pillars-container">
-            <h2 className="pillars-heading">OUR PILLARS</h2>
+            <h2 className="pillars-heading">{t('pillars.title')}</h2>
             <div className="pillars-list">
               {pillars.map((pillar, index) => (
                 <div 
@@ -124,11 +125,8 @@ export const WhoWeArePage = () => {
         {/* Bottom Mission Statement */}
         <footer className="mission-footer">
           <div className="mission-content">
-            <h3>OUR MISSION</h3>
-            <p>
-              To develop young talent holistically, creating pathways to success both on and off the field 
-              while uplifting communities across The Gambia and beyond.
-            </p>
+            <h3>{t('who_we_are.mission_title')}</h3>
+            <p>{t('who_we_are.mission_text')}</p>
           </div>
         </footer>
       </div>

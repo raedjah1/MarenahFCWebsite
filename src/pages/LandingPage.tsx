@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Hero from '../components/Hero';
 import { Pillars } from '../components/Pillars';
 import { Dreamers } from '../components/Dreamers';
@@ -41,17 +42,19 @@ const PinnedHero = () => {
 
 // Simple mission section that slides over hero
 const Mission = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="mission-section">
       <div className="mission-container">
         <div className="mission-content">
           <div className="mission-statement">
             <p className="mission-text">
-              At Marenah FC, our mission is to identify, develop, and empower young football talent while investing in the long-term success of our players and community. We combine elite football training with access to formal education, trade schools, and life skills development to ensure our players thrive both on and off the field. Our goal is not only to produce top-level athletes, but also to create pathways for academic achievement, vocational training, and meaningful employment. By fostering discipline, leadership, and opportunity, we aim to uplift communities, provide sustainable futures, and inspire the next generation in The Gambia and beyond.
+              {t('mission.text')}
             </p>
           </div>
-          <Link to="/team" className="uncover-story-btn">
-            UNCOVER THE STORY
+          <Link to="/who-we-are" className="uncover-story-btn" onClick={() => window.scrollTo(0, 0)}>
+            {t('mission.uncover_story')}
           </Link>
         </div>
       </div>

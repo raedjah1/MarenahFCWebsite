@@ -1,18 +1,20 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './Hero.css';
 import mfcLogo from '../assets/images/MFC__Main_Logo.jpg';
 import teamImage from '../assets/images/team.JPG';
 import coachImage from '../assets/images/coach_image.JPG';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   const currentHero = 0; // Always show the first slide
 
   const heroes = [
     {
       id: 1,
-      title: "DREAM",
-      subtitle: "RIGHT TO",
-      description: "Every child deserves the opportunity to pursue their dreams through football, education, and character development.",
+      title: t('hero.dream.title'),
+      subtitle: t('hero.dream.subtitle'),
+      description: t('hero.dream.description'),
       background: "linear-gradient(135deg, var(--background-color) 0%, #1a1a1a 50%, var(--secondary-color) 100%)",
       accent: "var(--primary-color)",
       showLogo: true,
@@ -20,9 +22,9 @@ const Hero: React.FC = () => {
     },
     {
       id: 2,
-      title: "EXCELLENCE",
-      subtitle: "STRIVING FOR",
-      description: "We nurture talent and build character that transforms lives and communities.",
+      title: t('hero.excellence.title'),
+      subtitle: t('hero.excellence.subtitle'),
+      description: t('hero.excellence.description'),
       background: "linear-gradient(125deg, var(--background-color) 0%, var(--secondary-color) 50%, #2a2a2a 100%)",
       accent: "var(--secondary-color)",
       showLogo: false,
@@ -30,9 +32,9 @@ const Hero: React.FC = () => {
     },
     {
       id: 3,
-      title: "FUTURE",
-      subtitle: "BUILDING THE",
-      description: "Join us in creating pathways to success for the next generation of dreamers, leaders, and champions.",
+      title: t('hero.future.title'),
+      subtitle: t('hero.future.subtitle'),
+      description: t('hero.future.description'),
       background: "linear-gradient(45deg, var(--background-color) 0%, #2a1f0a 50%, var(--primary-color) 100%)",
       accent: "var(--primary-color)",
       showLogo: false,
@@ -61,13 +63,13 @@ const Hero: React.FC = () => {
               <div className="hero-logo-circle">
                 <img 
                   src={mfcLogo} 
-                  alt="MFC Main Logo" 
+                  alt={t('hero.club_name')} 
                   className="hero-logo-image-large"
                 />
               </div>
               <div className="hero-club-info">
-                <h1 className="hero-club-name">Marenah Futbol Club</h1>
-                <p className="hero-club-quote">Redefining Football Excellence</p>
+                <h1 className="hero-club-name">{t('hero.club_name')}</h1>
+                <p className="hero-club-quote">{t('hero.tagline')}</p>
               </div>
             </div>
           </div>

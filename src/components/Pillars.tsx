@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Pillars.css';
 
 export const Pillars = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -33,18 +35,18 @@ export const Pillars = () => {
     <section className="pillars-section" ref={sectionRef}>
       <div className="pillars-overlay">
         <div className="container">
-          <h2 className="pillars-title">OUR PILLARS</h2>
+          <h2 className="pillars-title">{t('pillars.title')}</h2>
           <div className="pillars-grid">
             <div className="pillar">
-              <h3>EDUCATION</h3>
+              <h3>{t('pillars.education')}</h3>
               <div className={`pillar-underline ${isVisible ? 'animate' : ''}`}></div>
             </div>
             <div className="pillar">
-              <h3>FOOTBALL</h3>
+              <h3>{t('pillars.football')}</h3>
               <div className={`pillar-underline ${isVisible ? 'animate' : ''}`}></div>
             </div>
             <div className="pillar">
-              <h3>CHARACTER</h3>
+              <h3>{t('pillars.character')}</h3>
               <div className={`pillar-underline ${isVisible ? 'animate' : ''}`}></div>
             </div>
           </div>

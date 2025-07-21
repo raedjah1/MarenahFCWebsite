@@ -684,7 +684,7 @@
   overflow: hidden;
   border-radius: 0;
   background: linear-gradient(135deg, 
-    rgba(230, 166, 76, 0.05) 0%, 
+    rgba(230, 166, 76, 0.05) 0%,
     rgba(118, 87, 43, 0.05) 100%);
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.3),

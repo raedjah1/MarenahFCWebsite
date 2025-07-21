@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './News.css';
 import { useUpcomingMatches } from "../hooks/useFirebase";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -7,6 +8,7 @@ import type { Match } from "../firebase/types";
 import logoImage from "../assets/images/Logo.png";
 
 export const News = () => {
+  const { t } = useTranslation();
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
 
   // Fetch upcoming matches
@@ -69,8 +71,6 @@ export const News = () => {
     );
   };
 
-
-
   // Helper function to render match card similar to MatchesPage
   const renderMatchCard = (match: Match) => {
     const matchTime = new Date(match.date.seconds * 1000); // Convert Firestore timestamp to Date
@@ -84,7 +84,7 @@ export const News = () => {
         <div className="match-header">
           <div className="competition-badge">
             <i className="fas fa-trophy"></i>
-            <span>{match.competition || "Friendly"}</span>
+            <span>{match.competition || t('matches.friendly')}</span>
           </div>
           <div className="match-date-time">
             <span className="date">{formatMatchDate(match.date, true)}</span>
@@ -101,13 +101,13 @@ export const News = () => {
             {getTeamLogo("Marenah FC", true)}
             <div className="team-info">
               <span className="team-name">Marenah FC</span>
-              <span className="team-label">{match.isHome ? "HOME" : "AWAY"}</span>
+              <span className="team-label">{match.isHome ? t('matches.home') : t('matches.away')}</span>
             </div>
           </div>
 
           <div className="match-center">
             <div className="vs-indicator">
-              <span className="vs-text">VS</span>
+              <span className="vs-text">{t('matches.vs')}</span>
               <div className="match-countdown">
                 <i className="fas fa-clock"></i>
               </div>
@@ -117,7 +117,7 @@ export const News = () => {
           <div className="team-section away-team">
             <div className="team-info">
               <span className="team-name">{match.opponent}</span>
-              <span className="team-label">{!match.isHome ? "HOME" : "AWAY"}</span>
+              <span className="team-label">{!match.isHome ? t('matches.home') : t('matches.away')}</span>
             </div>
             {getTeamLogo(match.opponent, false, match.opponentLogo)}
           </div>
@@ -131,13 +131,13 @@ export const News = () => {
 
           <div className="upcoming-badge">
             <i className="fas fa-calendar-alt"></i>
-            <span>UPCOMING</span>
+            <span>{t('news.upcoming')}</span>
           </div>
         </div>
 
         <div className="match-hover-overlay">
           <i className="fas fa-eye"></i>
-          <span>View Details</span>
+          <span>{t('news.view_details')}</span>
         </div>
       </div>
     );
@@ -146,22 +146,22 @@ export const News = () => {
   return (
     <section className="news-section">
       <div className="container">
-        <h2 className="news-title">UPCOMING MATCHES</h2>
-        <p className="news-subtitle">MARK YOUR CALENDAR</p>
+        <h2 className="news-title">{t('news.title')}</h2>
+        <p className="news-subtitle">{t('news.subtitle')}</p>
 
         {upcomingLoading ? (
           <div className="loading-container">
             <LoadingSpinner />
-            <p>Loading upcoming fixtures...</p>
+            <p>{t('news.loading')}</p>
           </div>
         ) : upcomingError ? (
           <div className="error-container">
-            <p>Error loading fixtures: {upcomingError}</p>
+            <p>{t('news.error')}: {upcomingError}</p>
           </div>
         ) : upcomingMatches.length === 0 ? (
           <div className="empty-state">
             <i className="fas fa-calendar-times"></i>
-            <p>No upcoming fixtures scheduled.</p>
+            <p>{t('news.no_fixtures')}</p>
           </div>
         ) : (
           <div className="matches-grid">

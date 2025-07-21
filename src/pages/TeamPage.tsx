@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./TeamPage.css";
 import { useTeamMembersByRole } from "../hooks/useFirebase";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import type { TeamMember } from "../firebase/types";
 
 export const TeamPage = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<
     "management" | "coaching" | "players"
   >("management");
@@ -49,7 +51,7 @@ export const TeamPage = () => {
         {member.role === 'player' && (
           <div className="card-overlay">
             <i className="fas fa-eye"></i>
-            <span>View Details</span>
+            <span>{t('news.view_details')}</span>
           </div>
         )}
       </div>
@@ -65,21 +67,21 @@ export const TeamPage = () => {
           )}
         </div>
 
-        <h4 className="staff-position">{member.title || member.position || "Team Member"}</h4>
+        <h4 className="staff-position">{member.title || member.position || t('team.team_member')}</h4>
 
         {member.role === "player" && member.stats && (
           <div className="quick-stats">
             <div className="stat-item">
               <span className="stat-value">{member.stats.goals || 0}</span>
-              <span className="stat-label">Goals</span>
+              <span className="stat-label">{t('team.goals')}</span>
             </div>
             <div className="stat-item">
               <span className="stat-value">{member.stats.assists || 0}</span>
-              <span className="stat-label">Assists</span>
+              <span className="stat-label">{t('team.assists')}</span>
             </div>
             <div className="stat-item">
               <span className="stat-value">{member.stats.gamesPlayed || 0}</span>
-              <span className="stat-label">Games</span>
+              <span className="stat-label">{t('team.games')}</span>
             </div>
           </div>
         )}
@@ -136,21 +138,21 @@ export const TeamPage = () => {
             onClick={() => setActiveTab("management")}
           >
             <i className="fas fa-building"></i>
-            MANAGEMENT
+            {t('team.management')}
           </button>
           <button
             className={`team-nav-tab ${activeTab === "coaching" ? "active" : ""}`}
             onClick={() => setActiveTab("coaching")}
           >
             <i className="fas fa-clipboard-list"></i>
-            COACHING STAFF
+            {t('team.coaching_staff')}
           </button>
           <button
             className={`team-nav-tab ${activeTab === "players" ? "active" : ""}`}
             onClick={() => setActiveTab("players")}
           >
             <i className="fas fa-users"></i>
-            PLAYERS
+            {t('team.players')}
           </button>
         </div>
       </div>
@@ -160,21 +162,21 @@ export const TeamPage = () => {
         {activeTab === "management" && (
           <div className="management-section">
             <div className="section-header">
-              <h2>MANAGEMENT TEAM</h2>
-              <p>Leadership driving our vision forward</p>
+              <h2>{t('team.management_team')}</h2>
+              <p>{t('team.leadership_vision')}</p>
             </div>
             {managementLoading ? (
               <div className="loading-container">
                 <LoadingSpinner />
-                <p>Loading management team...</p>
+                <p>{t('team.loading_management')}</p>
               </div>
             ) : managementError ? (
               <div className="error-container">
-                <p>Error loading management team: {managementError}</p>
+                <p>{t('team.error_management')}: {managementError}</p>
               </div>
             ) : managementTeam.length === 0 ? (
               <div className="empty-state">
-                <p>No management team members found.</p>
+                <p>{t('team.no_management')}</p>
               </div>
             ) : (
               <div className="staff-grid">
@@ -187,21 +189,21 @@ export const TeamPage = () => {
         {activeTab === "coaching" && (
           <div className="coaching-section">
             <div className="section-header">
-              <h2>COACHING STAFF</h2>
-              <p>Expert guidance for player development</p>
+              <h2>{t('team.coaching_team')}</h2>
+              <p>{t('team.expert_guidance')}</p>
             </div>
             {coachingLoading ? (
               <div className="loading-container">
                 <LoadingSpinner />
-                <p>Loading coaching staff...</p>
+                <p>{t('team.loading_coaching')}</p>
               </div>
             ) : coachingError ? (
               <div className="error-container">
-                <p>Error loading coaching staff: {coachingError}</p>
+                <p>{t('team.error_coaching')}: {coachingError}</p>
               </div>
             ) : coachingStaff.length === 0 ? (
               <div className="empty-state">
-                <p>No coaching staff found.</p>
+                <p>{t('team.no_coaching')}</p>
               </div>
             ) : (
               <div className="staff-grid">
@@ -214,17 +216,17 @@ export const TeamPage = () => {
         {activeTab === "players" && (
           <div className="players-section">
             <div className="section-header">
-              <h2>PLAYERS</h2>
-              <p>Our talented squad</p>
+              <h2>{t('team.players')}</h2>
+              <p>{t('team.our_squad')}</p>
             </div>
             {playersLoading ? (
               <div className="loading-container">
                 <LoadingSpinner />
-                <p>Loading players...</p>
+                <p>{t('team.loading_players')}</p>
               </div>
             ) : playersError ? (
               <div className="error-container">
-                <p>Error loading players: {playersError}</p>
+                <p>{t('team.error_players')}: {playersError}</p>
               </div>
             ) : players.length === 0 ? (
               <div className="players-empty-state">
@@ -232,26 +234,26 @@ export const TeamPage = () => {
                   <div className="empty-state-icon">
                     <i className="fas fa-users"></i>
                   </div>
-                  <h3 className="empty-state-title">Coming Soon</h3>
+                  <h3 className="empty-state-title">{t('team.coming_soon')}</h3>
                   <p className="empty-state-subtitle">
-                    Our talented squad is being assembled. Stay tuned for player announcements and roster updates as we build our championship team.
+                    {t('team.no_players')}
                   </p>
                   <div className="empty-state-features">
                     <div className="empty-state-feature">
                       <i className="fas fa-star"></i>
-                      <span>Elite Players</span>
+                      <span>{t('team.elite_players')}</span>
                     </div>
                     <div className="empty-state-feature">
                       <i className="fas fa-trophy"></i>
-                      <span>Championship Ready</span>
+                      <span>{t('team.championship_ready')}</span>
                     </div>
                     <div className="empty-state-feature">
                       <i className="fas fa-globe"></i>
-                      <span>International Talent</span>
+                      <span>{t('team.international_talent')}</span>
                     </div>
                   </div>
                   <div className="empty-state-cta">
-                    Follow for Updates
+                    {t('team.follow_updates')}
                   </div>
                 </div>
               </div>
@@ -288,7 +290,7 @@ export const TeamPage = () => {
                 </div>
                 <div className="modal-member-details">
                   <h2>{selectedMember.name}</h2>
-                  <p className="modal-position">{selectedMember.title || selectedMember.position || "Team Member"}</p>
+                  <p className="modal-position">{selectedMember.title || selectedMember.position || t('team.team_member')}</p>
                   {selectedMember.jerseyNumber && (
                     <div className="modal-jersey">#{selectedMember.jerseyNumber}</div>
                   )}
@@ -319,19 +321,19 @@ export const TeamPage = () => {
 
               {selectedMember.role === "player" && selectedMember.stats && (
                 <div className="modal-section">
-                  <h4>Season Statistics</h4>
+                  <h4>{t('matches.season_statistics')}</h4>
                   <div className="modal-stats-grid">
                     <div className="modal-stat">
                       <span className="modal-stat-value">{selectedMember.stats.goals || 0}</span>
-                      <span className="modal-stat-label">Goals</span>
+                      <span className="modal-stat-label">{t('team.goals')}</span>
                     </div>
                     <div className="modal-stat">
                       <span className="modal-stat-value">{selectedMember.stats.assists || 0}</span>
-                      <span className="modal-stat-label">Assists</span>
+                      <span className="modal-stat-label">{t('team.assists')}</span>
                     </div>
                     <div className="modal-stat">
                       <span className="modal-stat-value">{selectedMember.stats.gamesPlayed || 0}</span>
-                      <span className="modal-stat-label">Games Played</span>
+                      <span className="modal-stat-label">{t('team.games')}</span>
                     </div>
                     {selectedMember.stats.yellowCards !== undefined && (
                       <div className="modal-stat">

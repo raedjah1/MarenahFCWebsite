@@ -1,85 +1,213 @@
 {
   "navigation": {
-    "who_we_are": "LAN NUN LA",
+    "who_we_are": "KU ÑUY ÑUN",
     "team": "EKIP BI",
     "matches": "MATCH YI",
-    "facility": "TERRAIN BI",
+    "facility": "TERRAIN YI",
     "store": "BUTIK BI",
     "partners": "PARTENAIRES YI"
   },
+  "hero": {
+    "club_name": "Marenah Futbol Club",
+    "tagline": "Di Defar Football bu Gën",
+    "dream": {
+      "title": "GËMËM",
+      "subtitle": "SAÑ-SAÑ CI",
+      "description": "Xale bu nekk am na sañ-sañ ngir topp ay gëmëmam ci football, njàng ak yokkute caractère."
+    },
+    "excellence": {
+      "title": "EXCELLENCE",
+      "subtitle": "JËM CI",
+      "description": "Ñu ngi yokk talant yi ak caractère bi di soppi dundinu nit ñi ak mbooloo yi."
+    },
+    "future": {
+      "title": "ËLËG",
+      "subtitle": "TABAX",
+      "description": "Andandool ak ñun ngir defar yoon yi jëm ci ndam ngir génération bi di ñëw yi gëmëm, njiit yi, ak champion yi."
+    }
+  },
+  "mission": {
+    "text": "Ci Marenah FC, sunu mission mooy gis, yokk ak dooleel xaleyi am talant ci football bi di investir ci ndam bu yàgg bu sunu footballeur yi ak mbooloo mi. Ñu ngi boole entrainement football bu mag ak njàng, écoles yi di jàngale métier ak yokkute dundinu nit ngir footballeur yi am ndam ci ak ci biti terrain bi. Sunu objectif du rek jur footballeur yu mag, mais tamit defar yoon yi jëm ci ndam ci njàng, formation professionnelle ak liggéey yu am njëriñ. Suñu di yokk discipline, leadership, ak occasion yi, ñu ngi jëm ci yékkati mbooloo yi, defar ëlëg yu wér te di inspiré génération bi di ñëw ci Gambie ak ci biti.",
+    "uncover_story": "XOOL LÉEBU BI"
+  },
+  "pillars": {
+    "title": "SUNU FONDEMENT YI",
+    "education": "NJÀNG",
+    "football": "FOOTBALL",
+    "character": "CARACTÈRE"
+  },
+  "players": {
+    "title": "SUNU FOOTBALLEUR YI",
+    "subtitle": "JÀPP MOMENT YI",
+    "alt_text": "Footballeur bi di fo"
+  },
+  "partners": {
+    "title": "SUNU PARTENAIRE YI"
+  },
+  "news": {
+    "title": "MATCH YI DI ÑËWW",
+    "subtitle": "MARQUER SA CALENDRIER",
+    "loading": "Di load match yi di ñëw...",
+    "error": "Erreur ci loading match yi",
+    "no_fixtures": "Amul match bu programé.",
+    "upcoming": "DI ÑËWW",
+    "view_details": "Xool Détail yi"
+  },
+  "matches": {
+    "fixtures": "MATCH YI",
+    "results": "RÉSULTAT YI",
+    "statistics": "STATISTIQUE YI",
+    "upcoming_fixtures": "MATCH YI DI ÑËWW",
+    "scheduled_matches": "Sunu match yi programé",
+    "recent_results": "RÉSULTAT YI MUJJ",
+    "latest_outcomes": "Résultat yi mujj",
+    "season_statistics": "STATISTIQUE YI CI SAISON BI",
+    "performance_overview": "Résumé performance bi",
+    "home": "TERRAIN BU NUY FOYI",
+    "away": "TERRAIN BU GANNAAW",
+    "vs": "CONTRE",
+    "final": "MUJJ",
+    "friendly": "Match Amical",
+    "wins": "Ndam yi",
+    "draws": "Match yu Null",
+    "losses": "Yàqu yi",
+    "total_games": "Lim Match yi",
+    "win_rate": "Pourcentage Ndam",
+    "goals_scored": "But yi Defar",
+    "goals_conceded": "But yi Nangu",
+    "goal_difference": "Différence But yi",
+    "victory": "Ndam",
+    "draw": "Match bu Null",
+    "defeat": "Yàqu",
+    "venue": "Béréb",
+    "date_time": "Date ak Waxtu",
+    "result": "Résultat",
+    "match_notes": "Notes ci Match bi"
+  },
+  "team": {
+    "management": "DIRECTION BI",
+    "coaching_staff": "ENTRAINEUR YI",
+    "players": "FOOTBALLEUR YI",
+    "management_team": "EKIP BU DIRECTION BI",
+    "leadership_vision": "Leadership bi di wommat sunu vision",
+    "coaching_team": "EKIP BU ENTRAINEUR YI",
+    "expert_guidance": "Xam-xam bu mag ngir yokkute footballeur yi",
+    "our_squad": "Sunu ekip bu am talant",
+    "team_member": "Way bu Ekip bi",
+    "goals": "But yi",
+    "assists": "Passe yi",
+    "games": "Match yi",
+    "coming_soon": "Di Ñëw Léegi",
+    "elite_players": "Footballeur yu Mag",
+    "championship_ready": "Paré ngir Championship",
+    "international_talent": "Talant International",
+    "follow_updates": "Topp Mise à Jour yi",
+    "loading_management": "Di load ekip bu direction bi...",
+    "loading_coaching": "Di load entraineur yi...",
+    "loading_players": "Di load footballeur yi...",
+    "error_management": "Erreur ci loading ekip bu direction bi",
+    "error_coaching": "Erreur ci loading entraineur yi",
+    "error_players": "Erreur ci loading footballeur yi",
+    "no_management": "Gisul kenn ci ekip bu direction bi.",
+    "no_coaching": "Gisul entraineur.",
+    "no_players": "Gisul footballeur."
+  },
+  "who_we_are": {
+    "title": "KU ÑUY ÑUN",
+    "subtitle": "Marenah FC lu ëpp club football la. Ñun catalyst bu transformation lañu, di tabax nit ñu mat sëkk ci sunu ñetti fondement yi.",
+    "photo_title": "Marenah FC",
+    "photo_subtitle": "Booloo ci Objectif, Wommat ci Excellence",
+    "education": {
+      "title": "NJÀNG",
+      "subtitle": "Fondement bu Yokkute",
+      "description": "Ñu ngi gëm ni njàng mooy fondement bu ndam. Sunu footballeur yi di jàng école, métier ak dundinu nit yi di ubbi bunt yi ci biti football."
+    },
+    "football": {
+      "title": "FOOTBALL",
+      "subtitle": "Excellence ci Sport",
+      "description": "Entrainement bu mag, coaching bu professionnel ak match yu compétitif di yokk footballeur yu international paré ngir occasion yi."
+    },
+    "character": {
+      "title": "CARACTÈRE",
+      "subtitle": "Tabax Njiit",
+      "description": "Discipline, njub ak leadership di defar sunu footballeur yi nekk modèle yi di inspiré seen mbooloo yi te di defar changement bu baax."
+    },
+    "mission_title": "SUNU MISSION",
+    "mission_text": "Yokk talant yu ndaw yi ci bépp wet, defar yoon yi jëm ci ndam ci ak ci biti terrain bi di yékkati mbooloo yi ci Gambie ak ci biti."
+  },
   "footer": {
     "club_name": "MARENAH FUTBOL CLUB",
-    "tagline": "Yokk Kàttan gi ci Mbëppat",
-    "connect": "JOKKOO AK NUN",
-    "location": "Marenah, Gambi",
+    "tagline": "Di Defar Football bu Gën",
+    "connect": "JOKKOO AK ÑUN",
+    "location": "Marenah, Gambie",
     "email": "info@marenahfc.com",
-    "phone": "+221 XX XXX XXXX",
-    "copyright": "© 2024 Marenah Futbol Club. Yépp am na boroom.",
-    "privacy": "Politig Sutura",
-    "terms": "Sartu yi",
+    "phone": "+220 310 4058",
+    "copyright": "© 2024 Marenah Futbol Club. Sañ-sañ Yépp Dénk.",
+    "privacy": "Politique Vie Privée",
+    "terms": "Condition yi",
     "admin": "Admin"
   },
   "facility": {
-    "title": "MARENAH FC AKADEMI",
-    "subtitle": "Di jàngal xale yi ci Gambi ngir ñu doon ay mbëppat yu mag",
-    "future_complex": "Terrain Marenah FC bi Di Nëw",
-    "architectural_vision": "Ni nu bëgg terrain bi mel",
+    "title": "ACADÉMIE MARENAH FC",
+    "subtitle": "Di jàngal génération bi di ñëw ci talant football Gambie",
+    "future_complex": "Complexe Marenah FC bi Di Ñëw",
+    "architectural_vision": "Vision architecturale sunu terrain bu international",
     "stats": {
-      "pitches": "6 Terrain yu Ndaw",
-      "players": "Lu ëpp 200 Xale",
-      "education": "Programu Jàng bu Mat"
+      "pitches": "6 Terrain Entrainement",
+      "players": "200+ Footballeur Académie",
+      "education": "Programme Njàng bu Mat"
     },
     "vision": {
-      "title": "Sunu Aajo",
-      "description": "Defar programu jàngale mbëppat bu am solo te boole ci jàng, ngir am ay mbëppat yu mat te mën di joŋante ci àdduna bi, te di wone sunu aada ak sunuy pexe."
+      "title": "Sunu Vision",
+      "description": "Defar programme yokkute xale yu international bu boole excellence football ak njàng, di jur nit ñu mat sëkk ñu mën foyi ci niveau yi gën kawe ci football international di wommat valeur yi ak culture Gambie."
     },
     "programs": {
-      "title": "Programu Jàngale yi",
+      "title": "Programme yi di Yokk",
       "youth": {
-        "title": "Jàngale Xale yi",
-        "description": "Jàngal leen mbëppat ci lu gëna sufeelu",
+        "title": "Yokkute Xale yi",
+        "description": "Yokkute fondement yi ak accent ci technique",
         "features": [
           "At 8-14",
-          "Lu Njëkk yi",
-          "Doxalin wu Mat"
+          "Fondement technique",
+          "Yokkute yaram"
         ]
       },
       "pre_professional": {
-        "title": "Lu Jiitu Pro",
-        "description": "Waxtaan yu Xóot ngir Doon Pro",
+        "title": "Avant Professionnel",
+        "description": "Entrainement bu mag di waajal yoon yi professionnel",
         "features": [
           "At 15-17",
-          "Njàng mu Xóot",
-          "Joŋante"
+          "Yokkute tactique",
+          "Focus compétition"
         ]
       },
       "elite": {
-        "title": "Yoonu Elite",
-        "description": "Yoon bu Jub jëm ci Ekipu Marenah FC bu Mag bi",
+        "title": "Yoon Elite",
+        "description": "Yoon bu jub jëm ci occasion yi ci ekip bu njëkk Marenah FC",
         "features": [
           "At 18-21",
-          "Dugg ci Pro",
-          "Joŋante bu Mag"
+          "Intégration professionnel",
+          "Compétition elite"
         ]
       }
     },
     "facilities": {
-      "title": "Jumtukaay yi ci Akademi bi",
+      "title": "Terrain yi Académie",
       "training": {
-        "title": "Terrain yi",
-        "description": "Jumtukaay yu Bees ngir Ndox ak Leer"
+        "title": "Terrain yi Entrainement",
+        "description": "Système moderne drainage ak lumière"
       },
       "accommodation": {
-        "title": "Fu ñu Dëkk",
-        "description": "Néeg yu Bees ak Fu ñu Jàng"
+        "title": "Nékkuwaay",
+        "description": "Chambre yu moderne ak béréb njàng"
       },
       "education": {
-        "title": "Fu ñu Jànge",
-        "description": "Jumtukaay yu ñu Sàkk ngir Jàng"
+        "title": "Centre Njàng",
+        "description": "Terrain yi ñu dénk njàng"
       },
       "medical": {
-        "title": "Fu ñu Faj",
-        "description": "Doktoor yi Xam Faju Mbëppat"
+        "title": "Centre Medical",
+        "description": "Docteur yi spécialiste ci sport"
       }
     }
   }

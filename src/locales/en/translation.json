@@ -7,13 +7,141 @@
     "store": "STORE",
     "partners": "PARTNERS"
   },
+  "hero": {
+    "club_name": "Marenah Futbol Club",
+    "tagline": "Redefining Football Excellence",
+    "dream": {
+      "title": "DREAM",
+      "subtitle": "RIGHT TO",
+      "description": "Every child deserves the opportunity to pursue their dreams through football, education, and character development."
+    },
+    "excellence": {
+      "title": "EXCELLENCE",
+      "subtitle": "STRIVING FOR",
+      "description": "We nurture talent and build character that transforms lives and communities."
+    },
+    "future": {
+      "title": "FUTURE",
+      "subtitle": "BUILDING THE",
+      "description": "Join us in creating pathways to success for the next generation of dreamers, leaders, and champions."
+    }
+  },
+  "mission": {
+    "text": "At Marenah FC, our mission is to identify, develop, and empower young football talent while investing in the long-term success of our players and community. We combine elite football training with access to formal education, trade schools, and life skills development to ensure our players thrive both on and off the field. Our goal is not only to produce top-level athletes, but also to create pathways for academic achievement, vocational training, and meaningful employment. By fostering discipline, leadership, and opportunity, we aim to uplift communities, provide sustainable futures, and inspire the next generation in The Gambia and beyond.",
+    "uncover_story": "UNCOVER THE STORY"
+  },
+  "pillars": {
+    "title": "OUR PILLARS",
+    "education": "EDUCATION",
+    "football": "FOOTBALL",
+    "character": "CHARACTER"
+  },
+  "players": {
+    "title": "OUR PLAYERS",
+    "subtitle": "CAPTURING THE MOMENTS",
+    "alt_text": "Player in action"
+  },
+  "partners": {
+    "title": "OUR PARTNERS"
+  },
+  "news": {
+    "title": "UPCOMING MATCHES",
+    "subtitle": "MARK YOUR CALENDAR",
+    "loading": "Loading upcoming fixtures...",
+    "error": "Error loading fixtures",
+    "no_fixtures": "No upcoming fixtures scheduled.",
+    "upcoming": "UPCOMING",
+    "view_details": "View Details"
+  },
+  "matches": {
+    "fixtures": "FIXTURES",
+    "results": "RESULTS", 
+    "statistics": "STATISTICS",
+    "upcoming_fixtures": "UPCOMING FIXTURES",
+    "scheduled_matches": "Our scheduled matches",
+    "recent_results": "RECENT RESULTS",
+    "latest_outcomes": "Latest match outcomes",
+    "season_statistics": "SEASON STATISTICS",
+    "performance_overview": "Performance overview",
+    "home": "HOME",
+    "away": "AWAY",
+    "vs": "VS",
+    "final": "FINAL",
+    "friendly": "Friendly",
+    "wins": "Wins",
+    "draws": "Draws",
+    "losses": "Losses",
+    "total_games": "Total Games",
+    "win_rate": "Win Rate",
+    "goals_scored": "Goals Scored",
+    "goals_conceded": "Goals Conceded",
+    "goal_difference": "Goal Difference",
+    "victory": "Victory",
+    "draw": "Draw",
+    "defeat": "Defeat",
+    "venue": "Venue",
+    "date_time": "Date & Time",
+    "result": "Result",
+    "match_notes": "Match Notes"
+  },
+  "team": {
+    "management": "MANAGEMENT",
+    "coaching_staff": "COACHING STAFF", 
+    "players": "PLAYERS",
+    "management_team": "MANAGEMENT TEAM",
+    "leadership_vision": "Leadership driving our vision forward",
+    "coaching_team": "COACHING STAFF",
+    "expert_guidance": "Expert guidance for player development",
+    "our_squad": "Our talented squad",
+    "team_member": "Team Member",
+    "goals": "Goals",
+    "assists": "Assists",
+    "games": "Games",
+    "coming_soon": "Coming Soon",
+    "elite_players": "Elite Players",
+    "championship_ready": "Championship Ready",
+    "international_talent": "International Talent",
+    "follow_updates": "Follow for Updates",
+    "loading_management": "Loading management team...",
+    "loading_coaching": "Loading coaching staff...",
+    "loading_players": "Loading players...",
+    "error_management": "Error loading management team",
+    "error_coaching": "Error loading coaching staff", 
+    "error_players": "Error loading players",
+    "no_management": "No management team members found.",
+    "no_coaching": "No coaching staff found.",
+    "no_players": "No players found."
+  },
+  "who_we_are": {
+    "title": "WHO WE ARE",
+    "subtitle": "Marenah FC is more than a football club. We are a catalyst for transformation, building complete individuals through our three foundational pillars.",
+    "photo_title": "Marenah FC",
+    "photo_subtitle": "United in Purpose, Driven by Excellence",
+    "education": {
+      "title": "EDUCATION",
+      "subtitle": "Foundation of Growth",
+      "description": "We believe education is the cornerstone of success. Our players receive formal schooling, trade skills, and life education that opens doors beyond football."
+    },
+    "football": {
+      "title": "FOOTBALL", 
+      "subtitle": "Excellence in Sport",
+      "description": "Elite training, professional coaching, and competitive play develop world-class athletes ready for international opportunities."
+    },
+    "character": {
+      "title": "CHARACTER",
+      "subtitle": "Building Leaders", 
+      "description": "Discipline, integrity, and leadership shape our players into role models who inspire their communities and create positive change."
+    },
+    "mission_title": "OUR MISSION",
+    "mission_text": "To develop young talent holistically, creating pathways to success both on and off the field while uplifting communities across The Gambia and beyond."
+  },
   "footer": {
     "club_name": "MARENAH FUTBOL CLUB",
     "tagline": "Redefining Football Excellence",
     "connect": "CONNECT WITH US",
     "location": "Marenah, Gambia",
     "email": "info@marenahfc.com",
-    "phone": "+221 XX XXX XXXX",
+    "phone": "+220 310 4058",
     "copyright": "© 2024 Marenah Futbol Club. All Rights Reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",

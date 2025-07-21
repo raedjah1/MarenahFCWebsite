@@ -1,11 +1,139 @@
 {
   "navigation": {
-    "who_we_are": "QUI NOUS SOMMES",
+    "who_we_are": "QUI SOMMES",
     "team": "ÉQUIPE",
     "matches": "MATCHS",
-    "facility": "INSTALLATION",
+    "facility": "CENTRE",
     "store": "BOUTIQUE",
     "partners": "PARTENAIRES"
+  },
+  "hero": {
+    "club_name": "Marenah Futbol Club",
+    "tagline": "Redéfinir l'Excellence du Football",
+    "dream": {
+      "title": "RÊVE",
+      "subtitle": "DROIT AU",
+      "description": "Chaque enfant mérite l'opportunité de poursuivre ses rêves à travers le football, l'éducation et le développement du caractère."
+    },
+    "excellence": {
+      "title": "EXCELLENCE",
+      "subtitle": "VISER L'",
+      "description": "Nous cultivons les talents et construisons le caractère qui transforme les vies et les communautés."
+    },
+    "future": {
+      "title": "AVENIR",
+      "subtitle": "CONSTRUIRE L'",
+      "description": "Rejoignez-nous pour créer des voies vers le succès pour la prochaine génération de rêveurs, leaders et champions."
+    }
+  },
+  "mission": {
+    "text": "Chez Marenah FC, notre mission est d'identifier, développer et autonomiser les jeunes talents footballistiques tout en investissant dans le succès à long terme de nos joueurs et de notre communauté. Nous combinons un entraînement de football d'élite avec l'accès à l'éducation formelle, aux écoles de métiers et au développement des compétences de vie pour assurer que nos joueurs prospèrent sur et hors du terrain. Notre objectif n'est pas seulement de produire des athlètes de haut niveau, mais aussi de créer des voies vers la réussite académique, la formation professionnelle et un emploi significatif. En favorisant la discipline, le leadership et l'opportunité, nous visons à élever les communautés, fournir des avenirs durables et inspirer la prochaine génération en Gambie et au-delà.",
+    "uncover_story": "DÉCOUVRIR L'HISTOIRE"
+  },
+  "pillars": {
+    "title": "NOS PILIERS",
+    "education": "ÉDUCATION",
+    "football": "FOOTBALL",
+    "character": "CARACTÈRE"
+  },
+  "players": {
+    "title": "NOS JOUEURS",
+    "subtitle": "CAPTURER LES MOMENTS",
+    "alt_text": "Joueur en action"
+  },
+  "partners": {
+    "title": "NOS PARTENAIRES"
+  },
+  "news": {
+    "title": "MATCHS À VENIR",
+    "subtitle": "MARQUEZ VOTRE CALENDRIER",
+    "loading": "Chargement des prochains matchs...",
+    "error": "Erreur lors du chargement des matchs",
+    "no_fixtures": "Aucun match programmé.",
+    "upcoming": "À VENIR",
+    "view_details": "Voir les Détails"
+  },
+  "matches": {
+    "fixtures": "MATCHS",
+    "results": "RÉSULTATS",
+    "statistics": "STATISTIQUES",
+    "upcoming_fixtures": "MATCHS À VENIR",
+    "scheduled_matches": "Nos matchs programmés",
+    "recent_results": "RÉSULTATS RÉCENTS",
+    "latest_outcomes": "Derniers résultats",
+    "season_statistics": "STATISTIQUES DE LA SAISON",
+    "performance_overview": "Aperçu des performances",
+    "home": "DOMICILE",
+    "away": "EXTÉRIEUR",
+    "vs": "VS",
+    "final": "FINAL",
+    "friendly": "Amical",
+    "wins": "Victoires",
+    "draws": "Nuls",
+    "losses": "Défaites",
+    "total_games": "Total Matchs",
+    "win_rate": "Taux de Victoire",
+    "goals_scored": "Buts Marqués",
+    "goals_conceded": "Buts Encaissés",
+    "goal_difference": "Différence de Buts",
+    "victory": "Victoire",
+    "draw": "Nul",
+    "defeat": "Défaite",
+    "venue": "Lieu",
+    "date_time": "Date et Heure",
+    "result": "Résultat",
+    "match_notes": "Notes du Match"
+  },
+  "team": {
+    "management": "DIRECTION",
+    "coaching_staff": "STAFF TECHNIQUE",
+    "players": "JOUEURS",
+    "management_team": "ÉQUIPE DIRIGEANTE",
+    "leadership_vision": "Leadership qui dirige notre vision",
+    "coaching_team": "STAFF TECHNIQUE",
+    "expert_guidance": "Guidance experte pour le développement des joueurs",
+    "our_squad": "Notre équipe talentueuse",
+    "team_member": "Membre de l'Équipe",
+    "goals": "Buts",
+    "assists": "Passes",
+    "games": "Matchs",
+    "coming_soon": "Bientôt Disponible",
+    "elite_players": "Joueurs d'Élite",
+    "championship_ready": "Prêt pour le Championnat",
+    "international_talent": "Talent International",
+    "follow_updates": "Suivez les Mises à Jour",
+    "loading_management": "Chargement de l'équipe dirigeante...",
+    "loading_coaching": "Chargement du staff technique...",
+    "loading_players": "Chargement des joueurs...",
+    "error_management": "Erreur lors du chargement de l'équipe dirigeante",
+    "error_coaching": "Erreur lors du chargement du staff technique",
+    "error_players": "Erreur lors du chargement des joueurs",
+    "no_management": "Aucun membre de l'équipe dirigeante trouvé.",
+    "no_coaching": "Aucun membre du staff technique trouvé.",
+    "no_players": "Aucun joueur trouvé."
+  },
+  "who_we_are": {
+    "title": "QUI NOUS SOMMES",
+    "subtitle": "Marenah FC est plus qu'un club de football. Nous sommes un catalyseur de transformation, construisant des individus complets à travers nos trois piliers fondamentaux.",
+    "photo_title": "Marenah FC",
+    "photo_subtitle": "Unis dans l'Objectif, Guidés par l'Excellence",
+    "education": {
+      "title": "ÉDUCATION",
+      "subtitle": "Fondation de la Croissance",
+      "description": "Nous croyons que l'éducation est la pierre angulaire du succès. Nos joueurs reçoivent une scolarité formelle, des compétences professionnelles et une éducation de vie qui ouvre des portes au-delà du football."
+    },
+    "football": {
+      "title": "FOOTBALL",
+      "subtitle": "Excellence dans le Sport",
+      "description": "Entraînement d'élite, coaching professionnel et jeu compétitif développent des athlètes de classe mondiale prêts pour les opportunités internationales."
+    },
+    "character": {
+      "title": "CARACTÈRE",
+      "subtitle": "Former des Leaders",
+      "description": "La discipline, l'intégrité et le leadership façonnent nos joueurs en modèles qui inspirent leurs communautés et créent un changement positif."
+    },
+    "mission_title": "NOTRE MISSION",
+    "mission_text": "Développer les jeunes talents de manière holistique, créant des voies vers le succès sur et hors du terrain tout en élevant les communautés à travers la Gambie et au-delà."
   },
   "footer": {
     "club_name": "MARENAH FUTBOL CLUB",
@@ -13,7 +141,7 @@
     "connect": "NOUS CONTACTER",
     "location": "Marenah, Gambie",
     "email": "info@marenahfc.com",
-    "phone": "+221 XX XXX XXXX",
+    "phone": "+220 310 4058",
     "copyright": "© 2024 Marenah Futbol Club. Tous droits réservés.",
     "privacy": "Politique de Confidentialité",
     "terms": "Conditions d'Utilisation",

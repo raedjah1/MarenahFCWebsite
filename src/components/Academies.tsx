@@ -1,12 +1,15 @@
+import { useTranslation } from 'react-i18next';
 import './Academies.css';
 
 export const Academies = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="academies-section">
       <div className="container">
         <div className="academies-content">
           <div className="academies-group">
-            <h3 className="academies-title">OUR PARTNERS</h3>
+            <h3 className="academies-title">{t('partners.title')}</h3>
             <div className="badges-row">
               <div className="badge-item">
                 <div className="badge-circle orange">

@@ -1,85 +1,213 @@
 {
   "navigation": {
     "who_we_are": "AN YE MINU LE",
-    "team": "KUNTIO",
-    "matches": "TULUNŊOLU",
-    "facility": "TULUNŊ KUNDA",
-    "store": "JULA KUNDA",
-    "partners": "KAFO TIOLU"
+    "team": "KURU",
+    "matches": "KELO LU",
+    "facility": "YIRO",
+    "store": "JULA YIRO",
+    "partners": "BAANYIMA"
+  },
+  "hero": {
+    "club_name": "Marenah Futbol Club",
+    "tagline": "Ka Ball Kelo Beteyandi",
+    "dream": {
+      "title": "MIROO",
+      "subtitle": "SILA LA",
+      "description": "Dindingo bee ka kan ka miroo la ball kelo, karandiyo, ani moo beteyandi la."
+    },
+    "excellence": {
+      "title": "BETEYAA",
+      "subtitle": "NYININKANDI",
+      "description": "Ntolu ye faamuya ani moo beteyandi ka adamadingolu ani jamaa lu baluu yiriwa."
+    },
+    "future": {
+      "title": "SINAA",
+      "subtitle": "LOORINDI",
+      "description": "I ye ntolu kafoo ka sila nyaa sewo kandi miroo la lu, nyaamaa lu, ani champion lu ye."
+    }
+  },
+  "mission": {
+    "text": "Marenah FC la, ntolu la mission mu ka dindingo faamuya lu ye ball kelo la jee, ka olu beteyandi ani ka barraka di olu ma, ka waati jamaa ntolu la kelokelaa lu ani jamaa la nafa kono. Ntolu ye ball kelo karandiyo beteyaa kafoo karandiyo, trade schools, ani baluu beteyandi ma ka ntolu la kelokelaa lu sewo kelo yiro kono ani a keneema. Ntolu la nyininkandi te kelokelaa beteyaa lu dorong di, barri ka sila nyaa sewo kandi karandiyo la, vocational training, ani baara soto la. Ka discipline, nyaamaa, ani nyaato beteyandi, ntolu ye jamaa lu yiriwa kandi, ka sinaa nyaama taa, ani ka inspiration di generation natoo ma Gambia kono ani a keneema.",
+    "uncover_story": "TARIKU YITANDI"
+  },
+  "pillars": {
+    "title": "NTOLU LA SINBOO LU",
+    "education": "KARANDIYO",
+    "football": "BALL KELO",
+    "character": "MOO"
+  },
+  "players": {
+    "title": "NTOLU LA KELOKELAA LU",
+    "subtitle": "WAATI LU MUTA",
+    "alt_text": "Kelokelaa ye kelo la"
+  },
+  "partners": {
+    "title": "NTOLU LA BAANYIMA LU"
+  },
+  "news": {
+    "title": "KELO LU NATOO",
+    "subtitle": "I LA WAATI SEBENDIYO",
+    "loading": "Kelo lu natoo loading...",
+    "error": "Error kelo lu loading la",
+    "no_fixtures": "Kelo programo te jee.",
+    "upcoming": "NATOO",
+    "view_details": "Details Jubi"
+  },
+  "matches": {
+    "fixtures": "KELO LU",
+    "results": "JAABI LU",
+    "statistics": "STATISTICS LU",
+    "upcoming_fixtures": "KELO LU NATOO",
+    "scheduled_matches": "Ntolu la kelo lu programo",
+    "recent_results": "JAABI LU KUNUNTO",
+    "latest_outcomes": "Jaabi lu kununto",
+    "season_statistics": "SEASON STATISTICS LU",
+    "performance_overview": "Performance overview",
+    "home": "KELO YIRO",
+    "away": "TANA YIRO",
+    "vs": "NI",
+    "final": "LABANOO",
+    "friendly": "Teriya Kelo",
+    "wins": "Soto lu",
+    "draws": "Kafoo lu",
+    "losses": "Tinyaa lu",
+    "total_games": "Kelo Bee Lajami",
+    "win_rate": "Soto Percentage",
+    "goals_scored": "Goal lu Keli",
+    "goals_conceded": "Goal lu Soto",
+    "goal_difference": "Goal Difference",
+    "victory": "Soto",
+    "draw": "Kafoo",
+    "defeat": "Tinyaa",
+    "venue": "Yiro",
+    "date_time": "Loon ani Waati",
+    "result": "Jaabi",
+    "match_notes": "Kelo Notes"
+  },
+  "team": {
+    "management": "NYAAMAA LU",
+    "coaching_staff": "KARAMOO LU",
+    "players": "KELOKELAA LU",
+    "management_team": "NYAAMAA KURU",
+    "leadership_vision": "Nyaamaa ye ntolu la vision taamandi",
+    "coaching_team": "KARAMOO KURU",
+    "expert_guidance": "Londi beteyaa kelokelaa lu beteyandi kama",
+    "our_squad": "Ntolu la kuru faamuya",
+    "team_member": "Kuru Member",
+    "goals": "Goal lu",
+    "assists": "Dema lu",
+    "games": "Kelo lu",
+    "coming_soon": "Natoo Saayikaati",
+    "elite_players": "Kelokelaa Beteyaa lu",
+    "championship_ready": "Championship Dabari",
+    "international_talent": "International Faamuya",
+    "follow_updates": "Updates Tonya",
+    "loading_management": "Nyaamaa kuru loading...",
+    "loading_coaching": "Karamoo lu loading...",
+    "loading_players": "Kelokelaa lu loading...",
+    "error_management": "Error nyaamaa kuru loading la",
+    "error_coaching": "Error karamoo lu loading la",
+    "error_players": "Error kelokelaa lu loading la",
+    "no_management": "Nyaamaa kuru member sotoo te.",
+    "no_coaching": "Karamoo sotoo te.",
+    "no_players": "Kelokelaa sotoo te."
+  },
+  "who_we_are": {
+    "title": "NTOLU YE MUNU DI",
+    "subtitle": "Marenah FC ka tamin ball kelo club kono. Ntolu ye catalyst di transformation kama, ka adamadingo dafaa lu loo ntolu la sinboo saba kono.",
+    "photo_title": "Marenah FC",
+    "photo_subtitle": "Kafoo Nyininkandi la, Beteyaa ye Taamandi",
+    "education": {
+      "title": "KARANDIYO",
+      "subtitle": "Yiriwa Sinboo",
+      "description": "Ntolu ye la ka karandiyo mu sewo sinboo di. Ntolu la kelokelaa lu ye karandiyo, trade skills, ani baluu karandiyo soto meng ye daa lu yele ball kelo keneema."
+    },
+    "football": {
+      "title": "BALL KELO",
+      "subtitle": "Beteyaa Sport kono",
+      "description": "Karandiyo beteyaa, professional coaching, ani kelo competition ye world-class kelokelaa lu loo international nyaato lu kama."
+    },
+    "character": {
+      "title": "MOO",
+      "subtitle": "Nyaamaa Loorindi",
+      "description": "Discipline, tinyaa, ani nyaamaa ye ntolu la kelokelaa lu ke model lu di meng ye jamaa lu inspire ani ka change nyaama ke."
+    },
+    "mission_title": "NTOLU LA MISSION",
+    "mission_text": "Ka talent dingo lu beteyandi fan bee la, ka sila nyaa sewo kandi kelo yiro kono ani a keneema ka jamaa lu yiriwa Gambia kono ani a keneema."
   },
   "footer": {
     "club_name": "MARENAH FUTBOL CLUB",
-    "tagline": "Ka Ball Kuntioya Lafita",
-    "connect": "I BE FO LA",
+    "tagline": "Ka Ball Kelo Beteyandi",
+    "connect": "KAFOO NTOLU MA",
     "location": "Marenah, Gambia",
     "email": "info@marenahfc.com",
-    "phone": "+221 XX XXX XXXX",
-    "copyright": "© 2024 Marenah Futbol Club. Hakilo Baa Be.",
-    "privacy": "Suturo Sariya",
-    "terms": "Sariya Kuntiolu",
+    "phone": "+220 310 4058",
+    "copyright": "© 2024 Marenah Futbol Club. Right Bee Maraata.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
     "admin": "Admin"
   },
   "facility": {
-    "title": "MARENAH FC KARANDIŊ KUNDA",
-    "subtitle": "Ka Gambia dindino karandi ball kuntioya la",
-    "future_complex": "Marenah FC Tulunŋ Kunda Nato",
-    "architectural_vision": "Ntelu minna ye tulunŋ kunda kura kanu",
+    "title": "MARENAH FC ACADEMY",
+    "subtitle": "Ka generation natoo la Gambian ball kelo talent beteyandi",
+    "future_complex": "Marenah FC Complex Natoo",
+    "architectural_vision": "Architectural vision ntolu la world-class facility la",
     "stats": {
-      "pitches": "Tulunŋ Kunda 6",
-      "players": "Karandila 200+ ",
-      "education": "Karandiŋ Kuntio Baa"
+      "pitches": "6 Training Yiro lu",
+      "players": "200+ Academy Kelokelaa lu",
+      "education": "Karandiyo Program Dafaa"
     },
     "vision": {
-      "title": "Ntelu La Mira",
-      "description": "Ka karandiŋ kunda samba soto min be ball kuntioya ni karandiŋ kafoo, ka dindino lafita min be se ka tulunŋ ke duniya kono ka Gambia la namunya ni laada tanka."
+      "title": "Ntolu la Vision",
+      "description": "Ka world-class dingo beteyandi program ke meng ye ball kelo beteyaa ani karandiyo kafoo, ka adamadingo dafaa lu loo meng se ka kelo ke international ball kelo level beteyaa la ka Gambian values ani culture taamandi."
     },
     "programs": {
-      "title": "Karandiŋ Kuntio",
+      "title": "Beteyandi Programs",
       "youth": {
-        "title": "Dindino Karandiŋ",
-        "description": "Ka ball kuntioya folo folo karandiŋ ke",
+        "title": "Dingo Beteyandi",
+        "description": "Sinboo skills beteyandi ni emphasis technical ability kono",
         "features": [
-          "San 8-14",
-          "Kuntioya Folo",
-          "Fanka Karandiŋ"
+          "Saan 8-14",
+          "Technical fundamentals",
+          "Physical literacy"
         ]
       },
       "pre_professional": {
-        "title": "Pro Kuntioya",
-        "description": "Ka karandiŋ kuntioya ke pro kuntio ye",
+        "title": "Pre-Professional",
+        "description": "Karandiyo beteyaa ka professional sila lu dabari",
         "features": [
-          "San 15-17",
-          "Kuntioya Karandiŋ",
-          "Tulunŋ Kuntioya"
+          "Saan 15-17",
+          "Tactical beteyandi",
+          "Competition focus"
         ]
       },
       "elite": {
         "title": "Elite Sila",
-        "description": "Sila telen Marenah FC kuntio ba ye",
+        "description": "Sila tilindiyo Marenah FC first team nyaato lu ma",
         "features": [
-          "San 18-21",
-          "Pro Kuntioya",
-          "Elite Tulunŋ"
+          "Saan 18-21",
+          "Professional integration",
+          "Elite competition"
         ]
       }
     },
     "facilities": {
-      "title": "Karandiŋ Kunda Fenolu",
+      "title": "Academy Facilities",
       "training": {
-        "title": "Tulunŋ Kundolu",
-        "description": "Ji ni Yelemani Kura"
+        "title": "Training Yiro lu",
+        "description": "Modern drainage ani lighting systems"
       },
       "accommodation": {
-        "title": "Siiniŋ Kunda",
-        "description": "Siiniŋ Kunda Kura ni Karandiŋ Yoro"
+        "title": "Siiriyo",
+        "description": "Modern dormitories ni study areas"
       },
       "education": {
-        "title": "Karandiŋ Kunda",
-        "description": "Karandiŋ Kunda Kura"
+        "title": "Karandiyo Center",
+        "description": "Karandiyo facilities dedicated"
       },
       "medical": {
-        "title": "Kendeyandi Kunda",
-        "description": "Kendeyandila Ball Kuntioya La"
+        "title": "Medical Center",
+        "description": "Sports medicine specialists"
       }
     }
   }
