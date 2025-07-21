@@ -180,136 +180,38 @@ export const useTeamMember = (id: string | null) => {
 };
 
 /**
- * Hook for team member CRUD operations
+ * Hook for team member mutations
  */
 export const useTeamMemberMutations = () => {
-  const [createState, setCreateState] = useState<UseMutationState>({
-    loading: false,
-    error: null,
-    success: false,
-  });
-
-  const [updateState, setUpdateState] = useState<UseMutationState>({
-    loading: false,
-    error: null,
-    success: false,
-  });
-
-  const [deleteState, setDeleteState] = useState<UseMutationState>({
-    loading: false,
-    error: null,
-    success: false,
-  });
-
-  const createTeamMember = useCallback(
-    async (input: TeamMemberInput, photoFile?: File) => {
-      setCreateState({ loading: true, error: null, success: false });
-
-      try {
-        const result = await teamService.createTeamMember(input, photoFile);
-
-        if (result.success) {
-          setCreateState({ loading: false, error: null, success: true });
-          return result.data;
-        } else {
-          setCreateState({
-            loading: false,
-            error: result.error || "Failed to create team member",
-            success: false,
-          });
-          return null;
-        }
-      } catch (error) {
-        setCreateState({
-          loading: false,
-          error:
-            error instanceof Error
-              ? error.message
-              : "An unexpected error occurred",
-          success: false,
-        });
-        return null;
-      }
+  const create = {
+    mutate: async (input: TeamMemberInput, photoFile?: File) => {
+      return await teamService.createTeamMember(input, photoFile);
     },
-    [],
-  );
+  };
 
-  const updateTeamMember = useCallback(
-    async (id: string, input: Partial<TeamMemberInput>, photoFile?: File) => {
-      setUpdateState({ loading: true, error: null, success: false });
-
-      try {
-        const result = await teamService.updateTeamMember(id, input, photoFile);
-
-        if (result.success) {
-          setUpdateState({ loading: false, error: null, success: true });
-          return result.data;
-        } else {
-          setUpdateState({
-            loading: false,
-            error: result.error || "Failed to update team member",
-            success: false,
-          });
-          return null;
-        }
-      } catch (error) {
-        setUpdateState({
-          loading: false,
-          error:
-            error instanceof Error
-              ? error.message
-              : "An unexpected error occurred",
-          success: false,
-        });
-        return null;
-      }
+  const update = {
+    mutate: async (id: string, input: Partial<TeamMemberInput>, photoFile?: File) => {
+      return await teamService.updateTeamMember(id, input, photoFile);
     },
-    [],
-  );
+  };
 
-  const deleteTeamMember = useCallback(async (id: string) => {
-    setDeleteState({ loading: true, error: null, success: false });
+  const updateOrder = {
+    mutate: async (updates: { id: string; displayOrder: number }[]) => {
+      return await teamService.updateTeamMembersOrder(updates);
+    },
+  };
 
-    try {
-      const result = await teamService.deleteTeamMember(id);
-
-      if (result.success) {
-        setDeleteState({ loading: false, error: null, success: true });
-        return true;
-      } else {
-        setDeleteState({
-          loading: false,
-          error: result.error || "Failed to delete team member",
-          success: false,
-        });
-        return false;
-      }
-    } catch (error) {
-      setDeleteState({
-        loading: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred",
-        success: false,
-      });
-      return false;
-    }
-  }, []);
+  const remove = {
+    mutate: async (id: string) => {
+      return await teamService.deleteTeamMember(id);
+    },
+  };
 
   return {
-    create: {
-      ...createState,
-      mutate: createTeamMember,
-    },
-    update: {
-      ...updateState,
-      mutate: updateTeamMember,
-    },
-    delete: {
-      ...deleteState,
-      mutate: deleteTeamMember,
-    },
+    create,
+    update,
+    updateOrder,
+    remove,
   };
 };
 

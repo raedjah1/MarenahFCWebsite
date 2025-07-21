@@ -242,6 +242,40 @@ class TeamService {
   // ==========================================================================
 
   /**
+   * Update team members display order
+   */
+  async updateTeamMembersOrder(updates: { id: string; displayOrder: number }[]): Promise<TeamMembersResult> {
+    try {
+      const batch = writeBatch(db);
+      
+      for (const update of updates) {
+        const docRef = doc(this.collection, update.id);
+        batch.update(docRef, {
+          displayOrder: update.displayOrder,
+          updatedAt: Timestamp.now(),
+        });
+      }
+      
+      await batch.commit();
+      
+      return {
+        success: true,
+        data: {
+          data: [],
+          hasMore: false,
+          total: updates.length,
+        },
+      };
+    } catch (error) {
+      console.error('Error updating team members order:', error);
+      return {
+        success: false,
+        error: 'Failed to update team members order. Please try again.',
+      };
+    }
+  }
+
+  /**
    * Get all team members with optional filtering and pagination
    */
   async getTeamMembers(options: TeamMemberQueryOptions = {}): Promise<TeamMembersResult> {
@@ -257,10 +291,17 @@ class TeamService {
         q = query(q, where('isActive', '==', options.isActive));
       }
 
-      // Apply ordering
-      const orderField = options.orderBy || 'name';
+      // Apply simple ordering first - try displayOrder, fallback to name
+      const orderField = options.orderBy || 'name'; // Default to name to avoid index issues
       const orderDirection = options.orderDirection || 'asc';
-      q = query(q, orderBy(orderField, orderDirection));
+      
+      // Only use simple ordering to avoid compound index requirements
+      try {
+        q = query(q, orderBy(orderField, orderDirection));
+      } catch (error) {
+        console.warn(`Failed to order by ${orderField}, using default ordering:`, error);
+        // If ordering fails, just use the base query without ordering
+      }
 
       // Apply pagination
       if (options.limit) {
@@ -268,10 +309,24 @@ class TeamService {
       }
 
       const snapshot = await getDocs(q);
-      const teamMembers = snapshot.docs.map(doc => ({
+      let teamMembers = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       })) as TeamMember[];
+
+      // Always apply client-side sorting for displayOrder
+      teamMembers = teamMembers.sort((a, b) => {
+        // First sort by displayOrder (if exists)
+        const orderA = a.displayOrder ?? 999999;
+        const orderB = b.displayOrder ?? 999999;
+        
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+        
+        // Then sort by name as secondary sort
+        return a.name.localeCompare(b.name);
+      });
 
       // Apply search filter if provided (client-side)
       let filteredMembers = teamMembers;
@@ -613,16 +668,40 @@ class TeamService {
       q = query(q, where('isActive', '==', options.isActive));
     }
 
-    // Apply ordering
-    const orderField = options.orderBy || 'name';
+    // Apply ordering - prefer displayOrder, then fallback to name or specified field
+    const orderField = options.orderBy || 'displayOrder';
     const orderDirection = options.orderDirection || 'asc';
-    q = query(q, orderBy(orderField, orderDirection));
+    
+    try {
+      // Try to order by displayOrder first
+      if (orderField === 'displayOrder') {
+        q = query(q, orderBy('displayOrder', orderDirection), orderBy('name', 'asc'));
+      } else {
+        q = query(q, orderBy(orderField, orderDirection));
+      }
+    } catch (error) {
+      // If displayOrder doesn't exist for some documents, fallback to name
+      console.warn('Failed to order by displayOrder, falling back to name:', error);
+      q = query(q, orderBy('name', 'asc'));
+    }
 
     return onSnapshot(q, (snapshot) => {
-      const teamMembers = snapshot.docs.map(doc => ({
+      let teamMembers = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       })) as TeamMember[];
+
+      // Client-side sorting as backup for documents without displayOrder
+      if (orderField === 'displayOrder') {
+        teamMembers = teamMembers.sort((a, b) => {
+          const orderA = a.displayOrder ?? 999999;
+          const orderB = b.displayOrder ?? 999999;
+          if (orderA === orderB) {
+            return a.name.localeCompare(b.name);
+          }
+          return orderDirection === 'asc' ? orderA - orderB : orderB - orderA;
+        });
+      }
 
       callback(teamMembers);
     });

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, Reorder } from "framer-motion";
 import "./AdminDashboard.css";
 import logoImage from "../assets/images/Logo.png";
 import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
@@ -123,6 +124,9 @@ const AdminDashboard = () => {
   const teamMutations = useTeamMemberMutations();
   const matchMutations = useMatchMutations();
   const productMutations = useProductMutations();
+
+  const [isReordering, setIsReordering] = useState(false);
+  const [reorderingMembers, setReorderingMembers] = useState<TeamMember[]>([]);
 
   // Redirect if not admin - fixed dependency array
   useEffect(() => {
@@ -248,6 +252,41 @@ const AdminDashboard = () => {
     </div>
   );
 
+  const handleReorderStart = (members: TeamMember[]) => {
+    setIsReordering(true);
+    setReorderingMembers([...members]);
+  };
+
+  const handleReorderEnd = async () => {
+    if (!isReordering) return;
+    
+    try {
+      // Create updates with new display orders
+      const updates = reorderingMembers.map((member, index) => ({
+        id: member.id,
+        displayOrder: index + 1,
+      }));
+
+      const result = await teamMutations.updateOrder.mutate(updates);
+      if (result.success) {
+        refetchTeam();
+      } else {
+        alert('Failed to save new order. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error updating order:', error);
+      alert('Error updating order. Please try again.');
+    } finally {
+      setIsReordering(false);
+      setReorderingMembers([]);
+    }
+  };
+
+  const handleReorderCancel = () => {
+    setIsReordering(false);
+    setReorderingMembers([]);
+  };
+
   const renderTeamManagement = () => {
     const roleMap = {
       players: "player",
@@ -257,6 +296,7 @@ const AdminDashboard = () => {
 
     const currentRole = roleMap[activeTeamSection];
     const members = getTeamMembersByRole(currentRole);
+    const displayMembers = isReordering ? reorderingMembers : members;
 
     return (
       <div className="team-management">
@@ -264,18 +304,21 @@ const AdminDashboard = () => {
           <button
             className={`team-tab ${activeTeamSection === "players" ? "active" : ""}`}
             onClick={() => setActiveTeamSection("players")}
+            disabled={isReordering}
           >
             Players ({getTeamMembersByRole("player").length})
           </button>
           <button
             className={`team-tab ${activeTeamSection === "coaches" ? "active" : ""}`}
             onClick={() => setActiveTeamSection("coaches")}
+            disabled={isReordering}
           >
             Coaches ({getTeamMembersByRole("coach").length})
           </button>
           <button
             className={`team-tab ${activeTeamSection === "management" ? "active" : ""}`}
             onClick={() => setActiveTeamSection("management")}
+            disabled={isReordering}
           >
             Management ({getTeamMembersByRole("management").length})
           </button>
@@ -286,19 +329,102 @@ const AdminDashboard = () => {
             {activeTeamSection.charAt(0).toUpperCase() +
               activeTeamSection.slice(1)}
           </h3>
-          <button
-            className="btn btn-primary"
-            onClick={handleAddNew}
-          >
-            <i className="fas fa-plus"></i>
-            Add {activeTeamSection.slice(0, -1)}
-          </button>
+          <div className="section-actions">
+            {!isReordering ? (
+              <>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => handleReorderStart(members)}
+                  disabled={members.length < 2}
+                  title="Reorder team members"
+                >
+                  <i className="fas fa-sort"></i>
+                  Reorder
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={handleAddNew}
+                >
+                  <i className="fas fa-plus"></i>
+                  Add {activeTeamSection.slice(0, -1)}
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="btn btn-success"
+                  onClick={handleReorderEnd}
+                >
+                  <i className="fas fa-check"></i>
+                  Save Order
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={handleReorderCancel}
+                >
+                  <i className="fas fa-times"></i>
+                  Cancel
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
         {teamLoading ? (
           <LoadingSpinner text="Loading team members..." />
         ) : teamError ? (
           <div className="error-message">Error: {teamError}</div>
+        ) : isReordering ? (
+          <div className="reorder-container">
+            <div className="reorder-instructions">
+              <p><i className="fas fa-info-circle"></i> Drag and drop to reorder team members</p>
+            </div>
+            <Reorder.Group 
+              axis="y" 
+              values={reorderingMembers} 
+              onReorder={setReorderingMembers}
+              className="reorder-list"
+            >
+              {reorderingMembers.map((member) => (
+                <Reorder.Item 
+                  key={member.id} 
+                  value={member}
+                  className="reorder-item"
+                  whileDrag={{ 
+                    scale: 1.02,
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                    zIndex: 1000
+                  }}
+                >
+                  <div className="reorder-member">
+                    <div className="reorder-drag-handle">
+                      <i className="fas fa-grip-vertical"></i>
+                    </div>
+                    <div className="reorder-member-info">
+                      {member.photoURL ? (
+                        <img
+                          src={member.photoURL}
+                          alt={member.name}
+                          className="member-photo"
+                        />
+                      ) : (
+                        <div className="member-placeholder">
+                          <i className="fas fa-user"></i>
+                        </div>
+                      )}
+                      <div className="member-details">
+                        <h4>{member.name}</h4>
+                        <p>{member.position || member.title || "-"}</p>
+                        {activeTeamSection === "players" && member.jerseyNumber && (
+                          <span className="jersey-number">#{member.jerseyNumber}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
+          </div>
         ) : (
           <div className="data-table">
             <table>
@@ -313,7 +439,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {members.map((member) => (
+                {displayMembers.map((member) => (
                   <tr key={member.id}>
                     <td>
                       {member.photoURL ? (
@@ -344,12 +470,13 @@ const AdminDashboard = () => {
                       <button
                         className="btn btn-sm btn-secondary"
                         onClick={() => setEditingItem(member)}
+                        title="Edit member"
                       >
                         <i className="fas fa-edit"></i>
                       </button>
                       <button
                         className="btn btn-sm btn-danger"
-                        onClick={() => handleDeleteTeamMember(member.id)}
+                        onClick={() => handleDelete(member.id)}
                       >
                         <i className="fas fa-trash"></i>
                       </button>
@@ -364,12 +491,37 @@ const AdminDashboard = () => {
     );
   };
 
-  const handleDeleteTeamMember = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this team member?")) {
-      const success = await teamMutations.delete.mutate(id);
-      if (success) {
-        refetchTeam();
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this item?")) {
+      return;
+    }
+
+    try {
+      let success = false;
+      if (activeSection === 'team') {
+        const result = await teamMutations.remove.mutate(id);
+        success = result.success;
+      } else if (activeSection === 'matches') {
+        success = await matchMutations.delete.mutate(id);
+      } else if (activeSection === 'store') {
+        success = await productMutations.delete.mutate(id);
       }
+
+      if (success) {
+        // Refresh the appropriate data
+        if (activeSection === 'team') {
+          refetchTeam();
+        } else if (activeSection === 'matches') {
+          refetchMatches();
+        } else if (activeSection === 'store') {
+          refetchProducts();
+        }
+      } else {
+        alert('Failed to delete item. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      alert('Error deleting item. Please try again.');
     }
   };
 
@@ -464,7 +616,7 @@ const AdminDashboard = () => {
                     )}
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => handleDeleteMatch(match.id)}
+                      onClick={() => handleDelete(match.id)}
                       title="Delete match"
                     >
                       <i className="fas fa-trash"></i>
@@ -478,24 +630,6 @@ const AdminDashboard = () => {
       )}
     </div>
   );
-
-  const handleDeleteMatch = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this match?")) {
-      const success = await matchMutations.delete.mutate(id);
-      if (success) {
-        refetchMatches();
-      }
-    }
-  };
-
-  const handleDeleteProduct = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      const success = await productMutations.delete.mutate(id);
-      if (success) {
-        refetchProducts();
-      }
-    }
-  };
 
   const renderStoreManagement = () => (
     <div className="store-management">
@@ -566,7 +700,7 @@ const AdminDashboard = () => {
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => handleDeleteProduct(product.id)}
+                      onClick={() => handleDelete(product.id)}
                     >
                       <i className="fas fa-trash"></i>
                     </button>

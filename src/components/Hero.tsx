@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Hero.css';
 import mfcLogo from '../assets/images/MFC__Main_Logo.jpg';
 import teamImage from '../assets/images/team.JPG';
 import coachImage from '../assets/images/coach_image.JPG';
 
 const Hero: React.FC = () => {
-  const [currentHero, setCurrentHero] = useState(0);
+  const currentHero = 0; // Always show the first slide
 
   const heroes = [
     {
@@ -39,12 +39,6 @@ const Hero: React.FC = () => {
       showTeam: false
     }
   ];
-
-  const handleHeroChange = (index: number) => {
-    if (index !== currentHero) {
-      setCurrentHero(index);
-    }
-  };
 
   const currentHeroData = heroes[currentHero];
 

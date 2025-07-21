@@ -47,6 +47,7 @@ export interface TeamMember {
     facebook?: string;
   };
   stats?: PlayerStats; // Only for players
+  displayOrder?: number; // For custom ordering within role
   isActive: boolean;
   createdAt: Timestamp;
   updatedAt: Timestamp;
@@ -80,6 +81,7 @@ export interface TeamMemberInput {
     twitter?: string;
     facebook?: string;
   };
+  displayOrder?: number;
   isActive?: boolean;
 }
 
