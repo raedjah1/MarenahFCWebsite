@@ -16,6 +16,7 @@ import { FacilityPage } from "./pages/FacilityPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SupportPage } from "./pages/SupportPage";
 import { StorePage } from "./pages/StorePage";
+import { ProductPage } from "./pages/ProductPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { TermsOfService } from "./pages/TermsOfService";
@@ -107,6 +108,7 @@ const MainContent = ({
           <Route path="/matches" element={<MatchesPage />} />
           <Route path="/facility" element={<FacilityPage />} />
           <Route path="/store" element={<StorePage />} />
+          <Route path="/store/product/:productId" element={<ProductPage />} />
           <Route path="/sponsorship" element={<SponsorshipPage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
