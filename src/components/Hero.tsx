@@ -70,6 +70,28 @@ const Hero: React.FC = () => {
               <div className="hero-club-info">
                 <h1 className="hero-club-name">{t('hero.club_name')}</h1>
                 <p className="hero-club-quote">{t('hero.tagline')}</p>
+                
+                {/* Social Media Buttons */}
+                <div className="hero-social-links">
+                  <a 
+                    href="https://instagram.com/marenahfc" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hero-social-link"
+                    aria-label="Follow us on Instagram"
+                  >
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                  <a 
+                    href="https://facebook.com/marenahfc" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hero-social-link"
+                    aria-label="Follow us on Facebook"
+                  >
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

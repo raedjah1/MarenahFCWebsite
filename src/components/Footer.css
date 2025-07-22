@@ -413,18 +413,238 @@
   }
   
   .footer-content {
-    grid-template-columns: 0.4fr 2fr 0.6fr; /* Adjusted ratios for better balance */
-    padding: 0 0.8rem; /* Adequate padding */
-    gap: 0.8rem; /* Reasonable gap */
+    grid-template-columns: 1fr; /* Single column layout on mobile */
+    padding: 0 1rem; /* Adequate padding */
+    gap: 2rem; /* More space between sections */
+    text-align: center; /* Center everything */
   }
   
   .footer-logo-section {
     min-width: auto;
-    gap: 0.3rem; /* Adequate spacing */
+    gap: 0.5rem; /* Better spacing */
+    order: 1; /* Logo first */
   }
 
   .footer-logo {
-    width: 45px; /* Reasonable logo size */
+    width: 60px; /* Larger logo for mobile */
+    height: 60px;
+  }
+
+  .footer-logo img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .footer-club-name {
+    font-size: 1rem; /* Larger, more readable */
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem; /* Readable tagline */
+    line-height: 1.3;
+    text-align: center;
+  }
+  
+  .footer-navigation {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of 5 */
+    gap: 1rem 2rem; /* Vertical and horizontal gaps */
+    padding: 1rem 0;
+    align-items: start;
+    order: 2; /* Navigation second */
+    max-width: 300px; /* Limit width for better layout */
+    margin: 0 auto; /* Center the navigation */
+  }
+
+  .footer-section {
+    text-align: center;
+    min-width: 0; /* Allow text to wrap if needed */
+  }
+
+  .footer-section h4 {
+    font-size: 0.9rem; /* Much larger and more readable */
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    margin: 0;
+    padding: 0.5rem; /* Touch-friendly padding */
+    word-wrap: break-word;
+    hyphens: auto;
+    font-weight: 600; /* Make it more prominent */
+  }
+
+  .footer-contact-section {
+    min-width: auto;
+    gap: 1rem; /* Better spacing */
+    align-items: center;
+    order: 3; /* Contact third */
+  }
+
+  .footer-contact-section h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .contact-info {
+    gap: 0.8rem;
+    align-items: center;
+    flex-direction: column; /* Stack contact items */
+  }
+
+  .contact-info p {
+    font-size: 0.8rem; /* Readable contact text */
+    line-height: 1.3;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-info i {
+    font-size: 1rem;
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  .social-links {
+    gap: 1rem; /* Better spacing for touch targets */
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .social-link {
+    width: 40px; /* Larger touch-friendly size */
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .social-link i {
+    font-size: 1.2rem;
+  }
+  
+  .footer-bottom {
+    padding: 2rem 1rem; /* More padding */
+    margin-top: 2rem;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column; /* Stack bottom content on mobile */
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .footer-legal {
+    gap: 1.5rem; /* Better spacing for touch */
+  }
+
+  .footer-legal a {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem; /* Touch-friendly padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 2.5rem 0 0;
+  }
+
+  .footer-content {
+    padding: 0 0.8rem;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .footer-logo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .footer-club-name {
+    font-size: 0.9rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.75rem;
+  }
+  
+  .footer-navigation {
+    grid-template-columns: 1fr; /* Single column on very small screens */
+    gap: 0.8rem;
+    max-width: 200px;
+  }
+
+  .footer-section h4 {
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+    padding: 0.4rem;
+  }
+
+  .footer-contact-section h4 {
+    font-size: 0.85rem;
+  }
+
+  .contact-info p {
+    font-size: 0.75rem;
+  }
+
+  .contact-info i {
+    font-size: 0.9rem;
+    width: 14px;
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .social-link i {
+    font-size: 1.1rem;
+  }
+  
+  .footer-bottom {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.75rem;
+  }
+
+  .footer-legal a {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 375px) {
+  .footer-content {
+    gap: 1.2rem;
+  }
+
+  .footer-navigation {
+    gap: 0.6rem;
+    max-width: 180px;
+  }
+
+  .footer-section h4 {
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    line-height: 1.2;
+  }
+
+  .footer-logo {
+    width: 45px;
     height: 45px;
   }
 
@@ -434,230 +654,24 @@
   }
 
   .footer-club-name {
-    font-size: 0.75rem; /* Readable size */
-    line-height: 1.2;
-    text-align: center;
+    font-size: 0.85rem;
   }
 
   .footer-tagline {
-    font-size: 0.6rem; /* Small but readable */
-    line-height: 1.3;
-    text-align: center;
-  }
-  
-  .footer-navigation {
-    grid-template-columns: repeat(5, 1fr); /* Keep all 5 navigation items */
-    gap: 0.4rem; /* Adequate gap for touch targets */
-    padding: 0;
-    align-items: start;
-  }
-
-  .footer-section {
-    text-align: center;
-    min-width: 0; /* Allow text to wrap if needed */
-  }
-
-  .footer-section h4 {
-    font-size: 0.65rem; /* Readable navigation text */
-    letter-spacing: 0.3px;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0.3rem 0.1rem; /* Touch-friendly padding */
-    word-wrap: break-word; /* Allow wrapping for long words */
-    hyphens: auto; /* Enable hyphenation */
-  }
-
-  .footer-contact-section {
-    min-width: auto;
-    gap: 0.6rem; /* Adequate spacing */
-    align-items: center;
-  }
-
-  .footer-contact-section h4 {
-    font-size: 0.65rem;
-    margin-bottom: 0.4rem;
-    text-align: center;
-  }
-
-  .contact-info {
-    gap: 0.4rem;
-    align-items: center;
-  }
-
-  .contact-info p {
-    font-size: 0.6rem; /* Readable contact text */
-    line-height: 1.2;
-    text-align: center;
-    justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping if needed */
-  }
-
-  .contact-info i {
-    font-size: 0.7rem;
-    width: 12px;
-    flex-shrink: 0; /* Prevent icon shrinking */
-  }
-
-  .social-links {
-    gap: 0.4rem; /* Adequate gap for touch targets */
-    justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping if needed */
-  }
-
-  .social-link {
-    width: 28px; /* Touch-friendly size */
-    height: 28px;
-    flex-shrink: 0; /* Prevent shrinking */
-  }
-
-  .social-link i {
-    font-size: 0.8rem;
-  }
-  
-  .footer-bottom {
-    padding: 1rem 0.8rem; /* Increased padding */
-    margin-top: 2rem; /* More separation */
-  }
-  
-  .footer-bottom-content {
-    flex-direction: column; /* Stack bottom content on mobile */
-    gap: 0.8rem;
-    text-align: center;
-  }
-
-  .footer-copyright {
-    font-size: 0.65rem;
-    line-height: 1.3;
-  }
-
-  .footer-legal {
-    gap: 1.2rem; /* Better spacing for touch */
-  }
-
-  .footer-legal a {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.4rem; /* Touch-friendly padding */
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-container {
-    padding: 2.5rem 0 0; /* Even more padding for very small screens */
-  }
-
-  .footer-content {
-    grid-template-columns: 0.35fr 2.1fr 0.55fr; /* Optimized ratios */
-    padding: 0 0.4rem;
-    gap: 0.6rem;
-  }
-
-  .footer-logo {
-    width: 38px;
-    height: 38px;
-  }
-
-  .footer-logo img {
-    width: 34px;
-    height: 34px;
-  }
-
-  .footer-club-name {
     font-size: 0.7rem;
   }
 
-  .footer-tagline {
-    font-size: 0.55rem;
-  }
-  
-  .footer-navigation {
-    grid-template-columns: repeat(5, 1fr); /* Still keep all 5 items */
-    gap: 0.3rem; /* Minimal but adequate gap */
-  }
-
-  .footer-section h4 {
-    font-size: 0.6rem; /* Small but still readable */
-    letter-spacing: 0.2px;
-    padding: 0.25rem 0.05rem; /* Minimal but touch-friendly padding */
-  }
-
   .contact-info p {
-    font-size: 0.55rem;
-  }
-
-  .contact-info i {
-    font-size: 0.65rem;
-    width: 10px;
+    font-size: 0.7rem;
   }
 
   .social-link {
-    width: 26px; /* Still touch-friendly */
-    height: 26px;
-  }
-
-  .social-link i {
-    font-size: 0.75rem;
-  }
-  
-  .footer-bottom {
-    padding: 1rem 0.4rem;
-  }
-
-  .footer-copyright {
-    font-size: 0.6rem;
-  }
-
-  .footer-legal a {
-    font-size: 0.6rem;
-    padding: 0.25rem 0.3rem;
-  }
-}
-
-/* Very small screens - ensure everything still fits */
-@media (max-width: 375px) {
-  .footer-content {
-    grid-template-columns: 0.3fr 2.3fr 0.4fr; /* Maximum space for navigation */
-    gap: 0.5rem;
-  }
-
-  .footer-navigation {
-    gap: 0.25rem; /* Minimal gap but still functional */
-  }
-
-  .footer-section h4 {
-    font-size: 0.55rem; /* As small as readable */
-    padding: 0.2rem 0.02rem;
-    line-height: 1.1;
-  }
-
-  .footer-logo {
     width: 32px;
     height: 32px;
   }
 
-  .footer-logo img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .footer-club-name {
-    font-size: 0.65rem;
-  }
-
-  .footer-tagline {
-    font-size: 0.5rem;
-  }
-
-  .contact-info p {
-    font-size: 0.5rem;
-  }
-
-  .social-link {
-    width: 24px;
-    height: 24px;
-  }
-
   .social-link i {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 }
 

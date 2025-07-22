@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoadingProvider } from "./contexts/LoadingContext";
 import { FirebaseAuthProvider } from "./contexts/FirebaseAuthContext";
 import { LoadingScreen } from "./components/LoadingScreen";
-import { CookieNotification } from "./components/CookieNotification";
 
 import { ViewTransition } from "./components/ViewTransition";
 import { RootLayout } from "./layouts/RootLayout";
@@ -92,7 +91,6 @@ const MainContent = ({
 
   return (
     <div className={`app ${isDarkMode ? "dark" : "light"}`}>
-      <CookieNotification />
       <Routes>
         {/* Auth routes without navigation */}
         <Route element={<AuthLayout />}>

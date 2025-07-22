@@ -364,6 +364,13 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .pillar-item {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
   }
   
   .team-photo {
@@ -386,6 +393,12 @@
   
   .main-title {
     font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .main-subtitle {
+    font-size: 1rem;
+    padding: 0 0.5rem;
   }
   
   .hero-image-section {
@@ -393,7 +406,7 @@
   }
   
   .team-photo {
-    height: 250px;
+    height: 280px; /* Better mobile height */
   }
   
   .photo-overlay {
@@ -412,17 +425,308 @@
   .content-grid {
     gap: 2rem;
   }
+
+  .pillars-heading {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
   
   .pillars-list {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .pillar-item {
     padding: 0.8rem;
+    min-width: auto;
+    max-width: none;
+  }
+
+  .pillar-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+
+  .pillar-title {
+    font-size: 0.9rem;
+  }
+
+  .pillar-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .pillar-indicator {
+    width: 3px;
+    height: 25px;
+  }
+
+  .pillar-item.active .pillar-indicator {
+    height: 35px;
   }
   
   .active-pillar-content {
     padding: 1.5rem;
+  }
+
+  .active-pillar-title {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+
+  .active-pillar-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .active-pillar-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .pillar-progress {
+    gap: 0.4rem;
+  }
+
+  .progress-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .mission-footer {
+    padding: 1.2rem;
+  }
+
+  .mission-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .mission-content p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 0.8rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .main-subtitle {
+    font-size: 0.9rem;
+    padding: 0 0.2rem;
+  }
+
+  .hero-image-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .team-photo {
+    height: 220px;
+  }
+
+  .photo-overlay {
+    padding: 1rem 0.8rem;
+  }
+
+  .photo-title {
+    font-size: 1.2rem;
+  }
+
+  .photo-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .content-grid {
+    gap: 1.5rem;
+  }
+
+  .pillars-heading {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .pillars-list {
+    gap: 0.8rem;
+  }
+
+  .pillar-item {
+    padding: 0.6rem;
+  }
+
+  .pillar-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .pillar-title {
+    font-size: 0.85rem;
+  }
+
+  .pillar-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .pillar-indicator {
+    width: 2px;
+    height: 20px;
+  }
+
+  .pillar-item.active .pillar-indicator {
+    height: 30px;
+  }
+
+  .active-pillar-content {
+    padding: 1.2rem;
+  }
+
+  .active-pillar-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .active-pillar-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .active-pillar-description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .pillar-progress {
+    gap: 0.3rem;
+  }
+
+  .progress-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .mission-footer {
+    padding: 1rem;
+  }
+
+  .mission-content h3 {
+    font-size: 1rem;
+  }
+
+  .mission-content p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 375px) {
+  .page-container {
+    padding: 0.6rem;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .main-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .team-photo {
+    height: 200px;
+  }
+
+  .photo-overlay {
+    padding: 0.8rem 0.6rem;
+  }
+
+  .photo-title {
+    font-size: 1.1rem;
+  }
+
+  .photo-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .pillars-heading {
+    font-size: 1.1rem;
+  }
+
+  .pillar-item {
+    padding: 0.5rem;
+  }
+
+  .pillar-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .pillar-title {
+    font-size: 0.8rem;
+  }
+
+  .pillar-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .active-pillar-content {
+    padding: 1rem;
+  }
+
+  .active-pillar-title {
+    font-size: 1rem;
+  }
+
+  .active-pillar-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .active-pillar-description {
+    font-size: 0.8rem;
+  }
+
+  .mission-footer {
+    padding: 0.8rem;
+  }
+
+  .mission-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .mission-content p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .team-photo {
+    height: 250px;
+  }
+
+  .photo-overlay {
+    padding: 1rem;
+  }
+
+  .photo-title {
+    font-size: 1.3rem;
+  }
+
+  .photo-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .content-grid {
+    gap: 1.5rem;
+  }
+
+  .active-pillar-content {
+    padding: 1.2rem;
   }
 } 
