@@ -8,8 +8,8 @@
 /* Mission Section - Slides over Hero */
 .mission-section {
   position: relative;
-  height: 30vh; /* smaller again since hero is pinned */
-  min-height: 200px;
+  height: auto; /* Changed from 30vh to auto for better mobile support */
+  min-height: 250px; /* Increased minimum height */
   width: 100%;
   background: linear-gradient(135deg, 
     rgba(0, 0, 0, 0.95) 0%, 
@@ -21,6 +21,7 @@
   justify-content: center;
   z-index: 50;
   overflow: hidden;
+  padding: 3rem 0; /* Added vertical padding */
 }
 
 /* Enhanced scroll overlay effect */
@@ -74,29 +75,29 @@
 .mission-content {
   text-align: center;
   color: white;
-  max-width: 700px;
+  max-width: 800px; /* Increased max width */
   margin: 0 auto;
-  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap */
 }
 
 .mission-statement {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .mission-text {
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.75rem; /* Slightly larger base font size */
   font-weight: 600;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7; /* Increased line height for better readability */
+  color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
   margin: 0;
   text-align: center;
-  max-width: 500px;
+  max-width: 700px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -106,16 +107,20 @@
   border: 2px solid rgb(230, 166, 76);
   color: rgb(230, 166, 76);
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.7rem; /* Slightly larger */
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 6px 12px;
+  padding: 8px 16px; /* Increased padding */
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 4px;
   background-clip: padding-box;
+  min-height: 44px; /* Ensure touch-friendly size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .uncover-story-btn:hover {
@@ -151,26 +156,28 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .mission-section {
-    height: 30vh;
-    min-height: 200px;
+    min-height: 300px; /* Increased minimum height for mobile */
+    padding: 2.5rem 0; /* Adequate padding */
   }
   
   .mission-content {
-    gap: 0.8rem;
-    padding-top: 1.5rem;
+    gap: 1.2rem;
+    max-width: 100%; /* Use full width on mobile */
   }
   
   .mission-text {
-    font-size: 0.6rem;
+    font-size: 0.8rem; /* Larger font for better readability */
     font-weight: 600;
-    line-height: 1.5;
-    max-width: 450px;
+    line-height: 1.6;
+    max-width: 100%; /* Use full available width */
+    padding: 0 0.5rem; /* Add some padding */
   }
   
   .uncover-story-btn {
-    font-size: 0.6rem;
-    padding: 5px 10px;
+    font-size: 0.7rem; /* Larger button text */
+    padding: 10px 20px; /* Increased padding for touch */
     letter-spacing: 1.2px;
+    min-height: 48px; /* Better touch target */
   }
   
   .mission-container {
@@ -184,29 +191,50 @@
 
 @media (max-width: 480px) {
   .mission-section {
-    height: 35vh;
-    min-height: 220px;
+    min-height: 350px; /* Even more height for small screens */
+    padding: 3rem 0; /* More generous padding */
   }
   
   .mission-content {
-    gap: 0.6rem;
-    padding-top: 1rem;
+    gap: 1.5rem; /* More space between elements */
   }
   
   .mission-text {
-    font-size: 0.55rem;
+    font-size: 0.85rem; /* Even larger for small screens */
     font-weight: 600;
-    max-width: 350px;
+    max-width: 100%;
+    line-height: 1.7; /* Better line spacing */
+    padding: 0 0.5rem;
   }
   
   .uncover-story-btn {
-    font-size: 0.55rem;
-    padding: 4px 8px;
+    font-size: 0.75rem; /* Larger button text */
+    padding: 12px 24px; /* Even more padding */
     letter-spacing: 1px;
+    min-height: 50px; /* Larger touch target */
   }
   
   .mission-container,
   .container {
     padding: 0 1rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 375px) {
+  .mission-section {
+    min-height: 380px;
+    padding: 3.5rem 0;
+  }
+  
+  .mission-text {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    padding: 0 0.25rem;
+  }
+  
+  .uncover-story-btn {
+    font-size: 0.8rem;
+    padding: 14px 28px;
   }
 } 

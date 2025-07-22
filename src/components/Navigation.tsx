@@ -7,6 +7,7 @@ import './Navigation.css';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { i18n, t } = useTranslation();
   const [isVisible, setIsVisible] = useState(true);
 
@@ -33,13 +34,13 @@ export const Navigation = () => {
 
       timeoutId = setTimeout(() => {
         if (isAtTop || isAtBottom) {
-          setIsVisible(true);
+        setIsVisible(true);
         } else if (hasScrolledPastThreshold) {
           if (scrollingDown) {
-            setIsVisible(false);
+        setIsVisible(false);
           } else if (scrollingUp) {
-            setIsVisible(true);
-          }
+        setIsVisible(true);
+      }
         }
         lastScrollPosition = currentScrollY;
       }, 50);
@@ -62,7 +63,44 @@ export const Navigation = () => {
     }
   }, [isVisible]);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  // Close mobile menu when clicking outside or on escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.mobile-nav') && !target.closest('.mobile-toggle')) {
+        setIsMobileMenuOpen(false);
+      }
+      if (!target.closest('.language-selector')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen || isMenuOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('click', handleClickOutside);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('click', handleClickOutside);
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen, isMenuOpen]);
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
+  };
 
   const handleNavClick = (to: string, event: React.MouseEvent) => {
     event.preventDefault();
@@ -85,69 +123,46 @@ export const Navigation = () => {
   const handleLanguageChange = (langCode: string) => {
     i18n.changeLanguage(langCode);
     setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
   };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMenuOpen(false);
+  };
+
+  const navigationItems = [
+    { path: '/who-we-are', key: 'navigation.who_we_are' },
+    { path: '/team', key: 'navigation.team' },
+    { path: '/matches', key: 'navigation.matches' },
+    { path: '/facility', key: 'navigation.facility' },
+    { path: '/store', key: 'navigation.store' }
+  ];
 
   return (
     <>
       <Link to="/" className="header-logo" onClick={(e) => handleNavClick('/', e)}>
-        <img src={logoImage} alt="Marenah FC Logo" />
-      </Link>
+        <img src={logoImage} alt="Marenah FC Logo" className="logo-img" />
+          </Link>
 
+      {/* Desktop Navigation */}
       <nav className="header-nav">
-        <ul>
-          <li className="nav-item">
-            <Link 
-              to="/who-we-are" 
-              className={`nav-link ${location.pathname === '/who-we-are' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/who-we-are', e)}
-            >
-              {t('navigation.who_we_are')}
-            </Link>
-          </li>
+        <ul className="nav-list">
+          {navigationItems.map((item, index) => (
+            <li key={item.path} className="nav-item">
+              <Link 
+                to={item.path} 
+                className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(item.path, e)}
+              >
+                {t(item.key)}
+              </Link>
+            </li>
+          ))}
+          </ul>
+        </nav>
 
-          <li className="nav-item">
-            <Link 
-              to="/team" 
-              className={`nav-link ${location.pathname === '/team' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/team', e)}
-            >
-              {t('navigation.team')}
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link 
-              to="/matches" 
-              className={`nav-link ${location.pathname === '/matches' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/matches', e)}
-            >
-              {t('navigation.matches')}
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link 
-              to="/facility" 
-              className={`nav-link ${location.pathname === '/facility' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/facility', e)}
-            >
-              {t('navigation.facility')}
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link 
-              to="/store" 
-              className={`nav-link ${location.pathname === '/store' ? 'active' : ''}`}
-              onClick={(e) => handleNavClick('/store', e)}
-            >
-              {t('navigation.store')}
-            </Link>
-          </li>
-        </ul>
-      </nav>
-
-      {/* Language Selector */}
+      {/* Desktop Language Selector */}
       <div className="language-selector">
         <button 
           className="language-button"
@@ -179,14 +194,50 @@ export const Navigation = () => {
 
       {/* Mobile menu toggle */}
       <button 
-        className="mobile-toggle"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className={`mobile-toggle ${isMobileMenuOpen ? 'active' : ''}`}
+        onClick={toggleMobileMenu}
         aria-label="Toggle navigation menu"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
+
+      {/* Mobile Navigation Menu */}
+      <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
+        <ul className="mobile-nav-list">
+          {navigationItems.map((item, index) => (
+            <li key={item.path} className="mobile-nav-item">
+              <Link 
+                to={item.path} 
+                className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(item.path, e)}
+              >
+                {t(item.key)}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile Language Selector */}
+        <div className="mobile-language-selector">
+          <h4 style={{ color: '#E6A64C', textAlign: 'center', marginBottom: '1rem' }}>
+            Choose Language
+          </h4>
+          <div className="mobile-language-grid">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                className={`mobile-language-option ${i18n.language === lang.code ? 'active' : ''}`}
+                onClick={() => handleLanguageChange(lang.code)}
+              >
+                <span className="flag">{lang.flag}</span>
+                <span className="language-name">{lang.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

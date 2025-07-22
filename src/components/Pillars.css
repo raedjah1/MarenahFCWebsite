@@ -385,8 +385,19 @@
 /* Enhanced responsive design */
 @media (max-width: 1200px) {
   .pillars-section {
-    height: 35vh; /* slightly smaller on tablets */
-    min-height: 320px;
+    height: auto; /* Changed to auto for better mobile support */
+    min-height: 350px; /* Increased minimum height */
+    padding: 3rem 0; /* Added vertical padding */
+  }
+
+  .pillars-title {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+  }
+
+  .pillars-grid {
+    gap: 2rem;
   }
 
   .pillar h3 {
@@ -399,25 +410,136 @@
 
 @media (max-width: 768px) {
   .pillars-section {
-    height: 50vh; /* taller on mobile to accommodate stacked layout */
-    min-height: 400px;
+    height: auto; /* Changed to auto for better mobile support */
+    min-height: 400px; /* Reduced height since we're keeping horizontal */
+    padding: 3rem 0; /* Adequate padding */
   }
 
   .pillars-title {
-    font-size: 2.5rem; /* smaller title on mobile */
-    margin-bottom: 2rem;
+    font-size: 2.2rem; /* Larger than before for better readability */
+    margin-bottom: 2rem; /* Appropriate space */
     letter-spacing: 2px;
+    padding: 0 1rem; /* Add padding to prevent edge cutoff */
   }
 
   .pillars-grid {
-    gap: 1.5rem; /* tighter spacing on mobile */
+    flex-direction: row; /* Keep horizontal like desktop */
+    gap: 1rem; /* Smaller gap for mobile spacing */
+    align-items: center; /* Center align */
+    width: 100%;
+    justify-content: center; /* Center the pillars */
+    flex-wrap: nowrap; /* Keep in single row */
+  }
+
+  .pillar {
+    flex: 1; /* Equal width distribution */
+    max-width: none; /* Remove max width restriction */
+    min-width: 0; /* Allow shrinking */
   }
 
   .pillar h3 {
-    font-size: 0.9rem;
-    padding: 1.8rem 1.5rem;
-    letter-spacing: 1.5px;
-    min-height: 70px;
+    font-size: 0.8rem; /* Smaller font to fit horizontally */
+    padding: 1.5rem 0.8rem; /* Compact padding */
+    letter-spacing: 1px;
+    min-height: 70px; /* Reduced height */
     border-radius: 12px;
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width */
+  }
+
+  .pillar-underline {
+    height: 16px; /* Smaller underline */
+    bottom: -18px;
+    background-size: 6px 6px, 6px 6px, 8px 8px, 100% 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pillars-section {
+    min-height: 350px; /* Reduced height */
+    padding: 2.5rem 0; /* Less padding */
+  }
+
+  .pillars-title {
+    font-size: 1.8rem; /* Smaller for very small screens */
+    margin-bottom: 1.5rem; /* Less space */
+    letter-spacing: 1.5px;
+    padding: 0 0.5rem; /* Minimal side padding */
+  }
+
+  .pillars-grid {
+    gap: 0.5rem; /* Very tight gap for small screens */
+    padding: 0 0.5rem; /* Add minimal padding */
+  }
+
+  .pillar h3 {
+    font-size: 0.7rem; /* Even smaller font */
+    padding: 1.2rem 0.5rem; /* Very compact padding */
+    letter-spacing: 0.8px;
+    min-height: 60px; /* Smaller height */
+    border-radius: 8px;
+  }
+
+  .pillar-underline {
+    height: 14px;
+    bottom: -16px;
+    background-size: 4px 4px, 4px 4px, 6px 6px, 100% 100%;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 375px) {
+  .pillars-section {
+    min-height: 320px; /* Compact height */
+    padding: 2rem 0;
+  }
+
+  .pillars-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+    padding: 0 0.5rem;
+  }
+
+  .pillars-grid {
+    gap: 0.3rem; /* Minimal gap */
+    padding: 0 0.3rem;
+  }
+
+  .pillar h3 {
+    font-size: 0.65rem;
+    padding: 1rem 0.4rem;
+    letter-spacing: 0.5px;
+    min-height: 55px;
+    border-radius: 6px;
+  }
+
+  .pillar-underline {
+    height: 12px;
+    bottom: -14px;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .pillars-section {
+    min-height: 280px; /* Shorter for landscape */
+    padding: 1.5rem 0;
+  }
+
+  .pillars-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .pillars-grid {
+    gap: 1.2rem; /* Good spacing for landscape */
+  }
+
+  .pillar h3 {
+    font-size: 0.75rem;
+    padding: 1rem 0.6rem;
+    min-height: 50px;
+    letter-spacing: 1px;
   }
 } 

@@ -87,23 +87,61 @@
   }
   
   .gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on mobile */
+    gap: 0.8rem; /* Slightly larger gap for better spacing */
+    margin: 0 -0.5rem; /* Adjust margins */
+  }
+  
+  .gallery-item {
+    height: 180px; /* Slightly smaller height */
+  }
+  
+  .gallery-overlay {
+    padding: 1.2rem 0.8rem 0.8rem; /* Compact padding */
+  }
+  
+  .gallery-overlay h3 {
+    font-size: 0.9rem; /* Smaller font */
+  }
+  
+  .gallery-overlay p {
+    font-size: 0.75rem; /* Smaller description */
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr); /* Still keep 2 columns */
+    gap: 0.6rem;
+    margin: 0 -0.3rem;
+  }
+  
+  .gallery-item {
+    height: 150px; /* Smaller height for very small screens */
+  }
+  
+  .gallery-overlay {
+    padding: 1rem 0.6rem 0.6rem;
+  }
+  
+  .gallery-overlay h3 {
+    font-size: 0.8rem;
+  }
+  
+  .gallery-overlay p {
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small screens - only then go to single column if absolutely necessary */
+@media (max-width: 320px) {
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Single column only for very tiny screens */
     gap: 0.5rem;
   }
   
   .gallery-item {
-    height: 200px;
-  }
-  
-  .gallery-overlay {
-    padding: 1.5rem 1rem 1rem;
-  }
-  
-  .gallery-overlay h3 {
-    font-size: 1rem;
-  }
-  
-  .gallery-overlay p {
-    font-size: 0.8rem;
+    height: 200px; /* Restore height for single column */
   }
 } 

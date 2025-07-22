@@ -66,20 +66,11 @@ export const Footer = () => {
           </div>
           
           <div className="social-links">
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <i className="fab fa-youtube"></i>
-            </a>
             <a href="https://www.instagram.com/marenahfc/" target="_blank" rel="noopener noreferrer" className="social-link">
               <i className="fab fa-instagram"></i>
             </a>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">
               <i className="fab fa-facebook"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <i className="fab fa-tiktok"></i>
             </a>
           </div>
         </div>
